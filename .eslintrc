@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "mocha": true
+  },
+  "globals": {
+    "webpackIsomorphicTools": true,
+    "_CLIENT_": true
+  },
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "installedESLint": true,
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "class-property"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "never"],
+    "linebreak-style": "off",
+    "no-underscore-dangle": ["error", { "allow": ["__PRELOADED_STATE__", "_CLIENT_"] }],
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+  }
+}

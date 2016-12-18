@@ -1,0 +1,25 @@
+@import "../../../node_modules/blaze/scss/blaze.scss";
+@import "../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+
+@import "animations/_base.scss";
+@import "mixins/_base.scss";
+@import "utils/_base.scss";
+
+body {
+  background: #FFF;
+}
+
+button, a {
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.app-content {
+  height: $app-content-height;
+
+  &__main-column {
+    position: relative;
+  }
+}

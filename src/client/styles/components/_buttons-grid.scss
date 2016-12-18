@@ -1,0 +1,32 @@
+@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+
+@import "../utils/colors";
+@import "../mixins/transitions";
+
+.buttons-grid {
+  width: 50%;
+
+  &__cell {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 4px;
+    position: relative;
+    background-color: $button-grid-bg;
+    @include button-transition(background);
+
+    &:hover {
+      background-color: shade($button-grid-bg, 30%);
+    }
+
+    &--active {
+      background-color: shade($button-grid-bg, 50%);
+    }
+
+    input {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
