@@ -1,16 +1,16 @@
-FROM kkarczmarczyk/node-yarn
+FROM node
 # MAINTAINER Mateo Quintero <quinterom1592@gmail.com>
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
-RUN yarn install
+RUN npm install
 COPY . /usr/src/app
-RUN yarn run build
+RUN npm run build
 
 ENV NODE_ENV production
 
 EXPOSE 8000
-CMD ["yarn", "run", "prod"]
+CMD ["npm", "run", "prod"]
 

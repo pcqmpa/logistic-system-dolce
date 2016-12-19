@@ -9,8 +9,8 @@
     "dev:server": "NODE_ENV=development nodemon --exec babel-node ./src/server/index.js",
     "dev:api": "NODE_ENV=development nodemon --exec babel-node ./src/server/api-server.js",
     "build": "NODE_ENV=production webpack --verbose --colors --display-error-details --config ./webpack/production/webpack.config.js",
-    "prod": "yarn run prod:start",
-    "prod:start": "concurrently --kill-others -p \"[{name}]\" -n \"API,SERVER\" -c \"green.bold,blue.bold\" \"yarn run prod:api\" \"yarn run prod:server\"",
+    "prod": "npm run prod:start",
+    "prod:start": "concurrently --kill-others -p \"[{name}]\" -n \"API,SERVER\" -c \"green.bold,blue.bold\" \"npm run prod:api\" \"npm run prod:server\"",
     "prod:server": "NODE_ENV=production babel-node ./src/server/index.js",
     "prod:api": "NODE_ENV=production babel-node ./src/server/api-server.js"
   },
