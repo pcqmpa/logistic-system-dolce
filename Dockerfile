@@ -17,5 +17,5 @@ RUN npm run build
 RUN ls
 
 
-EXPOSE 8000
+EXPOSE 80
 CMD ["npm", "run", "prod"]
