@@ -11,7 +11,7 @@ const webpackIsomorphicToolsConfig = require('../webpack-isomorphic-tools-config
 const { appName } = require('../../config/config');
 const {
   CONTEXT_SRC,
-  STATICS_DIR
+  ASSETS_DIR
 } = require('../../config/paths');
 
 const extractCSS = new ExtractTextPlugin(
@@ -29,7 +29,7 @@ module.exports = Config()
     },
     output: {
       filename: '[name]-[hash].js',
-      path: STATICS_DIR,
+      path: ASSETS_DIR,
       chunkFilename: '[name]-[hash].js',
       publicPath: '/assets/'
     },
@@ -60,7 +60,7 @@ module.exports = Config()
     },
     plugins: [
       extractCSS,
-      new CleanWebpackPlugin([path.relative(CONTEXT_SRC, STATICS_DIR)], {
+      new CleanWebpackPlugin([path.relative(CONTEXT_SRC, ASSETS_DIR)], {
         root: CONTEXT_SRC
       }),
       new webpack.DefinePlugin({

@@ -9,7 +9,7 @@ const webpackIsomorphicToolsConfig = require('../webpack-isomorphic-tools-config
 const { env, appName } = require('../../config/config');
 const {
   CONTEXT_SRC,
-  STATICS_DIR
+  ASSETS_DIR
 } = require('../../config/paths');
 
 module.exports = Config()
@@ -25,7 +25,7 @@ module.exports = Config()
     },
     output: {
       filename: '[name]-[hash].js',
-      path: STATICS_DIR,
+      path: ASSETS_DIR,
       chunkFilename: '[name]-[hash].js',
       publicPath: `http://${env.HOST}:${env.DEV_SERVER_PORT}/assets/`
     },

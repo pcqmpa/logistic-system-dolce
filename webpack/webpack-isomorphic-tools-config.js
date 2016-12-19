@@ -10,22 +10,22 @@ module.exports = {
         'jpeg',
         'jpg',
         'png',
-        'gif',
+        'gif'
       ],
-      parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser
     },
     fonts: {
       extensions: [
         'woff',
         'woff2',
         'ttf',
-        'eot',
+        'eot'
       ],
-      parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser
     },
     svg: {
       extension: 'svg',
-      parser: WebpackIsomorphicToolsPlugin.url_loader_parser,
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser
     },
     styles_modules: {
       extensions: ['css', 'scss'],
@@ -63,7 +63,7 @@ module.exports = {
         }
 
         return module.source;
-      },
-    },
-  },
+      }
+    }
+  }
 };

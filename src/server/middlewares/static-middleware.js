@@ -6,7 +6,7 @@ import Express from 'express';
 
 // App Config.
 import { env } from '../../../config/config';
-import { STATICS_DIR } from '../../../config/paths';
+import { BUILD_DIR } from '../../../config/paths';
 
 // Config Settings.
 const MAX_AGE = (env.DEBUG) ? 0 : '1 year';
@@ -22,7 +22,7 @@ const cacheSettings = {
  * @returns {void}
  */
 const staticMiddleware = (app) => {
-  app.use(Express.static(STATICS_DIR, cacheSettings));
+  app.use(Express.static(BUILD_DIR, cacheSettings));
 };
 
 export default staticMiddleware;
