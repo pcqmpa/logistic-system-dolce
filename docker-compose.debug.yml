@@ -10,10 +10,14 @@ services:
     links: 
       - db
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       MONGO_URL: mongodb://db:27017/logistic-system-dolce
     ports:
       - 8000:8000
+      - 5858:5858
+    volumes:
+      - .:/usr/src/app
+    command: node --debug=5858 ./src/server/index.js
   db:
     image: mongo:latest
     ports:
