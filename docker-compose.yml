@@ -13,11 +13,12 @@ services:
       - .:/usr/src/app/
       - /usr/src/app/node_modules
     environment:
-      PORT: 80
+      PORT: 3001
       NODE_ENV: production
       MONGO_URL: mongodb://db:27017/logistic-system-dolce
     ports:
-      - 80:80
+      - 3001:3001
+      - 3002:3002
   db:
     image: mongo:latest
     ports:
