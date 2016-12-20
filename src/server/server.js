@@ -28,7 +28,7 @@ const server = new Server(app);
 
 // Compression.
 if (!env.DEBUG) {
-  // app.use(compression());
+  app.use(compression());
 }
 
 // Set server env constant.
@@ -48,7 +48,7 @@ middlewares.renderMiddleware(app);
 //
 // Initialise Express
 // -----------------------------------------------------------------------------
-server.listen(env.SERVER_PORT, env.HOST, (err) => {
+server.listen(env.SERVER_PORT, (err) => {
   if (err) {
     Log.error(err);
   } else {
