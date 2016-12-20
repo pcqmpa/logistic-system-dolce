@@ -28,7 +28,7 @@ const server = new Server(app);
 
 // Compression.
 if (!env.DEBUG) {
-  app.use(compression());
+  // app.use(compression());
 }
 
 // Set server env constant.
