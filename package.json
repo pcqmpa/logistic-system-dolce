@@ -5,9 +5,9 @@
   "main": "./src/server/index.js",
   "scripts": {
     "dev": "concurrently --kill-others -p \"[{name}]\" -n \"BUILD,API,SERVER\" -c \"yellow.bold,green.bold,blue.bold\" \"yarn run dev:build\" \"yarn run dev:api\" \"yarn run dev:server\"",
-    "dev:build": "NODE_ENV=development babel-node ./src/server/dev-server.js",
-    "dev:server": "NODE_ENV=development nodemon --exec babel-node ./src/server/index.js",
-    "dev:api": "NODE_ENV=development nodemon --exec babel-node ./src/server/api-server.js",
+    "dev:build": "set NODE_ENV=development && babel-node ./src/server/dev-server.js",
+    "dev:server": "set NODE_ENV=development && nodemon --exec babel-node ./src/server/index.js",
+    "dev:api": "set NODE_ENV=development && nodemon --exec babel-node ./src/server/api-server.js",
     "build": "NODE_ENV=production webpack --verbose --colors --display-error-details --config ./webpack/production/webpack.config.js",
     "prod": "npm run prod:start",
     "prod:start": "concurrently --kill-others -p \"[{name}]\" -n \"API,SERVER\" -c \"green.bold,blue.bold\" \"npm run prod:api\" \"npm run prod:server\"",
