@@ -10,7 +10,7 @@ import connectMongo from 'connect-mongo';
 import {
   env,
   SESSION_SECRET
-} from '../../../config/config';
+} from '../../../config/';
 
 /**
  * Configure session store middleware with mongodb.

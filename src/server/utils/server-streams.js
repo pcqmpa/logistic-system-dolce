@@ -8,14 +8,16 @@ import { Observable } from 'rxjs';
 import request from 'request';
 
 /**
- * Creates an Observable of a {Ajax get} request.
+ * Creates an Observable of an Ajax request.
+ * @param {String} method -> The request method.
  * @param {String} url -> The service url.
- * @returns {Observable} -> The Ajax Get request.
+ * @param {Object} body -> The request body.
+ * @returns {Observable} -> The Ajax request.
  */
-const fromGetRequest = url => (
+const fromAjaxRequest = (method, url, body = null) => (
   Observable.create((observer) => {
     let reject = false;
-    request.get(url)
+    request({ method, body })
       .on('data', (response) => {
         if (!reject) {
           try {
@@ -30,10 +32,11 @@ const fromGetRequest = url => (
       .on('error', (err) => {
         observer.error(err);
       });
+
     return function dispose() {
       reject = true;
     };
   })
 );
 
-export default { fromGetRequest };
+export default { fromAjaxRequest };

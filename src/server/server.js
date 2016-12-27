@@ -7,7 +7,7 @@ import { Server } from 'http';
 import compression from 'compression';
 
 // App config.
-import { env } from '../../config/config';
+import { env } from '../../config/';
 
 // Utils.
 import { Log } from './utils/';

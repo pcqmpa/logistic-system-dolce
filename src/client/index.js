@@ -14,7 +14,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { configureStore } from '../shared/utils/';
 
 // App Config.
-import { MOUNT_ID, env } from '../../config/config';
+import { MOUNT_ID, env } from '../../config/';
 
 // App.
 import AppRouter from './app-router';

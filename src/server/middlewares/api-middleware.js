@@ -9,7 +9,7 @@ import httpProxy from 'http-proxy';
 import { Log } from '../../shared/utils/';
 
 // App Config.
-import { env } from '../../../config/config';
+import { env } from '../../../config/';
 
 const API_URL = `http://${env.HOST}:${env.API_PORT}`;
 

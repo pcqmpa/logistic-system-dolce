@@ -14,7 +14,7 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 
 // App Config.
-import { env } from '../../../config/config';
+import { env } from '../../../config/';
 import * as responses from '../constants/responses';
 
 // Utils.

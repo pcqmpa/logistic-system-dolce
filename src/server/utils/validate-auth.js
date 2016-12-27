@@ -6,7 +6,7 @@
 import jwt from 'jsonwebtoken';
 
 // App Config.
-import { TOKEN_SECRET } from '../../../config/config';
+import { TOKEN_SECRET } from '../../../config/';
 
 /**
  * It will check for a token in session and validates the expiration date.

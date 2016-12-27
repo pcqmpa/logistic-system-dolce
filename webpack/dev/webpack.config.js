@@ -6,7 +6,7 @@ const { Config } = require('webpack-config');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsConfig = require('../webpack-isomorphic-tools-config');
 
-const { env, appName } = require('../../config/config');
+const { env, appName } = require('../../config/');
 const {
   CONTEXT_SRC,
   ASSETS_DIR

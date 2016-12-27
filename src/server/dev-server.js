@@ -10,7 +10,7 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 // App Config.
-import { env } from '../../config/config';
+import { env } from '../../config/';
 import webpackConfig from '../../webpack/dev/webpack.config';
 
 // Utils.

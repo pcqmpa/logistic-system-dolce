@@ -8,7 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsConfig = require('../webpack-isomorphic-tools-config');
 
-const { appName } = require('../../config/config');
+const { appName } = require('../../config/');
 const {
   CONTEXT_SRC,
   ASSETS_DIR

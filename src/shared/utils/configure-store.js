@@ -15,7 +15,7 @@ import { DevTools } from '../containers/';
 import rootEpic from '../epics/';
 
 // App Config.
-import { env } from '../../../config/config';
+import { env } from '../../../config/';
 
 /**
  * Create a composed store.

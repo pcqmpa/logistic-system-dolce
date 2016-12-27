@@ -7,7 +7,7 @@
 import React, { Component, PropTypes } from 'react';
 
 // App Config.
-import { MOUNT_ID } from '../../../config/config';
+import { MOUNT_ID } from '../../../config/';
 
 class Html extends Component {
   static propTypes = {

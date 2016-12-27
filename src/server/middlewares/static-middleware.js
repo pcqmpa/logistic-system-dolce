@@ -5,7 +5,7 @@
 import Express from 'express';
 
 // App Config.
-import { env } from '../../../config/config';
+import { env } from '../../../config/';
 import { BUILD_DIR } from '../../../config/paths';
 
 // Config Settings.
