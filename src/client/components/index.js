@@ -1,3 +1,7 @@
+/**
+ * Module with the app components.
+ * @module src/client/components/
+ */
 // Layout components.
 export { default as Grid } from './layout/grid';
 export { default as GridCell } from './layout/grid-cell';
@@ -11,7 +15,7 @@ export { default as TableRow } from './layout/table-row';
 export { default as TableCell } from './layout/table-cell';
 export { default as ToastContainer } from './layout/toast-container';
 export { default as Toast } from './layout/toast';
-export { default as PillarBox } from './layout/pillar-box';
+export { default as BoxContainer } from './layout/box-container.js';
 export { default as Field } from './layout/field';
 
 // View components.

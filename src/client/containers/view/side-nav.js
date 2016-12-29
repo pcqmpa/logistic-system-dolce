@@ -31,6 +31,7 @@ class SideNav extends Component {
     this.state = {
       items: [
         { type: types.Link, link: routes.DASHBOARD, content: 'Dashboard' },
+	{ type: types.Link, link: routes.USERS_LIST, content: 'Usuarios' },  
         { type: types.Link, link: routes.PACKAGE_RECEPTION, content: 'Recepción de Paquetes' },
         { type: types.Link, link: routes.ASSIGN_ROUTES, content: 'Asignacón de Rutas' }
       ]

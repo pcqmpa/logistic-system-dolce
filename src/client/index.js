@@ -65,3 +65,4 @@ if (env.DEBUG && module.hot) {
 
 // Setup window onload event.
 window.onload = render;
+

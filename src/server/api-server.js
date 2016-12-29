@@ -15,7 +15,10 @@ import sessionMiddleware from './middlewares/session-middleware';
 import { Log } from './utils/';
 
 // Controllers.
-import { securityController } from './api-server/controllers/';
+import {
+  securityController,
+  userController  
+} from './api-server/controllers/';
 
 // Constants.
 import * as messages from '../shared/constants/messages';
@@ -37,6 +40,11 @@ sessionMiddleware(app);
 app.get('/api/callFetchUser', securityController.callFetchUser);
 
 app.post('/api/destroyUserSession', securityController.destroyUserSession);
+
+
+app.get('/api/callConsultUsers', userController.callConsultUsers);
+
+app.post('/api/callAddUser', userController.callAddUser);
 
 
 //

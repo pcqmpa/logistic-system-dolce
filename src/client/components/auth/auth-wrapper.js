@@ -7,7 +7,7 @@ const authWrapper = (options) => {
   const {
     authSelector,
     predicate,
-    replaceRoute,
+    replaceRoute
   } = options;
 
   const isAuthorized = data => (predicate(data));
@@ -16,11 +16,10 @@ const authWrapper = (options) => {
     class Authenticate extends Component {
       static propTypes = {
         actions: PropTypes.shape().isRequired,
-        user: PropTypes.shape().isRequired,
+        user: PropTypes.shape().isRequired
       };
 
       componentWillMount() {
-        console.log(this.props.user);
         if (!isAuthorized(this.props.user)) {
           this.props.actions.push(replaceRoute);
         }
@@ -40,7 +39,7 @@ const authWrapper = (options) => {
     return connect(
       (state, ownProps) => ({ user: authSelector(state, ownProps) }),
       dispatch => ({
-        actions: bindActionCreators({ ...routerActions }, dispatch),
+        actions: bindActionCreators({ ...routerActions }, dispatch)
       })
     )(Authenticate);
   }

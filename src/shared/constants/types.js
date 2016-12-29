@@ -1,4 +1,16 @@
-export const test = 'test';
+/**
+ * Module with different kind of types requiered in the app.
+ * @module src/shared/constants/types
+ */
+// Box Container sizes.
+export const SUPER_SIZE = 'super';
+export const XLARGE_SIZE = 'xlarge';
+export const LARGE_SIZE = 'large';
+export const MEDIUM_SIZE = 'medium';
+export const SMALL_SIZE = 'small';
+export const XSMALL_SIZE = 'xsmall';
+export const TINY_SIZE = 'tiny';
+export const NONE_SIZE = 'none';
 
 // Component types.
 export const Link = 'link';

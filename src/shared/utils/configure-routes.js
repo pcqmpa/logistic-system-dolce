@@ -2,7 +2,6 @@
  * Module with the config of the router.
  * @module src/shared/containers/router
  */
-
 // React.
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
@@ -18,6 +17,7 @@ import {
   App,
   LoginContainer,
   Dashboard,
+  UsersList,
   PackageReception,
   RoutesAssign
 } from '../../client/containers/';
@@ -42,6 +42,11 @@ const configureRoutes = (store) => {
         path={routes.LOGIN}
         component={authRules.userIsNotAuthenticated(LoginContainer)}
         onEnter={connect(authRules.userIsNotAuthenticated.onEnter)}
+      />
+      <Route
+        path={routes.USERS_LIST}
+        component={authRules.userIsAuthenticated(UsersList)}
+        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
       />
       <Route
         path={routes.PACKAGE_RECEPTION}

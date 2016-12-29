@@ -80,7 +80,7 @@ class LoginContainer extends Component {
     return (
       <div className="u-center-block login-container">
         <div className="u-center-block__content">
-          <h1 className="c-heading">Porfavor ingrese</h1>
+          <h1 className="c-heading">Por favor ingrese</h1>
           <Login
             username={username}
             password={password}
