@@ -3,14 +3,14 @@ import React, { PropTypes } from 'react';
 const Grid = ({
   children,
   className,
-  padding,
+  noGutter,
   wrap,
   layout
 }) => {
   const componentClass = 'o-grid';
-  let config;
+  let config = '';
 
-  if (padding === false) {
+  if (noGutter) {
     config += 'o-grid--no-gutter ';
   }
 
@@ -34,7 +34,7 @@ const Grid = ({
 Grid.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  padding: PropTypes.bool,
+  noGutter: PropTypes.bool,
   wrap: PropTypes.bool,
   layout: PropTypes.string
 };

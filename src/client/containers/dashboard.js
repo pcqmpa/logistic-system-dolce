@@ -6,13 +6,16 @@ import { connect } from 'react-redux';
 import { ButtonsGrid } from './';
 
 // Components.
-import { PillarBox } from '../components/';
+import { BoxContainer } from '../components/';
 
 // Actions.
 import {
   updateMainGroup,
   updateZone
 } from '../../shared/actions/dashboard-actions';
+
+// Constants.
+import { LARGE_SIZE } from '../../shared/constants/types';
 
 // Styles.
 import '../styles/dashboard.scss';
@@ -45,7 +48,11 @@ class Dashboard extends Component {
     } = this.props;
 
     return (
-      <PillarBox size="large" className="dashboard-container">
+      <BoxContainer
+        pillar
+        size={LARGE_SIZE}
+        className="dashboard-container"
+      >
         <h2 className="c-heading">Main Group</h2>
         <ButtonsGrid
           groupName="main_group"
@@ -82,7 +89,7 @@ class Dashboard extends Component {
             <span className="c-table__cell">Pepita Perez</span>
           </div>
         </div>
-      </PillarBox>
+      </BoxContainer>
     );
   }
 }

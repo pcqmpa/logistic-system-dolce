@@ -16,7 +16,7 @@ export const callFetchUser =
   ({ username, password }) =>
     (`/api/callFetchUser?username=${username}&password=${password}`);
 
-/** 
+/**
  * Service to destroy the current user session.
  * @returns {String} -> with the api url.
  */

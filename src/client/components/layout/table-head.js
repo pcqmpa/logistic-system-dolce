@@ -1,11 +1,19 @@
+/**
+ * Table head component.
+ * @module src/client/components/layout/table-head
+ */
+// React.
 import React, { PropTypes } from 'react';
+
+// Components
+import { TableCell } from '../';
 
 const TableHead = ({ className, titles }) => (
   <div className={`c-table__row c-table__row--heading ${className || ''}`}>
     {titles.map((title, key) => (
-      <span key={key} className={`c-table__cell ${title.classNames || ''}`}>
+      <TableCell key={key} className={title.className}>
         {title.text}
-      </span>
+      </TableCell>
     ))}
   </div>
 );

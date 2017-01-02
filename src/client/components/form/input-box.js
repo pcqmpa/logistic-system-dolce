@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import { componentHelpers } from '../../../shared/utils/';
 
 const InputBox = ({
+  id,
   value,
   name,
   label,
@@ -27,10 +28,10 @@ const InputBox = ({
 
   if (label) {
     return (
-      <label htmlFor={name} className={`c-label o-form-element ${config.trim()}`}>
+      <label htmlFor={id} className={`c-label o-form-element ${config.trim()}`}>
         {label}
         <input
-          id={name}
+          id={id}
           type={type || 'text'}
           name={name}
           className="c-field c-field--label"
@@ -44,7 +45,7 @@ const InputBox = ({
   }
   return (
     <input
-      id={name}
+      id={id}
       name={name}
       type={type || 'text'}
       className={`c-field ${config.trim()}`}
@@ -58,6 +59,7 @@ const InputBox = ({
 
 InputBox.propTypes = {
   type: PropTypes.string,
+  id: PropTypes.string,
   value: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,

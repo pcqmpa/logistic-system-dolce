@@ -17,7 +17,7 @@ import { Log } from './utils/';
 // Controllers.
 import {
   securityController,
-  userController  
+  userController
 } from './api-server/controllers/';
 
 // Constants.

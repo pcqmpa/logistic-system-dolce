@@ -17,7 +17,7 @@ import request from 'request';
 const fromAjaxRequest = (method, url, body = null) => (
   Observable.create((observer) => {
     let reject = false;
-    request({ method, body })
+    request({ method, body, uri: url })
       .on('data', (response) => {
         if (!reject) {
           try {

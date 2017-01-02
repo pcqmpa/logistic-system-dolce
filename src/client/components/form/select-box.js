@@ -41,7 +41,7 @@ const SelectBox = ({
 
 SelectBox.propTypes = {
   name: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func,
   className: PropTypes.string,
   placeholder: PropTypes.string,

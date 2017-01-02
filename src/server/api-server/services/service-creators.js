@@ -38,7 +38,7 @@ export const consultUsers =
 export const addUser = () => (`${API_SERVICE_URL}/api/Seguridad`);
 
 //
-// Tramsporter Services.
+// Transporter Services.
 // -----------------------------------------------------------------------------
 
 /**

@@ -4,6 +4,7 @@ const GridCell = ({
   children,
   className,
   width,
+  offset,
   padding,
   fixedWidth,
   responsiveSuffixes
@@ -13,6 +14,10 @@ const GridCell = ({
 
   if (width) {
     config += `o-grid__cell--width-${width} `;
+  }
+
+  if (offset) {
+    config += `o-grid__cell--offset-${offset}`;
   }
 
   if (responsiveSuffixes) {
@@ -42,6 +47,7 @@ GridCell.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   width: PropTypes.number,
+  offset: PropTypes.number,
   padding: PropTypes.bool,
   fixedWidth: PropTypes.bool,
   responsiveSuffixes: PropTypes.arrayOf(PropTypes.shape())

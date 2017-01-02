@@ -3,6 +3,9 @@ import React, { PropTypes } from 'react';
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
 
+// Styles.
+import '../../styles/components/_button.scss';
+
 const Button = ({
   id,
   type,
@@ -10,6 +13,7 @@ const Button = ({
   className,
   onClick,
   group,
+  size,
   theme,
   layout
 }) => {
@@ -20,6 +24,10 @@ const Button = ({
     theme,
     layout
   ]);
+
+  if (size) {
+    config += `u-${size} `;
+  }
 
   config += className || '';
 
@@ -43,6 +51,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   group: PropTypes.string,
   type: PropTypes.string,
+  size: PropTypes.string,
   theme: PropTypes.string,
   layout: PropTypes.string
 };

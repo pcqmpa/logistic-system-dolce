@@ -17,8 +17,12 @@ export { default as ToastContainer } from './layout/toast-container';
 export { default as Toast } from './layout/toast';
 export { default as BoxContainer } from './layout/box-container.js';
 export { default as Field } from './layout/field';
+export { default as InputGroup } from './layout/input-group';
+export { default as InputGroupItem } from './layout/input-group-item';
 
 // View components.
+export { default as Icon } from './view/icon';
+
 export { default as NotFound } from './view/not-found';
 export { default as Login } from './view/login';
 export { default as Loading } from './view/loading';
