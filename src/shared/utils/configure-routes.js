@@ -21,7 +21,7 @@ import {
   PackageReception,
   RoutesAssign
 } from '../../client/containers/';
-import { NotFound } from '../../client/components/';
+import { NotFound } from '../components/';
 
 /**
  * Configure the routes with the auth settings.

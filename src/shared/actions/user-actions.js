@@ -8,7 +8,7 @@ import {
 
 export const requestLogin = payload => ({ type: LOGIN_REQUEST, payload });
 
-export const loginSuccess = payload => ({ type: LOGIN_SUCCESS, payload });
+export const loginSuccess = user => ({ type: LOGIN_SUCCESS, user });
 
 export const loginFailed = err => ({ type: LOGIN_FAILED, err });
 

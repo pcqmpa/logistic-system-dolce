@@ -8,19 +8,27 @@ import React, { PropTypes } from 'react';
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
 
+// Styles.
+import '../../styles/components/_input-group.scss';
+
 const InputGroup = ({
   children,
   theme,
   layout,
+  center,
   className
 }) => {
-  const componentClass = 'input-group';
+  const componentClass = 'cp-input-group';
   let config = '';
 
   config += componentHelpers.generateComponentStyleConfig(componentClass, [
     theme,
     layout
   ]);
+
+  if (center) {
+    config += `${componentClass}--center `;
+  }
 
   config += className || '';
 
@@ -35,6 +43,7 @@ InputGroup.propTypes = {
   children: PropTypes.node.isRequired,
   theme: PropTypes.string,
   layout: PropTypes.string,
+  center: PropTypes.bool,
   className: PropTypes.string
 };
 

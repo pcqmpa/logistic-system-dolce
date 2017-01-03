@@ -1,5 +1,18 @@
-import { Observable } from 'rxjs';
+/**
+ * Module with the logout epic.
+ * @module src/shared/epics/logout-epic.
+ */
+// React - Redux
 import { routerActions } from 'react-router-redux';
+
+// Rxjs.
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/dom/ajax';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/delay';
 
 // Actions.
 import { logoutSuccess } from '../actions/user-actions';

@@ -27,13 +27,22 @@ import { validateAuth } from '../utils/';
 
 // Actions.
 import { loginSuccess } from '../../shared/actions/user-actions';
+import { updateUsersList, updateUserTypes } from '../../shared/actions/users-actions';
+
+// Services.
+import { initState } from '../api-server/streams/';
+// import { logisticTypesServices } from '../api-server/services/';
 
 // App.
 import reducer from '../../shared/reducers/';
 
 // Components.
-import { NotFound } from '../../client/components/';
+import { NotFound } from '../../shared/components/';
 import { Html } from '../components/';
+
+// TODO: check if this is needed.
+// Constants.
+// import { ADMIN } from '../../shared/constants/user-types';
 
 /**
  * Render the content.
@@ -79,49 +88,53 @@ const renderHtml = (nextProps, store, markup) => {
  * @returns {void}
  */
 const handleRender = (req, res) => {
-  const memoryHistory = createHistory(req.originalUrl);
-  const store = configureStore(
-    memoryHistory,
-    reducer
-  );
-  const history = syncHistoryWithStore(memoryHistory, store);
+  initState()
+    .subscribe((initialData) => {
+      const memoryHistory = createHistory(req.originalUrl);
+      const store = configureStore(
+        memoryHistory,
+        reducer
+      );
+      const history = syncHistoryWithStore(memoryHistory, store);
+      // Validate session.
+      const user = validateAuth(req.session);
+      if (user) {
+        store.dispatch(loginSuccess(user));
+        store.dispatch(updateUsersList(initialData.users));
+        store.dispatch(updateUserTypes(initialData.types));
+      }
 
-  // Validate session.
-  const user = validateAuth(req.session);
-  if (user) {
-    store.dispatch(loginSuccess(user));
-  }
+      // Configure routes.
+      const routes = configureRoutes(store);
 
-  // Configure routes.
-  const routes = configureRoutes(store);
+      // Refresh Isomorphic Assets.
+      if (env.DEBUG) {
+        webpackIsomorphicTools.refresh();
+      }
 
-  // Refresh Isomorphic Assets.
-  if (env.DEBUG) {
-    webpackIsomorphicTools.refresh();
-  }
+      match({ history, routes, location: req.originalUrl },
+      (err, redirectLocation, renderProps) => {
+        if (err) {
+          // Display error if exists.
+          Log.error(err);
+          return res.status(responses.ERROR)
+            .send(err.message);
+        } else if (redirectLocation) {
+          // In case of redirect propagate the redirect to the browser.
+          return res.redirect(
+            responses.REDIRECT,
+            redirectLocation.pathname + redirectLocation.search
+          );
+        } else if (!renderProps) {
+          // Route not found.
+          return res.status(responses.NOT_FOUND)
+            .send(renderHtml(null, null, <NotFound />));
+        }
 
-  match({ history, routes, location: req.originalUrl },
-   (err, redirectLocation, renderProps) => {
-     if (err) {
-       // Display error if exists.
-       Log.error(err);
-       return res.status(responses.ERROR)
-         .send(err.message);
-     } else if (redirectLocation) {
-       // In case of redirect propagate the redirect to the browser.
-       return res.redirect(
-         responses.REDIRECT,
-         redirectLocation.pathname + redirectLocation.search
-       );
-     } else if (!renderProps) {
-       // Route not found.
-       return res.status(responses.NOT_FOUND)
-         .send(renderHtml(null, null, <NotFound />));
-     }
-
-     return res.status(responses.OK)
-       .send(renderHtml(renderProps, store));
-   });
+        return res.status(responses.OK)
+          .send(renderHtml(renderProps, store));
+      });
+    });
 };
 
 /**

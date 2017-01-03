@@ -5,6 +5,7 @@ import { componentHelpers } from '../../../shared/utils/';
 
 const SelectBox = ({
   name,
+  value,
   options,
   onChange,
   className,
@@ -26,6 +27,7 @@ const SelectBox = ({
     <select
       name={name}
       id={name}
+      value={value}
       className={`c-field ${config.trim()}`}
       onChange={onChange}
     >
@@ -41,6 +43,7 @@ const SelectBox = ({
 
 SelectBox.propTypes = {
   name: PropTypes.string,
+  value: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func,
   className: PropTypes.string,

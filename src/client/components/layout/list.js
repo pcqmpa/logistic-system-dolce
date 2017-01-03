@@ -1,6 +1,6 @@
 /**
- * Input group item component.
- * @module src/client/components/layout/input-group-item
+ * Module with the List layout component.
+ * @module src/client/components/layout/list
  */
 // React.
 import React, { PropTypes } from 'react';
@@ -8,13 +8,16 @@ import React, { PropTypes } from 'react';
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
 
-const InputGroupItem = ({
+// Styles.
+import '../../styles/components/_list.scss';
+
+const List = ({
   children,
-  theme,
+  className,
   layout,
-  className
+  theme
 }) => {
-  const componentClass = 'cp-input-group__item';
+  const componentClass = 'cp-list';
   let config = '';
 
   config += componentHelpers.generateComponentStyleConfig(componentClass, [
@@ -25,17 +28,17 @@ const InputGroupItem = ({
   config += className || '';
 
   return (
-    <div className={`o-field ${componentClass} ${config.trim()}`}>
+    <ul className={`${componentClass} ${config.trim()}`}>
       {children}
-    </div>
+    </ul>
   );
 };
 
-InputGroupItem.propTypes = {
+List.propTypes = {
   children: PropTypes.node.isRequired,
-  theme: PropTypes.string,
+  className: PropTypes.string,
   layout: PropTypes.string,
-  className: PropTypes.string
+  theme: PropTypes.string
 };
 
-export default InputGroupItem;
+export default List;

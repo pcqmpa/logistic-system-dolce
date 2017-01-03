@@ -3,19 +3,21 @@
  * @module src/shared/actions/users-actions
  */
 import {
-  UPDATE_NEW_USER,
+  UPDATE_NEW_USER_FORM,
   ADD_NEW_USER_REQUEST,
   ADD_NEW_USER_SUCCESS,
   ADD_NEW_USER_FAILED,
   SELECT_USER_TO_EDIT,
   CLEAR_USER_TO_EDIT,
+  UPDATE_USERS_LIST,
   UPDATE_USERS_FILTER,
-  CLEAR_USERS_FILTER
+  CLEAR_USERS_FILTER,
+  UPDATE_USER_TYPES
 } from '../constants/actions';
 
 
 // New User Actions.
-export const updateNewUser = data => ({ type: UPDATE_NEW_USER, data });
+export const updateNewUser = data => ({ type: UPDATE_NEW_USER_FORM, data });
 
 export const addNewUserRequest = () => ({ type: ADD_NEW_USER_REQUEST });
 
@@ -28,8 +30,15 @@ export const selectUserToEdit = userId => ({ type: SELECT_USER_TO_EDIT, userId }
 
 export const clearUserToEdit = () => ({ type: CLEAR_USER_TO_EDIT });
 
-// Users Filter.
-export const updateUsersFilter = data => ({ type: UPDATE_USERS_FILTER, data });
+// Users actions.
+export const updateUsersList = users => ({ type: UPDATE_USERS_LIST, users });
+
+export const updateUsersFilter = ({ filter, value }) => ({
+  type: UPDATE_USERS_FILTER,
+  filter,
+  value
+});
 
 export const clearUsersFilter = () => ({ type: CLEAR_USERS_FILTER });
 
+export const updateUserTypes = types => ({ type: UPDATE_USER_TYPES, types });

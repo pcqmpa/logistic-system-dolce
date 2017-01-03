@@ -2,6 +2,7 @@
  * Module of Table component.
  * @module src/client/components/layout/table
  */
+// React.
 import React, { PropTypes } from 'react';
 
 // Utils.

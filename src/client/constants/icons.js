@@ -8,4 +8,8 @@ export const ALERT_BOX = 'aler-box';
 
 export const BACKSPACE = 'backspace';
 
-export const ACCUNT_PLUS = 'account-plus';
+export const ACCOUNT_PLUS = 'account-plus';
+
+export const ACCOUNT_REMOVE = 'account-remove';
+
+export const ACCOUNT_EDIT = 'account-settings-variant';

@@ -6,7 +6,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 // Reducers.
-import user from './user';
+import user from './user-reducer';
 import users from './users-reducer';
 import toastList from './toast-list-reducer';
 import loading from './loading';

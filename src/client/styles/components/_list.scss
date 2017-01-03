@@ -1,0 +1,33 @@
+@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../utils/_colors.scss";
+
+.cp-list {
+  margin: 0;
+  padding-left: 0;
+
+  &__item {
+    @include transition(background-color 0.2s);
+
+    &:hover {
+      background-color: $grey-lighter;
+    }
+
+    &--header {
+      font-weight: 600;
+      text-align: center;
+      background-color: $grey-light;
+
+      &:hover {
+        background-color: $grey-light;
+      }
+    }
+  }
+
+  &__section {
+    padding: 0.5em;
+
+    &--center {
+      text-align: center;
+    }
+  }
+}

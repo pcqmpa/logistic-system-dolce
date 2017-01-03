@@ -5,7 +5,7 @@ const GridCell = ({
   className,
   width,
   offset,
-  padding,
+  noGutter,
   fixedWidth,
   responsiveSuffixes
 }) => {
@@ -26,7 +26,7 @@ const GridCell = ({
     ), '');
   }
 
-  if (padding === false) {
+  if (noGutter) {
     config += 'o-grid__cell--no-gutter ';
   }
 
@@ -48,9 +48,9 @@ GridCell.propTypes = {
   className: PropTypes.string,
   width: PropTypes.number,
   offset: PropTypes.number,
-  padding: PropTypes.bool,
+  noGutter: PropTypes.bool,
   fixedWidth: PropTypes.bool,
-  responsiveSuffixes: PropTypes.arrayOf(PropTypes.shape())
+  responsiveSuffixes: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default GridCell;

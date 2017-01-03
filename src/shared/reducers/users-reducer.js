@@ -15,8 +15,10 @@ import {
   ADD_NEW_USER_FAILED,
   SELECT_USER_TO_EDIT,
   CLEAR_USER_TO_EDIT,
+  UPDATE_USERS_LIST,
   UPDATE_USERS_FILTER,
-  CLEAR_USERS_FILTER
+  CLEAR_USERS_FILTER,
+  UPDATE_USER_TYPES
 } from '../constants/actions';
 
 // New User Object.
@@ -24,21 +26,22 @@ const newUser = {
   username: false,
   password: false,
   fullname: false,
-  type: false
+  type: false,
+  isSubmitting: false
 };
 
 // Users filter.
 const usersFilter = {
-  fullname: false,
-  type: false
+  fullname: '',
+  type: ''
 };
 
 const initialState = {
-  users: [],
+  list: [],
   newUser,
   editUser: null,
   usersFilter,
-  isSubmitting: false
+  types: []
 };
 
 const actionHandlers = {
@@ -72,6 +75,10 @@ const actionHandlers = {
     ...state,
     editUser: false
   }),
+  [UPDATE_USERS_LIST]: (state, { users }) => ({
+    ...state,
+    list: users
+  }),
   [UPDATE_USERS_FILTER]: (state, { filter, value }) => ({
     ...state,
     usersFilter: {
@@ -82,6 +89,10 @@ const actionHandlers = {
   [CLEAR_USERS_FILTER]: state => ({
     ...state,
     usersFilter
+  }),
+  [UPDATE_USER_TYPES]: (state, { types }) => ({
+    ...state,
+    types
   })
 };
 

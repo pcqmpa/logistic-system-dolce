@@ -1,3 +1,4 @@
+
 import { createReducer } from 'redux-create-reducer';
 
 // Actions.
@@ -19,8 +20,8 @@ const actionHandlers = {
     ...state,
     rememberMe
   }),
-  [LOGIN_SUCCESS]: (state, { payload }) => ({
-    data: payload.user,
+  [LOGIN_SUCCESS]: (state, { user }) => ({
+    data: user,
     isAuth: true
   }),
   [LOGIN_FAILED]: () => (initialState),

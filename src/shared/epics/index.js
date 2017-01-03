@@ -10,7 +10,7 @@ import logoutEpic from './logout-epic';
 
 const rootEpic = combineEpics(
   loginEpic,
-  logoutEpic,
+  logoutEpic
 );
 
 export default rootEpic;

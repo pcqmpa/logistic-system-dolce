@@ -15,3 +15,7 @@ export const DISTRIBUTOR_STRING = 'Distribuidor';
 export const DIRECTOR = 3;
 export const DIRECTOR_STRING = 'Directora';
 
+// Admin.
+export const ADMIN = 4;
+export const ADMIN_STRING = 'Administrador';
+

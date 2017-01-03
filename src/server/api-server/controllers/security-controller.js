@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../../../../config/';
 
 // Services.
-import { securityServices } from '../services/';
+import { authUser } from '../streams/';
 
 // Constants.
 import * as responses from '../../constants/responses';
@@ -17,9 +17,10 @@ import { TOKEN_EXPIRATION } from '../../constants/values';
 import { INVALID_USER } from '../../../shared/constants/messages';
 
 const callFetchUser = (req, res) => {
-  securityServices.fetchUserRequest(req.query)
+  authUser(req.query)
     .subscribe(
       (data) => {
+        console.log(data);
         const { session } = req;
         const {
           username,
@@ -29,7 +30,7 @@ const callFetchUser = (req, res) => {
         const user = {
           username,
           password,
-          ...data
+          ...data.user
         };
         const tokenOptions = { user };
 
@@ -42,7 +43,7 @@ const callFetchUser = (req, res) => {
         session.token = token;
 
         // Responds with the user data
-        res.status(responses.OK).send({ user });
+        res.status(responses.OK).send({ ...data, user });
       },
       () => {
         res.status(responses.UNAUTHORIZED).send({

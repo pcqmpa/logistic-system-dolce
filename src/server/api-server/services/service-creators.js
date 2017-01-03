@@ -29,13 +29,23 @@ export const fetchUser =
  * @returns {String} -> With the URL request.
  */
 export const consultUsers =
-  username => (`${API_SERVICE_URL}/api/Usuarios${username && `?strUsuario=${username}`}`);
+  username => (`${API_SERVICE_URL}/api/Usuarios${(username) ? `?strUsuario=${username}` : ''}`);
 
 /**
  * Service to add a new user.
  * @returns {String} -> With the URL request.
  */
 export const addUser = () => (`${API_SERVICE_URL}/api/Seguridad`);
+
+//
+// Logitic Types Services.
+// -----------------------------------------------------------------------------
+
+/**
+ * Service to consult the logistic types.
+ * @returns {String} -> With the URL request.
+ */
+export const consultLogisticTypes = () => (`${API_SERVICE_URL}/api/TipoLogistica`);
 
 //
 // Transporter Services.
