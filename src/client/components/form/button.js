@@ -14,6 +14,7 @@ const Button = ({
   onClick,
   group,
   size,
+  block,
   theme,
   layout
 }) => {
@@ -24,6 +25,10 @@ const Button = ({
     theme,
     layout
   ]);
+
+  if (block) {
+    config += `${componentClass}--block `;
+  }
 
   if (size) {
     config += `u-${size} `;
@@ -52,6 +57,7 @@ Button.propTypes = {
   group: PropTypes.string,
   type: PropTypes.string,
   size: PropTypes.string,
+  block: PropTypes.bool,
   theme: PropTypes.string,
   layout: PropTypes.string
 };

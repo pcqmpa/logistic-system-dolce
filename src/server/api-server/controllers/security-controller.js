@@ -20,7 +20,6 @@ const callFetchUser = (req, res) => {
   authUser(req.query)
     .subscribe(
       (data) => {
-        console.log(data);
         const { session } = req;
         const {
           username,

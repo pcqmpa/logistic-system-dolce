@@ -1,13 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * Module with the login container component.
+ * @module src/shared/actions/users-actions
+ */
+import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { routerActions } from 'react-router-redux';
-
-// Constants.
-import {
-  USERNAME,
-  PASSWORD
-} from '../constants/strings';
 
 // Actions.
 import {
@@ -15,14 +12,21 @@ import {
   updatePassword,
   toggleRememberMe
 } from '../../shared/actions/login-form-actions';
-
 import { requestLogin } from '../../shared/actions/user-actions';
+import { updateRulesValidation } from '../../shared/actions/form-rules-actions';
 
 // Components.
 import { Login } from '../components/';
 
-// Utils.
-import { string } from '../../shared/utils/';
+// Lib.
+import validator from '../../shared/lib/validator';
+
+// Constants.
+import {
+  USERNAME,
+  PASSWORD,
+  LOGIN_RULES
+} from '../constants/strings';
 
 // Styles.
 import '../styles/login-container.scss';
@@ -30,25 +34,22 @@ import '../styles/login-container.scss';
 class LoginContainer extends Component {
   static propTypes = {
     actions: PropTypes.shape(),
-    username: PropTypes.string,
-    password: PropTypes.string,
-    rememberMe: PropTypes.bool
+    loginForm: PropTypes.shape(),
+    formRules: PropTypes.shape()
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {
-      username,
-      password,
-      rememberMe
-    } = this.props;
+    const { loginForm, formRules } = this.props;
+    const formValidation = validator.run(formRules, loginForm);
+    console.log(formValidation);
+    this.props.actions.updateRulesValidation(
+      LOGIN_RULES,
+      formValidation.resume
+    );
 
-    if (!string.empty(username) || !string.empty(password)) {
-      this.props.actions.requestLogin({
-        username,
-        password,
-        rememberMe
-      });
+    if (formValidation.valid) {
+      this.props.actions.requestLogin(loginForm);
     }
   };
 
@@ -72,9 +73,8 @@ class LoginContainer extends Component {
 
   render() {
     const {
-      username,
-      password,
-      rememberMe
+      formRules,
+      loginForm
     } = this.props;
 
     return (
@@ -82,9 +82,10 @@ class LoginContainer extends Component {
         <div className="u-center-block__content">
           <h1 className="c-heading">Por favor ingrese</h1>
           <Login
-            username={username}
-            password={password}
-            rememberMe={rememberMe}
+            rules={formRules}
+            username={loginForm.username}
+            password={loginForm.password}
+            rememberMe={loginForm.rememberMe}
             handleSubmit={this.handleSubmit}
             handleInputChanges={this.handleInputChanges}
             handleToggleRememberMe={this.handleToggleRememberMe}
@@ -96,14 +97,17 @@ class LoginContainer extends Component {
 }
 
 export default connect(
-  state => ({ ...state.loginForm }),
+  state => ({
+    loginForm: state.loginForm,
+    formRules: state.formRules.login
+  }),
   dispatch => ({
     actions: bindActionCreators({
       requestLogin,
       updateUsername,
       updatePassword,
       toggleRememberMe,
-      ...routerActions
+      updateRulesValidation
     }, dispatch)
   })
 )(LoginContainer);

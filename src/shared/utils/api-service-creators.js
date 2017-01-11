@@ -32,7 +32,7 @@ export const destroyUserSession = () => ('/api/destroyUserSession');
  * @returns {String} -> With the URL request.
  */
 export const callConsultUsers =
-  username => (`/api/callConsultUsers${username && `?strUsuario=${username}`}`);
+  username => (`/api/callConsultUsers${(username) ? `?strUsuario=${username}` : ''}`);
 
 /**
  * Service to add a new user.

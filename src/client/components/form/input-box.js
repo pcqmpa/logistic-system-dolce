@@ -3,8 +3,12 @@ import React, { PropTypes } from 'react';
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
 
+// Styles.
+import '../../styles/components/_input-box.scss';
+
 const InputBox = ({
   id,
+  valid,
   value,
   name,
   label,
@@ -16,7 +20,7 @@ const InputBox = ({
   theme,
   layout
 }) => {
-  const componentClass = 'input-box';
+  const componentClass = 'cp-input-box';
   let config = '';
 
   config += componentHelpers.generateComponentStyleConfig(componentClass, [
@@ -24,17 +28,21 @@ const InputBox = ({
     layout
   ]);
 
+  if (!valid) {
+    config += `${componentClass}--invalid `;
+  }
+
   config += className || '';
 
   if (label) {
     return (
-      <label htmlFor={id} className={`c-label o-form-element ${config.trim()}`}>
+      <label htmlFor={id} className="c-label o-form-element cp-label-input-box">
         {label}
         <input
           id={id}
           type={type || 'text'}
           name={name}
-          className="c-field c-field--label"
+          className={`c-field c-field--label ${componentClass} ${config.trim()}`}
           placeholder={placeholder}
           value={value}
           onChange={onChange}
@@ -48,7 +56,7 @@ const InputBox = ({
       id={id}
       name={name}
       type={type || 'text'}
-      className={`c-field ${config.trim()}`}
+      className={`c-field ${componentClass} ${config.trim()}`}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -60,6 +68,7 @@ const InputBox = ({
 InputBox.propTypes = {
   type: PropTypes.string,
   id: PropTypes.string,
+  valid: PropTypes.bool,
   value: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,

@@ -17,7 +17,11 @@ import {
 
 
 // New User Actions.
-export const updateNewUser = data => ({ type: UPDATE_NEW_USER_FORM, data });
+export const updateNewUser = ({ input, value }) => ({
+  type: UPDATE_NEW_USER_FORM,
+  input,
+  value
+});
 
 export const addNewUserRequest = () => ({ type: ADD_NEW_USER_REQUEST });
 

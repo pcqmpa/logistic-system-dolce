@@ -18,7 +18,7 @@ import 'rxjs/add/operator/catch';
 import { addToast, removeToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 import { loginSuccess, loginFailed } from '../actions/user-actions';
-import { updateUsersList } from '../actions/users-actions';
+import { updateUsersList, updateUserTypes } from '../actions/users-actions';
 
 // API services.
 import { callFetchUser } from '../utils/api-service-creators';
@@ -27,18 +27,19 @@ import { callFetchUser } from '../utils/api-service-creators';
 import { DASHBOARD } from '../constants/routes';
 import { LOGIN_REQUEST } from '../constants/actions';
 import { ERROR, BRAND } from '../constants/types';
-// import { INVALID_USER } from '../constants/messages';
+import { INVALID_USER, WELCOME } from '../constants/messages';
 
 const loginSuccessEpic = (payload) => {
-  console.log(payload);
-  const toast = addToast({ type: BRAND, message: 'Bienvenido' });
-  // TODO: uncomment this
-  // if (!payload.LogEstado) {
-  //   throw new Error(INVALID_USER);
-  // }
+  const toast = addToast({ type: BRAND, message: WELCOME });
+  if (!payload.user.LogEstado) {
+    throw new Error(INVALID_USER);
+  }
   return Observable.merge(
     Observable.of(loginSuccess(payload.user)),
-    Observable.of(updateUsersList(payload.users)),
+    Observable.of(
+      updateUsersList(payload.users),
+      updateUserTypes(payload.types)
+    ),
     Observable.of(routerActions.push(DASHBOARD)),
     Observable.of(
       hideLoading(),

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others -p \"[{name}]\" -n \"BUILD,API,SERVER\" -c \"yellow.bold,green.bold,blue.bold\" \"yarn run dev:build\" \"yarn run dev:api\" \"yarn run dev:server\"",
     "dev:build": "NODE_ENV=development babel-node ./src/server/dev-server.js",
-    "dev:server": "NODE_ENV=development nodemon --exec babel-node ./src/server/index.js --watch src/server src/shared build",
+    "dev:server": "NODE_ENV=development nodemon --exec babel-node ./src/server/index.js --watch ./src ./build",
     "dev:api": "NODE_ENV=development nodemon --exec babel-node ./src/server/api-server.js --watch src/server",
     "build": "NODE_ENV=production webpack --verbose --colors --display-error-details --config ./webpack/production/webpack.config.js",
     "prod": "npm run prod:start",
@@ -55,6 +55,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "blaze": "^3.2.0",
+    "body-parser": "^1.15.2",
     "bourbon": "^4.2.7",
     "clean-webpack-plugin": "^0.1.14",
     "compression": "^1.6.2",

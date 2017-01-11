@@ -17,4 +17,9 @@ export const INVALID_USER = 'El usuario o contraseña son incorrectos.';
 
 export const EXTERNAL_SERVER_ERROR = 'External server error.';
 
-export const ARGS_ABSENCE = 'The required arguments were not passed.';
+export const ARGS_ABSENCE = 'Los datos son insuficientes.';
+
+//
+// Login Messages
+// -----------------------------------------------------------------------------
+export const WELCOME = 'Bienvenido(a)';

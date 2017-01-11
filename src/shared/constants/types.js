@@ -27,3 +27,11 @@ export const GET = 'GET';
 export const POST = 'POST';
 export const PUT = 'PUT';
 export const PATCH = 'PATCH';
+
+// Form Types.
+export const PASSWORD = 'password';
+export const SUBMIT = 'submit';
+
+// Form Rules.
+export const REQUIRED = 'required';
+export const OPTIONAL = 'optional';

@@ -15,6 +15,7 @@ import * as routes from '../constants/routes';
 // Components.
 import {
   App,
+  NewUser,
   LoginContainer,
   Dashboard,
   UsersList,
@@ -46,6 +47,11 @@ const configureRoutes = (store) => {
       <Route
         path={routes.USERS_LIST}
         component={authRules.userIsAuthenticated(UsersList)}
+        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+      />
+      <Route
+        path={routes.NEW_USER}
+        component={authRules.userIsAuthenticated(NewUser)}
         onEnter={connect(authRules.userIsAuthenticated.onEnter)}
       />
       <Route

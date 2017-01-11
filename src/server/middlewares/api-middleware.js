@@ -6,7 +6,7 @@
 import httpProxy from 'http-proxy';
 
 // Utils.
-import { Log } from '../../shared/utils/';
+import { Log } from '../utils/';
 
 // App Config.
 import { env } from '../../../config/';

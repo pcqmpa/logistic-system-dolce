@@ -5,6 +5,9 @@
 // Services.
 import { userServices } from '../services/';
 
+// Utils.
+import { Log } from '../../utils/';
+
 // Constants.
 import * as responses from '../../constants/responses';
 import {
@@ -22,21 +25,22 @@ const callConsultUsers = (req, res) => {
         },
         () => {
           res.status(responses.ERROR).send({
-            message: EXTERNAL_SERVER_ERROR
+            err: EXTERNAL_SERVER_ERROR
           });
         }
       );
 };
 
 const callAddUser = (req, res) => {
-  if (!req.query.user) {
+  const user = req.body;
+  if (!user.StrUsuario) {
     return res
       .status(responses.ERROR)
-      .send({ meessage: ARGS_ABSENCE });
+      .send({ err: ARGS_ABSENCE });
   }
 
   return userServices
-    .addUserRequest(req.query.user)
+    .addUserRequest(user)
       .subscribe(
         (message) => {
           // The user was created succesfully.
@@ -48,7 +52,7 @@ const callAddUser = (req, res) => {
           // There was an external error.
           res
             .status(responses.ERROR)
-            .send({ message: err });
+            .send({ err });
         }
       );
 };

@@ -9,7 +9,7 @@ import { array } from '../utils/';
 
 // Actions.
 import {
-  UPDATE_NEW_USER,
+  UPDATE_NEW_USER_FORM,
   ADD_NEW_USER_REQUEST,
   ADD_NEW_USER_SUCCESS,
   ADD_NEW_USER_FAILED,
@@ -23,10 +23,10 @@ import {
 
 // New User Object.
 const newUser = {
-  username: false,
-  password: false,
-  fullname: false,
-  type: false,
+  username: '',
+  password: '',
+  fullname: '',
+  type: '',
   isSubmitting: false
 };
 
@@ -44,12 +44,16 @@ const initialState = {
   types: []
 };
 
+/**
+ * Users action handlers.
+ * @type {Object}
+ */
 const actionHandlers = {
-  [UPDATE_NEW_USER]: (state, { input, value }) => ({
+  [UPDATE_NEW_USER_FORM]: (state, { input, value }) => ({
     ...state,
     newUser: {
       ...state.newUser,
-      [input]: value
+      [input]: (value === 'none') ? '' : value
     }
   }),
   [ADD_NEW_USER_REQUEST]: state => ({

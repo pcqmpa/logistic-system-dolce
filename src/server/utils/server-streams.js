@@ -14,10 +14,15 @@ import request from 'request';
  * @param {Object} body -> The request body.
  * @returns {Observable} -> The Ajax request.
  */
-const fromAjaxRequest = (method, url, body = null) => (
+const fromAjaxRequest = (method, url, body = {}) => (
   Observable.create((observer) => {
     let reject = false;
-    request({ method, body, uri: url })
+    request({
+      method,
+      body,
+      uri: url,
+      json: true
+    })
       .on('data', (response) => {
         if (!reject) {
           try {

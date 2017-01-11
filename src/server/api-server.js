@@ -9,6 +9,7 @@ import Express from 'express';
 import { env } from '../../config/';
 
 // Middlewares.
+import bodyParser from 'body-parser';
 import sessionMiddleware from './middlewares/session-middleware';
 
 // Utils.
@@ -30,6 +31,8 @@ const app = new Express();
 //
 // API Configuration.
 // -----------------------------------------------------------------------------
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup session.
 sessionMiddleware(app);

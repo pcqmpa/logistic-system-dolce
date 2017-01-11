@@ -33,16 +33,19 @@ import {
 import { XLARGE_SIZE } from '../../../shared/constants/types';
 
 const UsersFilter = ({
+  rules,
   types,
   filter,
   onClearFilter,
-  onFilterChanges
+  onFilterChanges,
+  linkToNewUser
 }) => (
   <Grid noGutter>
     <GridCell width={10}>
       <Button
         size={XLARGE_SIZE}
         layout={BUTTON_ICON}
+        onClick={linkToNewUser}
       >
         <Icon
           type={ACCOUNT_PLUS}
@@ -56,6 +59,7 @@ const UsersFilter = ({
           <InputBox
             id="fullname_filter"
             name="fullname_filter"
+            valid={rules.fullname.valid}
             value={filter.fullname}
             onChange={onFilterChanges(USER_FULLNAME_FILTER)}
             placeholder="Filtro de usuarios"
@@ -66,6 +70,7 @@ const UsersFilter = ({
             id="user_type_filter"
             name="user_type_filter"
             placeholder="Tipo de usuario"
+            valid={rules.type.valid}
             value={filter.type}
             options={types}
             onChange={onFilterChanges(USER_TYPE_FILTER)}
@@ -87,10 +92,12 @@ const UsersFilter = ({
 );
 
 UsersFilter.propTypes = {
+  rules: PropTypes.shape().isRequired,
   types: PropTypes.arrayOf(PropTypes.object),
   filter: PropTypes.shape(),
   onClearFilter: PropTypes.func,
-  onFilterChanges: PropTypes.func
+  onFilterChanges: PropTypes.func,
+  linkToNewUser: PropTypes.func
 };
 
 export default UsersFilter;

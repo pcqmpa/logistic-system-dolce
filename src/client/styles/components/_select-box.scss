@@ -1,0 +1,10 @@
+@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+
+@import "../utils/_colors.scss";
+
+.cp-select-box {
+  &--invalid {
+    border: 1px solid $error-color !important;
+    background-color: tint($error-color, 90%) !important;
+  }
+}

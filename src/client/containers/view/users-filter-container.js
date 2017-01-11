@@ -2,10 +2,11 @@
  * Module with the users list filter container.
  * @module src/client/containers/view/users-filter
  */
-// React.
+// React - Redux.
 import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 // Components.
 import { UsersFilter } from '../../components/';
@@ -13,11 +14,15 @@ import { UsersFilter } from '../../components/';
 // Actions.
 import { updateUsersFilter, clearUsersFilter } from '../../../shared/actions/users-actions';
 
+// Constants.
+import { NEW_USER } from '../../../shared/constants/routes';
+
 class UsersFilterContainer extends Component {
   static propTypes = {
     types: PropTypes.arrayOf(PropTypes.object),
     usersFilter: PropTypes.shape(),
-    actions: PropTypes.shape()
+    actions: PropTypes.shape(),
+    formRules: PropTypes.shape()
   };
 
   /**
@@ -30,6 +35,15 @@ class UsersFilterContainer extends Component {
   handleFilterChanges = filter => (event) => {
     const { value } = event.target;
     this.props.actions.updateUsersFilter({ filter, value });
+  };
+
+  /**
+   * Redirects to the new user form.
+   * @private
+   * @returns {void} ->
+   */
+  linkToNewUser = () => {
+    this.props.actions.push(NEW_USER);
   };
 
   /**
@@ -55,24 +69,35 @@ class UsersFilterContainer extends Component {
   );
 
   render() {
-    const { types, usersFilter } = this.props;
+    const {
+      types,
+      usersFilter,
+      formRules
+    } = this.props;
+
     return (
       <UsersFilter
+        rules={formRules}
         types={this.mapUserTypes(types)}
         filter={usersFilter}
         onFilterChanges={this.handleFilterChanges}
         onClearFilter={this.clearFilterInputs}
+        linkToNewUser={this.linkToNewUser}
       />
     );
   }
 }
 
 export default connect(
-  state => ({ ...state.users }),
+  state => ({
+    ...state.users,
+    formRules: state.formRules.usersFilter
+  }),
   dispatch => ({
     actions: bindActionCreators({
       updateUsersFilter,
-      clearUsersFilter
+      clearUsersFilter,
+      push
     }, dispatch)
   })
 )(UsersFilterContainer);

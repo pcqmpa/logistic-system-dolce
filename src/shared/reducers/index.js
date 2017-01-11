@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 // Reducers.
+import formRules from './form-rules';
 import user from './user-reducer';
 import users from './users-reducer';
 import toastList from './toast-list-reducer';
@@ -17,6 +18,7 @@ import packageReception from './package-reception';
 // Root Reducer.
 export default combineReducers({
   routing: routerReducer,
+  formRules,
   user,
   users,
   toastList,
