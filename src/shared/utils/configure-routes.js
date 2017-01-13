@@ -19,6 +19,7 @@ import {
   LoginContainer,
   Dashboard,
   UsersList,
+  AssignTransporter,
   PackageReception,
   RoutesAssign
 } from '../../client/containers/';
@@ -52,6 +53,11 @@ const configureRoutes = (store) => {
       <Route
         path={routes.NEW_USER}
         component={authRules.userIsAuthenticated(NewUser)}
+        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+      />
+      <Route
+        path={routes.ASSIGN_TRANSPORTER}
+        component={authRules.userIsAuthenticated(AssignTransporter)}
         onEnter={connect(authRules.userIsAuthenticated.onEnter)}
       />
       <Route

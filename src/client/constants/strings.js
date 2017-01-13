@@ -27,3 +27,10 @@ export const USER_TYPE_INPUT = 'Tipo de usuario';
 export const USER_FULLNAME_FILTER = 'fullname';
 
 export const USER_TYPE_FILTER = 'type';
+
+// Assign Transporter Form.
+export const ID_USER = 'idUser';
+export const NAME_USER = 'nameUser';
+export const ID_TRANSPORTER = 'idTransporter';
+export const SELECT_MASTER = 'select_master';
+export const SELECT_TRANSPORTER_INPUT = 'Seleccionar Usuario';

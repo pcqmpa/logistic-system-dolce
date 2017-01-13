@@ -11,6 +11,7 @@ export { default as UsersList } from './users-list';
 export { default as PackageReception } from './package-reception';
 export { default as RoutesAssign } from './routes-assign';
 export { default as NewUser } from './new-user';
+export { default as AssignTransporter } from './assign-transporter';
 
 // Views.
 export { default as SideNav } from './view/side-nav';

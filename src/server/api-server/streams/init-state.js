@@ -4,7 +4,11 @@
  * @module src/server/api-server/streams/init-state
  */
 // Services.
-import { userServices, logisticTypesServices } from '../services/';
+import {
+  userServices,
+  logisticTypesServices,
+  transporterServices
+} from '../services/';
 
 /**
  * Stream that request the admin init state.
@@ -14,10 +18,14 @@ const initState = () => (
   userServices.consultUsersRequest()
     .concatMap(users => (
       logisticTypesServices.consultLogisticTypesRequest()
-        .map(types => ({
-          users,
-          types
-        }))
+        .concatMap(types => (
+          transporterServices.getTransportersRequest()
+            .map(transporters => ({
+              users,
+              types,
+              transporters
+            }))
+        ))
     ))
 );
 

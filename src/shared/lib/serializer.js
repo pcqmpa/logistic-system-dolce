@@ -3,6 +3,7 @@
  * @module src/shared/utils/serializer
  */
 import {
+  DISTRIBUTOR,
   TRANSPORTER_STRING,
   DISTRIBUTOR_STRING,
   DIRECTOR_STRING,
@@ -38,4 +39,15 @@ const toNewUser = data => ({
   StrNombreTipoUsuario: getUserType(data.type)
 });
 
-export default { toNewUser };
+/**
+ * Serialize distributor users.
+ * @param {Array} users -> The array of users.
+ * @return {Array} -> The serialized array.
+ */
+const toDistributorUsers = users => (
+  users
+    .filter(user => (user.IdTipo === DISTRIBUTOR))
+    .map(user => ({ id: user.IdUsuario, assign: false }))
+);
+
+export default { toNewUser, toDistributorUsers };

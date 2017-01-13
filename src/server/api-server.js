@@ -4,12 +4,12 @@
  */
 // Node.
 import Express from 'express';
+import bodyParser from 'body-parser';
 
 // App Config.
 import { env } from '../../config/';
 
 // Middlewares.
-import bodyParser from 'body-parser';
 import sessionMiddleware from './middlewares/session-middleware';
 
 // Utils.
@@ -18,7 +18,8 @@ import { Log } from './utils/';
 // Controllers.
 import {
   securityController,
-  userController
+  userController,
+  transporterController
 } from './api-server/controllers/';
 
 // Constants.
@@ -40,15 +41,28 @@ sessionMiddleware(app);
 //
 // API Services.
 // -----------------------------------------------------------------------------
-app.get('/api/callFetchUser', securityController.callFetchUser);
 
+// Security.
+app.get('/api/callFetchUser', securityController.callFetchUser);
 app.post('/api/destroyUserSession', securityController.destroyUserSession);
 
-
+// User.
 app.get('/api/callConsultUsers', userController.callConsultUsers);
-
 app.post('/api/callAddUser', userController.callAddUser);
 
+// Transporter.
+app.get(
+  '/api/callGetTransporters',
+  transporterController.callGetTransporters
+);
+app.post(
+  '/api/callAssignTransporter',
+  transporterController.callAssignTransporter
+);
+app.post(
+  '/api/callAssignDistributor',
+  transporterController.callAssignDistributor
+);
 
 //
 // API Initialize.

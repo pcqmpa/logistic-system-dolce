@@ -2,6 +2,7 @@
  * Module with the users reducer actions.
  * @module src/shared/actions/users-actions
  */
+// Constants.
 import {
   UPDATE_NEW_USER_FORM,
   ADD_NEW_USER_REQUEST,

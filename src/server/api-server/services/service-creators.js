@@ -56,3 +56,21 @@ export const consultLogisticTypes = () => (`${API_SERVICE_URL}/api/TipoLogistica
  * @returns {String} -> With the URL request.
  */
 export const getTransporters = () => (`${API_SERVICE_URL}/api/Trasportador`);
+
+/**
+ * Service to asign a transporter master to a transporter user.
+ * @param {String} idUser -> The transporter user id.
+ * @param {String} idTransporter -> The transporter master id.
+ * @returns {String} -> With the URL request.
+ */
+export const assignTransporter = (idUser, idTransporter) =>
+  (`${API_SERVICE_URL}/api/Trasportador?idUsuario=${idUser}&idTranportador=${idTransporter}`);
+
+/**
+ * Service to asign a transporter master to a transporter user.
+ * @param {String} idTransporter -> The transporter user id.
+ * @param {String} idDistributor -> The distributor id.
+ * @returns {String} -> With the URL request.
+ */
+export const assignDistributor = (idTransporter, idDistributor) =>
+  (`${API_SERVICE_URL}/api/Usuarios?idTransportista=${idTransporter}&idDistribuidor=${idDistributor}`);

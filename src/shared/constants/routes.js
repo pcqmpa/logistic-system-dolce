@@ -14,3 +14,5 @@ export const PACKAGE_RECEPTION = '/packageReception';
 export const ROUTES_ASSIGN = '/routesAssign';
 
 export const NEW_USER = '/newUser';
+
+export const ASSIGN_TRANSPORTER = '/assignTransporter';

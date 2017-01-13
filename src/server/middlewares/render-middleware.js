@@ -17,6 +17,9 @@ import { Provider } from 'react-redux';
 import { env } from '../../../config/';
 import * as responses from '../constants/responses';
 
+// Lib.
+import serializer from '../../shared/lib/serializer';
+
 // Utils.
 import {
   Log,
@@ -27,7 +30,14 @@ import { validateAuth } from '../utils/';
 
 // Actions.
 import { loginSuccess } from '../../shared/actions/user-actions';
-import { updateUsersList, updateUserTypes } from '../../shared/actions/users-actions';
+import {
+  updateUsersList,
+  updateUserTypes
+} from '../../shared/actions/users-actions';
+import {
+  initTransporterList,
+  updateDistributorFormList
+} from '../../shared/actions/transporters-actions';
 
 // Services.
 import { initState } from '../api-server/streams/';
@@ -102,6 +112,10 @@ const handleRender = (req, res) => {
         store.dispatch(loginSuccess(user));
         store.dispatch(updateUsersList(initialData.users));
         store.dispatch(updateUserTypes(initialData.types));
+        store.dispatch(initTransporterList(initialData.transporters));
+        store.dispatch(updateDistributorFormList(
+          serializer.toDistributorUsers(initialData.users)
+        ));
       }
 
       // Configure routes.

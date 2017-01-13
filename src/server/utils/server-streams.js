@@ -2,7 +2,8 @@
  * Module with server specific Observables.
  * @module src/server/api-server
  */
-import { Observable } from 'rxjs';
+// Rxjs.
+import { Observable } from 'rxjs/Observable';
 
 // Node.
 import request from 'request';
@@ -24,6 +25,7 @@ const fromAjaxRequest = (method, url, body = {}) => (
       json: true
     })
       .on('data', (response) => {
+        console.log(response.toString());
         if (!reject) {
           try {
             const data = JSON.parse(response.toString());

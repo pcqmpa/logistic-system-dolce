@@ -31,6 +31,7 @@ export const PATCH = 'PATCH';
 // Form Types.
 export const PASSWORD = 'password';
 export const SUBMIT = 'submit';
+export const CHECKBOX = 'checkbox';
 
 // Form Rules.
 export const REQUIRED = 'required';

@@ -1,12 +1,12 @@
 /**
- * Module with the security controllers.
- * @module src/server/api-server/controllers/security-controller
+ * Module with the user controllers.
+ * @module src/server/api-server/controllers/user-controller
  */
 // Services.
 import { userServices } from '../services/';
 
 // Utils.
-import { Log } from '../../utils/';
+// import { Log } from '../../utils/';
 
 // Constants.
 import * as responses from '../../constants/responses';

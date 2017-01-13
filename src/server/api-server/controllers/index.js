@@ -7,3 +7,5 @@ export { default as securityController } from './security-controller';
 
 export { default as userController } from './user-controller';
 
+export { default as transporterController } from './transporter-controller';
+

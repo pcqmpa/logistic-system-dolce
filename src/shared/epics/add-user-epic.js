@@ -14,9 +14,6 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/mergeMap';
 
-// Lib.
-import serializer from '../lib/serializer';
-
 // Actions.
 import {
   updateUsersList,
@@ -25,12 +22,16 @@ import {
 } from '../actions/users-actions';
 import { addToast, removeToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
+import { updateDistributorFormList } from '../actions/transporters-actions';
 
 // API services.
 import {
   callAddUser,
   callConsultUsers
 } from '../utils/api-service-creators';
+
+// Lib.
+import serializer from '../lib/serializer';
 
 // Constants.
 import { ERROR, BRAND } from '../constants/types';
@@ -44,6 +45,9 @@ const registerNewUserSuccess = (payload) => {
     .mergeMap(users => (
       Observable.concat(
         Observable.of(updateUsersList(users.data)),
+        Observable.of(updateDistributorFormList(
+          serializer.toDistributorUsers(users)
+        )),
         Observable.of(
           addNewUserSuccess(),
           hideLoading(),

@@ -1,5 +1,5 @@
 /**
- * Module with the security external services.
+ * Module with the user services.
  * @module src/server/api-server/services/security-services
  */
 // API Creators.
