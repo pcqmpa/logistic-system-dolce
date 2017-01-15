@@ -8,11 +8,15 @@ import { combineEpics } from 'redux-observable';
 import login from './login-epic';
 import logout from './logout-epic';
 import addUser from './add-user-epic';
+import assignTransporter from './assign-transporter-epic';
+import assignDistributors from './assign-distributors-epic';
 
 const rootEpic = combineEpics(
   login,
   logout,
-  addUser
+  addUser,
+  assignTransporter,
+  assignDistributors
 );
 
 export default rootEpic;

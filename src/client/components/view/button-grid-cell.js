@@ -20,6 +20,7 @@ const ButtonGridCell = ({
   return (
     <div className="c-list__item">
       <RadioButton
+        label
         value={value}
         name={name}
         checked={checked}

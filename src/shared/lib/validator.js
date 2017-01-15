@@ -6,7 +6,26 @@
 import { string } from '../utils/';
 
 // Constants.
-import { REQUIRED } from '../constants/types';
+import {
+  STRING,
+  NUMBER,
+  OBJECT,
+  ARRAY,
+  REQUIRED
+} from '../constants/types';
+
+/**
+ * Validate the data based on the type of the rule.
+ * @param {String} type -> The type rule.
+ * @param {Any} data -> The data to validate.
+ * @returns {Bool} -> The result of the validation.
+ */
+const validateByType = (type, data) => ({
+  [STRING]: data !== null && !string.empty(data),
+  [NUMBER]: data !== null && !string.empty(data.toString()),
+  [ARRAY]: data !== null && data.length > 0,
+  [OBJECT]: data !== null && Object.keys(data).length > 0
+}[type]);
 
 /**
  * Checks every prop based on a set of rules,
@@ -19,7 +38,7 @@ const run = (rules, data) => {
   const resume = Object.keys(rules).reduce((validation, prop) => {
     let passed = true;
     if (rules[prop].rule === REQUIRED) {
-      passed = !string.empty(data[prop].toString());
+      passed = validateByType(rules[prop].type, data[prop]);
     }
 
     return {

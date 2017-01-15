@@ -47,7 +47,7 @@ export const callAddUser = () => ('/api/callAddUser');
  * Service to get the list of transporter masters.
  * @returns {String} -> With the URL request.
  */
-export const callGetTrasnporters = () => ('/api/callGetTrasnporters');
+export const callGetTransporters = () => ('/api/callGetTransporters');
 
 /**
  * Service to assign a transporter user to a transporter master.

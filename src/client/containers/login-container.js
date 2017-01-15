@@ -42,7 +42,6 @@ class LoginContainer extends Component {
     event.preventDefault();
     const { loginForm, formRules } = this.props;
     const formValidation = validator.run(formRules, loginForm);
-    console.log(formValidation);
     this.props.actions.updateRulesValidation(
       LOGIN_RULES,
       formValidation.resume

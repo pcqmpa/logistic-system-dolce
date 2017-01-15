@@ -20,6 +20,7 @@ import {
   Dashboard,
   UsersList,
   AssignTransporter,
+  AssignDistributors,
   PackageReception,
   RoutesAssign
 } from '../../client/containers/';
@@ -58,6 +59,11 @@ const configureRoutes = (store) => {
       <Route
         path={routes.ASSIGN_TRANSPORTER}
         component={authRules.userIsAuthenticated(AssignTransporter)}
+        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+      />
+      <Route
+        path={routes.ASSIGN_DISTRIBUTORS}
+        component={authRules.userIsAuthenticated(AssignDistributors)}
         onEnter={connect(authRules.userIsAuthenticated.onEnter)}
       />
       <Route

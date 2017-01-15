@@ -90,4 +90,8 @@ SelectBox.propTypes = {
   layout: PropTypes.string
 };
 
+SelectBox.defaultProps = {
+  valid: true
+};
+
 export default SelectBox;

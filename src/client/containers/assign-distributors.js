@@ -21,7 +21,7 @@ import {
 
   Button,
   SelectBox,
-  RadioButton
+  CheckBox
 } from '../components/';
 
 // Lib.
@@ -32,9 +32,9 @@ import {
   updateSelectedDataTable
 } from '../../shared/actions/data-table-actions';
 import {
-  updateTransporterFormUser,
-  updateTransporterFormMaster,
-  assignTransporterRequest
+  updateDistributorFormTransporter,
+  updateDistributorFormDistributors,
+  assignDistributorRequest
 } from '../../shared/actions/transporters-actions';
 import { updateRulesValidation } from '../../shared/actions/form-rules-actions';
 
@@ -45,17 +45,17 @@ import {
 } from '../../shared/constants/types';
 import { TRANSPORTER } from '../../shared/constants/user-types';
 import {
-  TRANSPORTER_FORM_RULES,
+  DISTRIBUTOR_FORM_RULES,
   SELECT_TRANSPORTER_INPUT
 } from '../constants/strings';
 import {
-  TRANSPORTER_FORM
+  DISTRIBUTOR_FORM
 } from '../../shared/constants/strings';
 
 // Styles.
 import '../styles/assign-transporter.scss';
 
-class AssignTransporter extends Component {
+class AssignDistributors extends Component {
   static propTypes = {
     actions: PropTypes.shape().isRequired,
     form: PropTypes.shape(),
@@ -69,8 +69,8 @@ class AssignTransporter extends Component {
 
     this.state = {
       headers: [
+        { text: 'Usuario', size: 40 },
         { text: 'Nombre', size: 40 },
-        { text: 'Documento', size: 40 },
         { text: 'Seleccionar', size: 20 }
       ]
     };
@@ -91,23 +91,22 @@ class AssignTransporter extends Component {
   );
 
   /**
-   * Map the transporter masters.
-   * @param {Array} masters -> The current list of masters.
+   * Map the distributor users.
+   * @param {Array} distributors -> The current list of distributors.
    * @returns {Array} -> List of ReactElements.
    */
-  mapMasters = masters => (
-    masters.map((master, key) => (
+  mapMasters = distributors => (
+    distributors.map((distributor, key) => (
       <DataRow key={key}>
-        <DataItem width={40}>{master.StrNombre}</DataItem>
-        <DataItem center width={40}>{master.StrDocumento}</DataItem>
+        <DataItem center width={40}>{distributor.Strusuario}</DataItem>
+        <DataItem center width={40}>{distributor.StrNombre}</DataItem>
         <DataItem width={20}>
           <InputGroup center>
-            <RadioButton
-              name="select_transporter_master"
-              value={master.Id.toString()}
-              valid={this.props.formRules.idTransporter.valid}
-              onChange={this.handleSelectMaster(master.Id)}
-              checked={master.Id === this.props.form.idTransporter}
+            <CheckBox
+              name="select_distributors"
+              value={distributor.Idusuario.toString()}
+              valid={this.props.formRules.distributors.valid}
+              onChange={this.handleSelectDistributor(distributor.Idusuario)}
             />
           </InputGroup>
         </DataItem>
@@ -124,7 +123,7 @@ class AssignTransporter extends Component {
   handlePaginatorClick = idData => (event) => {
     event.preventDefault();
     this.props.actions.updateSelectedDataTable(
-      TRANSPORTER_FORM,
+      DISTRIBUTOR_FORM,
       idData
     );
   };
@@ -134,25 +133,25 @@ class AssignTransporter extends Component {
    * @param {DOMEvent} event -> The element event.
    * @returns {void}
    */
-  handleSelectUser = (event) => {
+  handleSelectTransporter = (event) => {
     event.preventDefault();
-    const idUser = parseInt(event.target.value, 10);
+    const idTransporter = parseInt(event.target.value, 10);
     const [selectedUser] = this.props.users
-      .filter(user => (user.Idusuario === idUser));
-    this.props.actions.updateTransporterFormUser(
-      (isNaN(idUser)) ? '' : idUser.toString(),
-      (isNaN(idUser)) ? '' : selectedUser.StrNombre
+      .filter(user => (user.Idusuario === idTransporter));
+    this.props.actions.updateDistributorFormTransporter(
+      (isNaN(idTransporter)) ? '' : idTransporter.toString(),
+      (isNaN(idTransporter)) ? '' : selectedUser.StrNombre
     );
   };
 
   /**
-   * Handle select transporter master.
-   * @param {String} idTransporter -> The transporter master id.
+   * Handle select distributor user.
+   * @param {String} idDistributor -> The distributor id.
    * @param {DOMEvent} event -> The element event.
    * @returns {void}
    */
-  handleSelectMaster = idTransporter => () => {
-    this.props.actions.updateTransporterFormMaster(idTransporter);
+  handleSelectDistributor = idDistributor => () => {
+    this.props.actions.updateDistributorFormDistributors(idDistributor);
   };
 
   /**
@@ -165,12 +164,12 @@ class AssignTransporter extends Component {
     const formValidation = validator.run(formRules, form);
 
     this.props.actions.updateRulesValidation(
-      TRANSPORTER_FORM_RULES,
+      DISTRIBUTOR_FORM_RULES,
       formValidation.resume
     );
 
     if (formValidation.valid) {
-      this.props.actions.assignTransporterRequest();
+      this.props.actions.assignDistributorRequest();
     }
   };
 
@@ -186,21 +185,21 @@ class AssignTransporter extends Component {
         pillar
         size={MEDIUM_SIZE}
       >
-        <h2 className="c-heading">Asignar Transportador</h2>
+        <h2 className="c-heading">Asignar Ditribuidores</h2>
         <Grid noGutter>
           <GridCell width={20}>
             <SelectBox
               id="user_transporter"
               name="user_transporter"
               placeholder={SELECT_TRANSPORTER_INPUT}
-              value={form.idUser}
-              valid={formRules.idUser.valid}
+              value={form.idTransporter}
+              valid={formRules.idTransporter.valid}
               options={this.mapTransporterUsers(users)}
-              onChange={this.handleSelectUser}
+              onChange={this.handleSelectTransporter}
             />
           </GridCell>
           <GridCell width={20} offset={40}>
-            <p className="user-name-box">{form.nameUser}</p>
+            <p className="user-name-box">{form.nameTransporter}</p>
           </GridCell>
         </Grid>
         <Grid
@@ -242,19 +241,18 @@ class AssignTransporter extends Component {
 
 export default connect(
   state => ({
-    form: state.transporters.transporterForm,
-    transporters: state.transporters.list,
+    form: state.transporters.distributorForm,
     users: state.users.list,
-    dataTable: state.dataTable.transporterFormTable,
-    formRules: state.formRules.transporterForm
+    dataTable: state.dataTable.distributorFormTable,
+    formRules: state.formRules.distributorForm
   }),
   dispatch => ({
     actions: bindActionCreators({
       updateSelectedDataTable,
-      updateTransporterFormUser,
-      updateTransporterFormMaster,
-      assignTransporterRequest,
+      updateDistributorFormTransporter,
+      updateDistributorFormDistributors,
+      assignDistributorRequest,
       updateRulesValidation
     }, dispatch)
   })
-)(AssignTransporter);
+)(AssignDistributors);

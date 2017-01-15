@@ -16,3 +16,5 @@ export const ROUTES_ASSIGN = '/routesAssign';
 export const NEW_USER = '/newUser';
 
 export const ASSIGN_TRANSPORTER = '/assignTransporter';
+
+export const ASSIGN_DISTRIBUTORS = '/assignDistributors';

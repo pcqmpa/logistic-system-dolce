@@ -46,7 +46,7 @@ const InputBox = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          data-group={group}
+          dataGroup={group}
         />
       </label>
     );
@@ -60,7 +60,7 @@ const InputBox = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      data-group={group}
+      dataGroup={group}
     />
   );
 };
@@ -78,6 +78,10 @@ InputBox.propTypes = {
   group: PropTypes.string,
   theme: PropTypes.string,
   layout: PropTypes.string
+};
+
+InputBox.defaultProps = {
+  valid: true
 };
 
 export default InputBox;

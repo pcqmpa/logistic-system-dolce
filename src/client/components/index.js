@@ -23,6 +23,12 @@ export { default as List } from './layout/list';
 export { default as ListItem } from './layout/list-item';
 export { default as ListSection } from './layout/list-section';
 
+export { default as DataTable } from './layout/data-table';
+export { default as DataHeader } from './layout/data-header';
+export { default as DataContent } from './layout/data-content';
+export { default as DataRow } from './layout/data-row';
+export { default as DataItem } from './layout/data-item';
+
 // View components.
 export { default as Icon } from './view/icon';
 

@@ -23,22 +23,36 @@ const fromAjaxRequest = (method, url, body = {}) => (
       body,
       uri: url,
       json: true
-    })
-      .on('data', (response) => {
-        console.log(response.toString());
-        if (!reject) {
-          try {
-            const data = JSON.parse(response.toString());
-            observer.next(data);
-          } catch (err) {
-            observer.error(err);
-          }
+    }, (err, response, reqBody) => {
+      if (err) {
+        return observer.error(err);
+      }
+
+      if (!reject) {
+        try {
+          const data = reqBody;
+          observer.next(data);
+        } catch (error) {
+          observer.error(error);
         }
-        observer.complete();
-      })
-      .on('error', (err) => {
-        observer.error(err);
-      });
+      }
+      return observer.complete();
+    });
+      // .on('data', (response) => {
+      //   console.log(response.toString());
+      //   if (!reject) {
+      //     try {
+      //       const data = JSON.parse(response.toString());
+      //       observer.next(data);
+      //     } catch (err) {
+      //       observer.error(err);
+      //     }
+      //   }
+      //   observer.complete();
+      // })
+      // .on('error', (err) => {
+      //   observer.error(err);
+      // });
 
     return function dispose() {
       reject = true;

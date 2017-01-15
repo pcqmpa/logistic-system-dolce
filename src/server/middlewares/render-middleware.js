@@ -17,9 +17,6 @@ import { Provider } from 'react-redux';
 import { env } from '../../../config/';
 import * as responses from '../constants/responses';
 
-// Lib.
-import serializer from '../../shared/lib/serializer';
-
 // Utils.
 import {
   Log,
@@ -29,6 +26,9 @@ import {
 import { validateAuth } from '../utils/';
 
 // Actions.
+import {
+  updateSerializedDataTable
+} from '../../shared/actions/data-table-actions';
 import { loginSuccess } from '../../shared/actions/user-actions';
 import {
   updateUsersList,
@@ -50,9 +50,12 @@ import reducer from '../../shared/reducers/';
 import { NotFound } from '../../shared/components/';
 import { Html } from '../components/';
 
-// TODO: check if this is needed.
 // Constants.
-// import { ADMIN } from '../../shared/constants/user-types';
+import { DISTRIBUTOR } from '../../shared/constants/user-types';
+import {
+  DISTRIBUTOR_FORM,
+  TRANSPORTER_FORM
+} from '../../shared/constants/strings';
 
 /**
  * Render the content.
@@ -113,8 +116,14 @@ const handleRender = (req, res) => {
         store.dispatch(updateUsersList(initialData.users));
         store.dispatch(updateUserTypes(initialData.types));
         store.dispatch(initTransporterList(initialData.transporters));
-        store.dispatch(updateDistributorFormList(
-          serializer.toDistributorUsers(initialData.users)
+        store.dispatch(updateSerializedDataTable(
+          TRANSPORTER_FORM,
+          initialData.transporters
+        ));
+        store.dispatch(updateDistributorFormList(initialData.users));
+        store.dispatch(updateSerializedDataTable(
+          DISTRIBUTOR_FORM,
+          initialData.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
         ));
       }
 

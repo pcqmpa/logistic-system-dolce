@@ -32,8 +32,10 @@ class SideNav extends Component {
       items: [
         { type: types.Link, link: routes.DASHBOARD, content: 'Dashboard' },
         { type: types.Link, link: routes.USERS_LIST, content: 'Usuarios' },
+        { type: types.Link, link: routes.ASSIGN_TRANSPORTER, content: 'Asignar Transportador' },
+        { type: types.Link, link: routes.ASSIGN_DISTRIBUTORS, content: 'Asignar Distribuidores' },
         { type: types.Link, link: routes.PACKAGE_RECEPTION, content: 'Recepción de Paquetes' },
-        { type: types.Link, link: routes.ASSIGN_ROUTES, content: 'Asignacón de Rutas' }
+        { type: types.Link, link: routes.ASSIGN_ROUTES, content: 'Asignación de Rutas' }
       ]
     };
   }

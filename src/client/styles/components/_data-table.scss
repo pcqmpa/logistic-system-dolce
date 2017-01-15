@@ -1,0 +1,33 @@
+@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+
+@import "../utils/_colors.scss";
+
+.cp-data-table {
+  &__header {
+    font-weight: 600;
+    text-align: center;
+    background-color: $grey-light;
+  }
+
+  &__row {
+    background-color: tint($grey-lighter, 80%);
+
+    &:hover {
+      background-color: $grey-lighter;
+    }
+  }
+
+  &__item {
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__paginator {
+    margin-top: 4px !important;
+    margin-right: 4px !important;
+  }
+}

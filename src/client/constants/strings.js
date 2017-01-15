@@ -13,6 +13,8 @@ export const USER_TYPE = 'type';
 // Form Rules.
 export const NEW_USER_RULES = 'newUser';
 export const LOGIN_RULES = 'login';
+export const TRANSPORTER_FORM_RULES = 'transporterForm';
+export const DISTRIBUTOR_FORM_RULES = 'distributorForm';
 
 // New form.
 export const USERNAME_INPUT = 'Usuario';

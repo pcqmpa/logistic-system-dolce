@@ -5,18 +5,24 @@
 // Redux.
 import { createReducer } from 'redux-create-reducer';
 
+// Lib.
+import serializer from '../lib/serializer';
+
 // Actions.
 import {
   INIT_TRANSPORTER_LIST,
   UPDATE_TRANSPORTER_LIST,
 
-  UPDATE_ASSIGN_TRANSPORTER_FORM,
+  UPDATE_TRANSPORTER_FORM_USER,
+  UPDATE_TRANSPORTER_FORM_MASTER,
+  ASSIGN_TRANSPORTER_REQUEST,
   ASSIGN_TRANSPORTER_SUCCESS,
   ASSIGN_TRANSPORTER_FAILED,
 
   UPDATE_DISTRIBUTOR_FORM_LIST,
   UPDATE_DISTRIBUTOR_FORM_TRANSPORTER,
   UPDATE_DISTRIBUTOR_FORM_DISTRIBUTORS,
+  ASSIGN_DISTRIBUTOR_REQUEST,
   ASSIGN_DISTRIBUTOR_SUCCESS,
   ASSIGN_DISTRIBUTOR_FAILED
 } from '../constants/actions';
@@ -30,7 +36,7 @@ import {
  * @type {Object}
  */
 const distributorForm = {
-  idTransporter: null,
+  idTransporter: '',
   nameTransporter: '',
   distributors: [],
   isSubmitting: false,
@@ -42,7 +48,7 @@ const distributorForm = {
  * @type {Object}
  */
 const transporterForm = {
-  idUser: null,
+  idUser: '',
   nameUser: '',
   idTransporter: null,
   isSubmitting: false,
@@ -82,11 +88,26 @@ const actionHandlers = {
   [INIT_TRANSPORTER_LIST]: updateTransportersList,
   [UPDATE_TRANSPORTER_LIST]: updateTransportersList,
 
-  [UPDATE_ASSIGN_TRANSPORTER_FORM]: (state, { input, value }) => ({
+  [UPDATE_TRANSPORTER_FORM_USER]: (state, { idUser, nameUser }) => ({
     ...state,
     transporterForm: {
       ...state.transporterForm,
-      [input]: value
+      idUser,
+      nameUser
+    }
+  }),
+  [UPDATE_TRANSPORTER_FORM_MASTER]: (state, { idTransporter }) => ({
+    ...state,
+    transporterForm: {
+      ...state.transporterForm,
+      idTransporter
+    }
+  }),
+  [ASSIGN_TRANSPORTER_REQUEST]: state => ({
+    ...state,
+    transporterForm: {
+      ...state.transporterForm,
+      isSubmitting: true
     }
   }),
   [ASSIGN_TRANSPORTER_SUCCESS]: state => ({
@@ -106,36 +127,54 @@ const actionHandlers = {
     ...state,
     distributorForm: {
       ...state.distributorForm,
-      distributors
+      distributors: serializer.toDistributorUsers(distributors)
     }
   }),
-  [UPDATE_DISTRIBUTOR_FORM_TRANSPORTER]: (state, { transporter }) => ({
+  [UPDATE_DISTRIBUTOR_FORM_TRANSPORTER]: (state, { idTransporter, nameTransporter }) => ({
     ...state,
     distributorForm: {
       ...state.distributorForm,
-      idTransporter: transporter.IdUsuario,
-      nameTransporter: transporter.StrNombre
+      idTransporter,
+      nameTransporter
     }
   }),
   [UPDATE_DISTRIBUTOR_FORM_DISTRIBUTORS]: (state, { idDistributor }) => ({
     ...state,
     distributorForm: {
       ...state.distributorForm,
-      distributors: state.distributors
-        .map((distributor) => {
-          if (distributor.id !== idDistributor) {
-            return distributor;
-          }
-          return {
-            ...distributor,
-            assign: !distributor.assign
-          };
-        })
+      distributors: state.distributorForm
+        .distributors
+          .map((distributor) => {
+            if (distributor.id !== idDistributor) {
+              return distributor;
+            }
+            return {
+              ...distributor,
+              assign: !distributor.assign
+            };
+          })
+    }
+  }),
+  [ASSIGN_DISTRIBUTOR_REQUEST]: state => ({
+    ...state,
+    distributorForm: {
+      ...state.distributorForm,
+      isSubmitting: true
     }
   }),
   [ASSIGN_DISTRIBUTOR_SUCCESS]: state => ({
     ...state,
-    distributorForm
+    distributorForm: {
+      ...state.distributorForm,
+      idTransporter: '',
+      nameTransporter: '',
+      distributors: state.distributorForm.distributors
+        .map(distributor => ({
+          ...distributor,
+          assign: false
+        }))
+    },
+    isSubmitting: false
   }),
   [ASSIGN_DISTRIBUTOR_FAILED]: state => ({
     ...state,

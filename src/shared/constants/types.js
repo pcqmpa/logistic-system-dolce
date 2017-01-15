@@ -2,6 +2,12 @@
  * Module with different kind of types requiered in the app.
  * @module src/shared/constants/types
  */
+// Primitive Types.
+export const STRING = 'STRING';
+export const NUMBER = 'NUMBER';
+export const ARRAY = 'ARRAY';
+export const OBJECT = 'OBJECT';
+
 // Box Container sizes.
 export const SUPER_SIZE = 'super';
 export const XLARGE_SIZE = 'xlarge';
@@ -12,7 +18,7 @@ export const XSMALL_SIZE = 'xsmall';
 export const TINY_SIZE = 'tiny';
 export const NONE_SIZE = 'none';
 
-// Component types.
+// Component Types.
 export const Link = 'link';
 
 // Message Types.
@@ -32,6 +38,7 @@ export const PATCH = 'PATCH';
 export const PASSWORD = 'password';
 export const SUBMIT = 'submit';
 export const CHECKBOX = 'checkbox';
+export const RADIO = 'radio';
 
 // Form Rules.
 export const REQUIRED = 'required';

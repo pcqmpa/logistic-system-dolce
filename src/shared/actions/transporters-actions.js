@@ -7,7 +7,8 @@ import {
   INIT_TRANSPORTER_LIST,
   UPDATE_TRANSPORTER_LIST,
 
-  UPDATE_ASSIGN_TRANSPORTER_FORM,
+  UPDATE_TRANSPORTER_FORM_USER,
+  UPDATE_TRANSPORTER_FORM_MASTER,
   ASSIGN_TRANSPORTER_REQUEST,
   ASSIGN_TRANSPORTER_SUCCESS,
   ASSIGN_TRANSPORTER_FAILED,
@@ -32,10 +33,15 @@ export const updateTransporterList = list => ({
 });
 
 // Transporters Assign Actions.
-export const updateAssignTransporterForm = (input, value) => ({
-  type: UPDATE_ASSIGN_TRANSPORTER_FORM,
-  input,
-  value
+export const updateTransporterFormUser = (idUser, nameUser) => ({
+  type: UPDATE_TRANSPORTER_FORM_USER,
+  idUser,
+  nameUser
+});
+
+export const updateTransporterFormMaster = idTransporter => ({
+  type: UPDATE_TRANSPORTER_FORM_MASTER,
+  idTransporter
 });
 
 export const assignTransporterRequest = () => ({
@@ -56,9 +62,10 @@ export const updateDistributorFormList = distributors => ({
   distributors
 });
 
-export const updateDistributorFormTransporter = transporter => ({
+export const updateDistributorFormTransporter = (idTransporter, nameTransporter) => ({
   type: UPDATE_DISTRIBUTOR_FORM_TRANSPORTER,
-  transporter
+  idTransporter,
+  nameTransporter
 });
 
 export const updateDistributorFormDistributors = idDistributor => ({

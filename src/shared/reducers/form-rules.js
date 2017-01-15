@@ -12,7 +12,14 @@ import {
 } from '../constants/actions';
 
 // Constants.
-import { REQUIRED, OPTIONAL } from '../constants/types';
+import {
+  STRING,
+  NUMBER,
+  ARRAY,
+
+  REQUIRED,
+  OPTIONAL
+} from '../constants/types';
 
 /**
  * Optional rule.
@@ -27,10 +34,20 @@ const optionalRule = {
  * Form initial and default rule.
  * @type {Object}
  */
-const initialRule = {
+const requiredRule = {
   rule: REQUIRED,
   valid: true
 };
+
+/**
+ * Create a required rule.
+ * @param {String} type -> The type of the rule.
+ * @returns {Object} -> The rule.
+ */
+const createRule = (type = STRING) => ({
+  ...requiredRule,
+  type
+});
 
 /**
  * Users filter.
@@ -42,14 +59,38 @@ const usersFilter = {
 };
 
 /**
+ * Assign Transporter form.
+ * @type {Object}
+ */
+const transporterForm = {
+  idUser: createRule(),
+  nameUser: optionalRule,
+  idTransporter: createRule(NUMBER),
+  isSubmitting: optionalRule,
+  failed: optionalRule
+};
+
+/**
+ * Assign Distributors form.
+ * @type {Object}
+ */
+const distributorForm = {
+  idTransporter: createRule(),
+  nameTransporter: optionalRule,
+  distributors: createRule(ARRAY),
+  isSubmitting: optionalRule,
+  failed: optionalRule
+};
+
+/**
  * New user rules
  * @type {Object}
  */
 const newUser = {
-  username: initialRule,
-  password: initialRule,
-  fullname: initialRule,
-  type: initialRule
+  username: createRule(),
+  password: createRule(),
+  fullname: createRule(),
+  type: createRule()
 };
 
 /**
@@ -57,8 +98,8 @@ const newUser = {
  * @type {Object}
  */
 const login = {
-  username: initialRule,
-  password: initialRule,
+  username: createRule(),
+  password: createRule(),
   rememberMe: optionalRule
 };
 
@@ -69,7 +110,9 @@ const login = {
 const initialState = {
   login,
   newUser,
-  usersFilter
+  usersFilter,
+  transporterForm,
+  distributorForm
 };
 
 /**

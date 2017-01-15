@@ -2,7 +2,7 @@
  * Module with the users list container component.
  * @module src/client/containers/users-list
  */
-// React.
+// React - Redux.
 import React, { Component, PropTypes } from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

@@ -7,8 +7,10 @@ import { routerReducer } from 'react-router-redux';
 
 // Reducers.
 import formRules from './form-rules';
+import dataTable from './data-table-reducer';
 import user from './user-reducer';
 import users from './users-reducer';
+import transporters from './transporters-reducer';
 import toastList from './toast-list-reducer';
 import loading from './loading';
 import loginForm from './login-form';
@@ -19,8 +21,10 @@ import packageReception from './package-reception';
 export default combineReducers({
   routing: routerReducer,
   formRules,
+  dataTable,
   user,
   users,
+  transporters,
   toastList,
   loading,
   loginForm,
