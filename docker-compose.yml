@@ -7,10 +7,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    links: 
+    links:
       - db
     volumes:
       - .:/usr/src/app/
+      - /usr/src/app/build
       - /usr/src/app/node_modules
     environment:
       PORT: 3001
