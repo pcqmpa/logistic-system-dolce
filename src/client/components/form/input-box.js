@@ -16,7 +16,6 @@ const InputBox = ({
   onChange,
   className,
   placeholder,
-  group,
   theme,
   layout
 }) => {
@@ -46,7 +45,6 @@ const InputBox = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          dataGroup={group}
         />
       </label>
     );
@@ -60,7 +58,6 @@ const InputBox = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      dataGroup={group}
     />
   );
 };
@@ -75,7 +72,6 @@ InputBox.propTypes = {
   onChange: PropTypes.func,
   className: PropTypes.string,
   placeholder: PropTypes.string,
-  group: PropTypes.string,
   theme: PropTypes.string,
   layout: PropTypes.string
 };

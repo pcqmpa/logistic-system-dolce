@@ -19,6 +19,11 @@ import { addToast, removeToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 import { loginSuccess, loginFailed } from '../actions/user-actions';
 import { updateUsersList, updateUserTypes } from '../actions/users-actions';
+import {
+  initTransporterList,
+  updateDistributorFormList
+} from '../actions/transporters-actions';
+import { updateSerializedDataTable } from '../actions/data-table-actions';
 
 // API services.
 import { callFetchUser } from '../utils/api-service-creators';
@@ -28,6 +33,11 @@ import { DASHBOARD } from '../constants/routes';
 import { LOGIN_REQUEST } from '../constants/actions';
 import { ERROR, BRAND } from '../constants/types';
 import { INVALID_USER, WELCOME } from '../constants/messages';
+import { DISTRIBUTOR } from '../constants/user-types';
+import {
+  TRANSPORTER_FORM,
+  DISTRIBUTOR_FORM
+} from '../constants/strings';
 
 const loginSuccessEpic = (payload) => {
   const toast = addToast({ type: BRAND, message: WELCOME });
@@ -38,7 +48,17 @@ const loginSuccessEpic = (payload) => {
     Observable.of(loginSuccess(payload.user)),
     Observable.of(
       updateUsersList(payload.users),
-      updateUserTypes(payload.types)
+      updateUserTypes(payload.types),
+      initTransporterList(payload.transporters),
+      updateSerializedDataTable(
+        TRANSPORTER_FORM,
+        payload.transporters
+      ),
+      updateDistributorFormList(payload.users),
+      updateSerializedDataTable(
+        DISTRIBUTOR_FORM,
+        payload.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
+      )
     ),
     Observable.of(routerActions.push(DASHBOARD)),
     Observable.of(

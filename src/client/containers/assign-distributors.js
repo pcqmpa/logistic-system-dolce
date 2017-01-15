@@ -95,7 +95,7 @@ class AssignDistributors extends Component {
    * @param {Array} distributors -> The current list of distributors.
    * @returns {Array} -> List of ReactElements.
    */
-  mapMasters = distributors => (
+  mapDistributors = distributors => (
     distributors.map((distributor, key) => (
       <DataRow key={key}>
         <DataItem center width={40}>{distributor.Strusuario}</DataItem>
@@ -221,7 +221,7 @@ class AssignDistributors extends Component {
                 ))}
               </DataHeader>
               <DataContent>
-                {this.mapMasters(dataTable.selectedData.list)}
+                {this.mapDistributors(dataTable.selectedData.list)}
               </DataContent>
             </DataTable>
             <p>

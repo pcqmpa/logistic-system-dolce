@@ -30,8 +30,7 @@ const Login = ({
             id={`${USERNAME}_input`}
             name={`${USERNAME}_input`}
             value={username}
-            group={USERNAME}
-            onChange={handleInputChanges}
+            onChange={handleInputChanges(USERNAME)}
             valid={rules.username.valid}
             placeholder={'Nombre de usuario'}
           />
@@ -42,8 +41,7 @@ const Login = ({
             id={`${PASSWORD}_input`}
             name={`${PASSWORD}_input`}
             value={password}
-            group={PASSWORD}
-            onChange={handleInputChanges}
+            onChange={handleInputChanges(PASSWORD)}
             valid={rules.password.valid}
             placeholder={'Contraseña'}
           />
@@ -51,6 +49,7 @@ const Login = ({
       </div>
     </div>
     <CheckBox
+      label
       name={'remember_me_input'}
       checked={rememberMe}
       onChange={handleToggleRememberMe}
@@ -59,6 +58,7 @@ const Login = ({
     </CheckBox>
     <div className="o-form-element">
       <Button
+        block
         type={'submit'}
         classNames={'c-button--brand c-button--block'}
       >

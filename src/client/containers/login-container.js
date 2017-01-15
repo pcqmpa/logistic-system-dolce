@@ -52,8 +52,7 @@ class LoginContainer extends Component {
     }
   };
 
-  handleInputChanges = (event) => {
-    const type = event.target.dataset.group;
+  handleInputChanges = type => (event) => {
     const value = event.target.value;
     const { actions } = this.props;
 
