@@ -35,7 +35,6 @@ import { ASSIGN_DISTRIBUTOR_REQUEST } from '../constants/actions';
 
 const assignDistributorsRequestSuccess = (payload) => {
   const { message } = payload.response;
-  console.log('DONE');
   const toast = addToast({ type: BRAND, message });
   return Observable.concat(
     Observable.of(

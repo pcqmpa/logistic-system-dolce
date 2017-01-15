@@ -54,29 +54,27 @@ const callAssignTransporter = (req, res) => {
 };
 
 const callAssignDistributor = (req, res) => {
-  console.log('REQUEST');
-  res.status(responses.OK).send({ message: 'HI' });
-  // const { idTransporter, idDistributor } = req.body;
-  // if (!idTransporter || !idDistributor) {
-  //   return res.status(responses.ERROR)
-  //     .send({ err: ARGS_ABSENCE });
-  // }
-  // return transporterServices
-  //   .assignDistributorRequest(idDistributor, idTransporter)
-  //     .subscribe(
-  //       message => (
-  //         // The user was successfully assigned.
-  //         res
-  //           .satus(responses.OK)
-  //           .send({ message })
-  //       ),
-  //       err => (
-  //         // There was an external server error.
-  //         res
-  //           .status(responses.ERROR)
-  //           .send({ err })
-  //       )
-  //     );
+  const { idTransporter, idDistributor } = req.body;
+  if (!idTransporter || !idDistributor) {
+    return res.status(responses.ERROR)
+      .send({ err: ARGS_ABSENCE });
+  }
+  return transporterServices
+    .assignDistributorRequest(idDistributor, idTransporter)
+      .subscribe(
+        message => (
+          // The user was successfully assigned.
+          res
+            .satus(responses.OK)
+            .send({ message })
+        ),
+        err => (
+          // There was an external server error.
+          res
+            .status(responses.ERROR)
+            .send({ err })
+        )
+      );
 };
 
 export default {
