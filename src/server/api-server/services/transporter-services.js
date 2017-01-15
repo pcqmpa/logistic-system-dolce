@@ -30,7 +30,11 @@ const getTransportersRequest = () => (
  * @returns {Symbol.Observable} -> The request.
  */
 const assignTransporterRequest = (idUser, idTranporter) => (
-  streams.fromAjaxRequest(POST, assignTransporter(idUser, idTranporter))
+  streams.fromAjaxRequest(
+    POST,
+    assignTransporter(),
+    { idUsuario: idUser, idTranportador: idTranporter }
+  )
 );
 
 /**
@@ -40,7 +44,11 @@ const assignTransporterRequest = (idUser, idTranporter) => (
  * @returns {Symbol.Observable} -> The request.
  */
 const assignDistributorRequest = (idTranporter, idDistributor) => (
-  streams.fromAjaxRequest(POST, assignDistributor(idTranporter, idDistributor))
+  streams.fromAjaxRequest(
+    POST,
+    assignDistributor(),
+    { idTransportista: idTranporter, idDistribuidor: idDistributor }
+  )
 );
 
 export default {
