@@ -20,6 +20,7 @@ import {
   InputGroup,
 
   Button,
+  InputBox,
   SelectBox,
   RadioButton
 } from '../components/';
@@ -199,8 +200,11 @@ class AssignTransporter extends Component {
               onChange={this.handleSelectUser}
             />
           </GridCell>
-          <GridCell width={20} offset={40}>
+          <GridCell width={20} offset={5}>
             <p className="user-name-box">{form.nameUser}</p>
+          </GridCell>
+          <GridCell width={20} offset={15}>
+            <InputBox placeholder="Filtrar transportadores" />
           </GridCell>
         </Grid>
         <Grid
