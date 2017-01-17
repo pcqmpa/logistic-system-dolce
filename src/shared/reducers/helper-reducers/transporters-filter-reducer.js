@@ -27,7 +27,10 @@ const initialState = {
 const actionHandlers = {
   [UPDATE_TRANSPORTERS_FILTER]: (state, { filter, value }) => ({
     ...state,
-    [filter]: value
+    filters: {
+      ...state.filters,
+      [filter]: value
+    }
   })
 };
 

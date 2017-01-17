@@ -28,9 +28,6 @@ import {
 // Lib.
 import validator from '../../shared/lib/validator';
 
-// Utils.
-import { string } from '../../shared/utils/';
-
 // Actions.
 import {
   updateSerializedDataTable,
@@ -65,8 +62,10 @@ import '../styles/assign-transporter.scss';
 class AssignTransporter extends Component {
   static propTypes = {
     actions: PropTypes.shape().isRequired,
+    transporters: PropTypes.arrayOf(PropTypes.object),
     form: PropTypes.shape(),
     users: PropTypes.arrayOf(PropTypes.object),
+    filter: PropTypes.string,
     dataTable: PropTypes.shape(),
     formRules: PropTypes.shape()
   };
@@ -188,26 +187,25 @@ class AssignTransporter extends Component {
    */
   handleFilterChanges = (event) => {
     const { value } = event.target;
+    const filteredUsers = this.props.transporters
+        .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
 
     this.props.actions.updateTransportersFilter(
       TRANSPORTERS_FILTER,
       value
     );
 
-    if (!string.empty(value)) {
-      const filteredUsers = this.props.users.list
-      .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
-      this.props.actions.updateSerializedDataTable(
-        TRANSPORTER_FORM,
-        filteredUsers
-      );
-    }
+    this.props.actions.updateSerializedDataTable(
+      TRANSPORTER_FORM,
+      filteredUsers
+    );
   };
 
   render() {
     const {
       form,
       users,
+      filter,
       formRules,
       dataTable
     } = this.props;
@@ -234,6 +232,7 @@ class AssignTransporter extends Component {
           </GridCell>
           <GridCell width={20} offset={15}>
             <InputBox
+              value={filter}
               placeholder="Filtrar transportadores"
               onChange={this.handleFilterChanges}
             />
@@ -258,7 +257,9 @@ class AssignTransporter extends Component {
                 ))}
               </DataHeader>
               <DataContent>
-                {this.mapMasters(dataTable.selectedData.list)}
+                {(dataTable.selectedData.list) ?
+                  this.mapMasters(dataTable.selectedData.list) : ''
+                }
               </DataContent>
             </DataTable>
             <p>
@@ -280,6 +281,7 @@ export default connect(
   state => ({
     form: state.transporters.transporterForm,
     transporters: state.transporters.list,
+    filter: state.transporters.filters.transportersFilter,
     users: state.users.list,
     dataTable: state.dataTable.transporterFormTable,
     formRules: state.formRules.transporterForm

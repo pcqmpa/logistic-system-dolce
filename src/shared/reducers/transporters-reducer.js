@@ -27,7 +27,9 @@ import {
   UPDATE_DISTRIBUTOR_FORM_DISTRIBUTORS,
   ASSIGN_DISTRIBUTOR_REQUEST,
   ASSIGN_DISTRIBUTOR_SUCCESS,
-  ASSIGN_DISTRIBUTOR_FAILED
+  ASSIGN_DISTRIBUTOR_FAILED,
+
+  UPDATE_TRANSPORTERS_FILTER
 } from '../constants/actions';
 
 //
@@ -188,7 +190,8 @@ const actionHandlers = {
       failed: true
     }
   }),
-  ...filters.actionHandlers
+  [UPDATE_TRANSPORTERS_FILTER]:
+    filters.actionHandlers[UPDATE_TRANSPORTERS_FILTER]
 };
 
 export default createReducer(initialState, actionHandlers);

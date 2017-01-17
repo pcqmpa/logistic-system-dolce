@@ -57,7 +57,7 @@ const actionHandlers = {
         ...state[table],
         listData,
         paginators,
-        selectedData
+        selectedData: selectedData || {}
       }
     };
   },

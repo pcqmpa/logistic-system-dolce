@@ -28,9 +28,6 @@ import {
 // Lib.
 import validator from '../../shared/lib/validator';
 
-// Utils.
-import { string } from '../../shared/utils/';
-
 // Actions.
 import {
   updateSerializedDataTable,
@@ -66,6 +63,7 @@ class AssignDistributors extends Component {
   static propTypes = {
     actions: PropTypes.shape().isRequired,
     form: PropTypes.shape(),
+    filter: PropTypes.string,
     users: PropTypes.arrayOf(PropTypes.object),
     dataTable: PropTypes.shape(),
     formRules: PropTypes.shape()
@@ -187,26 +185,29 @@ class AssignDistributors extends Component {
    */
   handleFilterChanges = (event) => {
     const { value } = event.target;
+    const filteredUsers = this.props.users
+        .filter(user => (
+          user.StrNombre.toUpperCase()
+            .includes(value.toUpperCase()) &&
+          user.IdTipo === TRANSPORTER
+        ));
 
     this.props.actions.updateTransportersFilter(
       DISTRIBUTORS_FILTER,
       value
     );
 
-    if (!string.empty(value)) {
-      const filteredUsers = this.props.users.list
-      .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
-      this.props.actions.updateSerializedDataTable(
-        DISTRIBUTOR_FORM,
-        filteredUsers
-      );
-    }
+    this.props.actions.updateSerializedDataTable(
+      DISTRIBUTOR_FORM,
+      filteredUsers
+    );
   };
 
   render() {
     const {
       form,
       users,
+      filter,
       formRules,
       dataTable
     } = this.props;
@@ -233,6 +234,7 @@ class AssignDistributors extends Component {
           </GridCell>
           <GridCell width={20} offset={15}>
             <InputBox
+              value={filter}
               placeholder="Filtrar transportadores"
               onChange={this.handleFilterChanges}
             />
@@ -257,7 +259,8 @@ class AssignDistributors extends Component {
                 ))}
               </DataHeader>
               <DataContent>
-                {this.mapDistributors(dataTable.selectedData.list)}
+                {(dataTable.selectedData.list) ?
+                  this.mapDistributors(dataTable.selectedData.list) : ''}
               </DataContent>
             </DataTable>
             <p>
@@ -278,6 +281,7 @@ class AssignDistributors extends Component {
 export default connect(
   state => ({
     form: state.transporters.distributorForm,
+    filter: state.transporters.filters.ditributorsFilter,
     users: state.users.list,
     dataTable: state.dataTable.distributorFormTable,
     formRules: state.formRules.distributorForm
