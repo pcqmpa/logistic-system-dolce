@@ -8,6 +8,9 @@ import { createReducer } from 'redux-create-reducer';
 // Lib.
 import serializer from '../lib/serializer';
 
+// Helpers.
+import filters from './helper-reducers/transporters-filter-reducer';
+
 // Actions.
 import {
   INIT_TRANSPORTER_LIST,
@@ -61,6 +64,7 @@ const transporterForm = {
  */
 const initialState = {
   list: [],
+  filters: filters.initialState,
   transporterForm,
   distributorForm
 };
@@ -183,7 +187,8 @@ const actionHandlers = {
       isSubmitting: false,
       failed: true
     }
-  })
+  }),
+  ...filters.actionHandlers
 };
 
 export default createReducer(initialState, actionHandlers);

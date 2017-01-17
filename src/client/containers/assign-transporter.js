@@ -28,14 +28,19 @@ import {
 // Lib.
 import validator from '../../shared/lib/validator';
 
+// Utils.
+import { string } from '../../shared/utils/';
+
 // Actions.
 import {
+  updateSerializedDataTable,
   updateSelectedDataTable
 } from '../../shared/actions/data-table-actions';
 import {
   updateTransporterFormUser,
   updateTransporterFormMaster,
-  assignTransporterRequest
+  assignTransporterRequest,
+  updateTransportersFilter
 } from '../../shared/actions/transporters-actions';
 import { updateRulesValidation } from '../../shared/actions/form-rules-actions';
 
@@ -50,7 +55,8 @@ import {
   SELECT_TRANSPORTER_INPUT
 } from '../constants/strings';
 import {
-  TRANSPORTER_FORM
+  TRANSPORTER_FORM,
+  TRANSPORTERS_FILTER
 } from '../../shared/constants/strings';
 
 // Styles.
@@ -175,6 +181,29 @@ class AssignTransporter extends Component {
     }
   };
 
+  /**
+   * Handle changes on the filter.
+   * @param {DOMEvent} event -> The element event.
+   * @returns {void}
+   */
+  handleFilterChanges = (event) => {
+    const { value } = event.target;
+
+    this.props.actions.updateTransportersFilter(
+      TRANSPORTERS_FILTER,
+      value
+    );
+
+    if (!string.empty(value)) {
+      const filteredUsers = this.props.users.list
+      .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
+      this.props.actions.updateSerializedDataTable(
+        TRANSPORTER_FORM,
+        filteredUsers
+      );
+    }
+  };
+
   render() {
     const {
       form,
@@ -204,7 +233,10 @@ class AssignTransporter extends Component {
             <p className="user-name-box">{form.nameUser}</p>
           </GridCell>
           <GridCell width={20} offset={15}>
-            <InputBox placeholder="Filtrar transportadores" />
+            <InputBox
+              placeholder="Filtrar transportadores"
+              onChange={this.handleFilterChanges}
+            />
           </GridCell>
         </Grid>
         <Grid
@@ -258,7 +290,9 @@ export default connect(
       updateTransporterFormUser,
       updateTransporterFormMaster,
       assignTransporterRequest,
-      updateRulesValidation
+      updateRulesValidation,
+      updateTransportersFilter,
+      updateSerializedDataTable
     }, dispatch)
   })
 )(AssignTransporter);

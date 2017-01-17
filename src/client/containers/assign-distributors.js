@@ -20,6 +20,7 @@ import {
   InputGroup,
 
   Button,
+  InputBox,
   SelectBox,
   CheckBox
 } from '../components/';
@@ -27,14 +28,19 @@ import {
 // Lib.
 import validator from '../../shared/lib/validator';
 
+// Utils.
+import { string } from '../../shared/utils/';
+
 // Actions.
 import {
+  updateSerializedDataTable,
   updateSelectedDataTable
 } from '../../shared/actions/data-table-actions';
 import {
   updateDistributorFormTransporter,
   updateDistributorFormDistributors,
-  assignDistributorRequest
+  assignDistributorRequest,
+  updateTransportersFilter
 } from '../../shared/actions/transporters-actions';
 import { updateRulesValidation } from '../../shared/actions/form-rules-actions';
 
@@ -49,7 +55,8 @@ import {
   SELECT_TRANSPORTER_INPUT
 } from '../constants/strings';
 import {
-  DISTRIBUTOR_FORM
+  DISTRIBUTOR_FORM,
+  DISTRIBUTORS_FILTER
 } from '../../shared/constants/strings';
 
 // Styles.
@@ -173,6 +180,29 @@ class AssignDistributors extends Component {
     }
   };
 
+  /**
+   * Handle changes on the filter.
+   * @param {DOMEvent} event -> The element event.
+   * @returns {void}
+   */
+  handleFilterChanges = (event) => {
+    const { value } = event.target;
+
+    this.props.actions.updateTransportersFilter(
+      DISTRIBUTORS_FILTER,
+      value
+    );
+
+    if (!string.empty(value)) {
+      const filteredUsers = this.props.users.list
+      .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
+      this.props.actions.updateSerializedDataTable(
+        DISTRIBUTOR_FORM,
+        filteredUsers
+      );
+    }
+  };
+
   render() {
     const {
       form,
@@ -198,8 +228,14 @@ class AssignDistributors extends Component {
               onChange={this.handleSelectTransporter}
             />
           </GridCell>
-          <GridCell width={20} offset={40}>
+          <GridCell width={20} offset={5}>
             <p className="user-name-box">{form.nameTransporter}</p>
+          </GridCell>
+          <GridCell width={20} offset={15}>
+            <InputBox
+              placeholder="Filtrar transportadores"
+              onChange={this.handleFilterChanges}
+            />
           </GridCell>
         </Grid>
         <Grid
@@ -252,7 +288,9 @@ export default connect(
       updateDistributorFormTransporter,
       updateDistributorFormDistributors,
       assignDistributorRequest,
-      updateRulesValidation
+      updateRulesValidation,
+      updateTransportersFilter,
+      updateSerializedDataTable
     }, dispatch)
   })
 )(AssignDistributors);

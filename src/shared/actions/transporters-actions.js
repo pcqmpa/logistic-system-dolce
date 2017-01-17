@@ -18,7 +18,9 @@ import {
   UPDATE_DISTRIBUTOR_FORM_DISTRIBUTORS,
   ASSIGN_DISTRIBUTOR_REQUEST,
   ASSIGN_DISTRIBUTOR_SUCCESS,
-  ASSIGN_DISTRIBUTOR_FAILED
+  ASSIGN_DISTRIBUTOR_FAILED,
+
+  UPDATE_TRANSPORTERS_FILTER
 } from '../constants/actions';
 
 // Transporters List Actions.
@@ -84,3 +86,11 @@ export const assignDistributorSuccess = () => ({
 export const assignDistributorFailed = () => ({
   type: ASSIGN_DISTRIBUTOR_FAILED
 });
+
+// Filter Actions.
+export const updateTransportersFilter = (filter, value) => ({
+  type: UPDATE_TRANSPORTERS_FILTER,
+  filter,
+  value
+});
+
