@@ -38,17 +38,17 @@ const callAssignTransporter = (req, res) => {
   return transporterServices
     .assignTransporterRequest(idUser, idTransporter)
       .subscribe(
-        message => (
+        response => (
           // The user was successfully assigned.
           res
-            .satus(responses.OK)
-            .send({ message })
+            .status(responses.OK)
+            .send({ message: response.Message })
         ),
         err => (
           // There was an external server error.
           res
             .status(responses.ERROR)
-            .send({ err })
+            .send({ err: err.Message })
         )
       );
 };
@@ -65,7 +65,7 @@ const callAssignDistributor = (req, res) => {
         message => (
           // The user was successfully assigned.
           res
-            .satus(responses.OK)
+            .status(responses.OK)
             .send({ message })
         ),
         err => (

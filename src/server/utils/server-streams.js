@@ -38,22 +38,6 @@ const fromAjaxRequest = (method, url, body = {}) => (
       }
       return observer.complete();
     });
-      // .on('data', (response) => {
-      //   console.log(response.toString());
-      //   if (!reject) {
-      //     try {
-      //       const data = JSON.parse(response.toString());
-      //       observer.next(data);
-      //     } catch (err) {
-      //       observer.error(err);
-      //     }
-      //   }
-      //   observer.complete();
-      // })
-      // .on('error', (err) => {
-      //   observer.error(err);
-      // });
-
     return function dispose() {
       reject = true;
     };
