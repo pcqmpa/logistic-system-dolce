@@ -42,5 +42,6 @@ export { default as UsersFilter } from './view/users-filter';
 export { default as SelectBox } from './form/select-box';
 export { default as CheckBox } from './form/check-box';
 export { default as InputBox } from './form/input-box';
+export { default as TextArea } from './form/text-area';
 export { default as Button } from './form/button';
 export { default as RadioButton } from './form/radio-button';

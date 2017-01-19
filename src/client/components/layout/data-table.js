@@ -24,8 +24,8 @@ class DataTable extends Component {
     layout: PropTypes.string,
     selected: PropTypes.number,
     className: PropTypes.string,
-    paginators: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onClickPaginator: PropTypes.func.isRequired
+    paginators: PropTypes.arrayOf(PropTypes.object),
+    onClickPaginator: PropTypes.func
   };
 
   mapPaginators = (componentClass) => {
@@ -58,7 +58,7 @@ class DataTable extends Component {
     }
 
     return '';
-  }
+  };
 
   render() {
     const {
