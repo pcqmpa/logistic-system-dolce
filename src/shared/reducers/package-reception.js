@@ -11,34 +11,28 @@ import {
   TOGGLE_ORDER
 } from '../constants/actions';
 
+//
+// Initial State.
+// -----------------------------------------------------------------------------
+
+/**
+ * Function to add a new orders zone.
+ * @param {Number} zoneId -> The zone id.
+ * @param {Object} order -> The order to init the list.
+ * @returns {Object} -> The new orders zone.
+ */
+// const newOrderSelected = (zoneId, order) => ({
+//   zoneId,
+//   orders: [order]
+// });
+
+/**
+ * Initial state
+ * @type {Object}
+ */
 const initialState = {
-  campaigns: [{
-    campaignName: 'sample campaign',
-    code: '1234',
-    zones: [
-      {
-        id: '002',
-        orders: [
-          {
-            orderId: 1156152,
-            vendorId: 123456789,
-            vendorName: 'Pepita Perez',
-            received: false
-          }
-        ]
-      }
-    ]
-  }],
-  campaignSelected: null,
-  selectAll: false,
-  campaignsTable: {
-    titles: [
-      'Zona',
-      'Pedido No',
-      'Cédula Asesora',
-      'Recibido'
-    ]
-  }
+  ordersList: [],
+  selectedOrders: []
 };
 
 const actionHandlers = {

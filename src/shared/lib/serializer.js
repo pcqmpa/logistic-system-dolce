@@ -79,6 +79,15 @@ const toDataTablePaginators = data => (
   ))
 );
 
+/**
+ * Serialize to package reception orders summary.
+ * @param {Array} data -> The array of data.
+ * @return {Array} -> The serialized array.
+ */
+// const toOrdersSummary = data => (
+//   data.map()
+// );
+
 export default {
   toNewUser,
   toDistributorUsers,

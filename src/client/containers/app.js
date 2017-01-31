@@ -19,13 +19,13 @@ const App = ({ children, user }) => (
   <main className="o-grid o-grid--no-gutter app-content">
     {user.isAuth &&
       <GridCell
-        width={15}
+        width={20}
         className="app-content__nav-column"
       >
         <SideNav />
       </GridCell>
     }
-    <GridCell width={(user.isAuth) ? 85 : 100} className="app-content__main-column">
+    <GridCell width={(user.isAuth) ? 80 : 100} className="app-content__main-column">
       {user.isAuth && <HeaderNav />}
       <Panel navTop={user.isAuth} className="views-container">
         {children}
