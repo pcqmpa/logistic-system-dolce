@@ -1,14 +1,18 @@
+/**
+ * Module with the package reception reducer.
+ * @module src/shared/reducers/package-reception
+ */
+// Redux.
 import { createReducer } from 'redux-create-reducer';
-
-// Helper.
-import ZoneOrders from './helper-reducers/zone-orders';
 
 // Actions.
 import {
-  UPDATE_CAMPAIGNS,
-  SELECT_CAMPAIGN,
-  TOGGLE_SELECT_ALL,
-  TOGGLE_ORDER
+  TOGGLE_ORDER,
+  UPDATE_ORDERS_LIST,
+  UPDATE_ORDERS_OBSERVATION,
+  PACKAGE_RECEPTION_REQUEST,
+  PACKAGE_RECEPTION_SUCCESS,
+  PACKAGE_RECEPTION_FAILED
 } from '../constants/actions';
 
 //
@@ -16,52 +20,68 @@ import {
 // -----------------------------------------------------------------------------
 
 /**
- * Function to add a new orders zone.
- * @param {Number} zoneId -> The zone id.
- * @param {Object} order -> The order to init the list.
- * @returns {Object} -> The new orders zone.
- */
-// const newOrderSelected = (zoneId, order) => ({
-//   zoneId,
-//   orders: [order]
-// });
-
-/**
  * Initial state
  * @type {Object}
  */
 const initialState = {
   ordersList: [],
-  selectedOrders: []
+  observation: '',
+  isSubmitting: false
 };
 
+//
+// Handlers.
+// -----------------------------------------------------------------------------
+
+/**
+ * Package reception action handlers.
+ * @type {Object}
+ */
 const actionHandlers = {
-  [UPDATE_CAMPAIGNS]: (state, { campaigns }) => ({
+  [TOGGLE_ORDER]: (state, { orderId }) => ({
     ...state,
-    campaigns
-  }),
-  [SELECT_CAMPAIGN]: (state, { campaignSelected }) => ({
-    ...state,
-    campaignSelected
-  }),
-  [TOGGLE_SELECT_ALL]: state => ({
-    ...state,
-    selectAll: !state.selectAll
-  }),
-  [TOGGLE_ORDER]: (state, action) => ({
-    ...state,
-    campaignSelected: {
-      ...state.campaignSelected,
-      zones: state.campaignSelected.zones.map((zone) => {
-        if (zone.id === action.zoneId) {
+    ordersForm: state.ordersList
+      .map((order) => {
+        if (order.Id === orderId) {
           return {
-            ...zone,
-            orders: ZoneOrders[action.type](zone, action)
+            ...order,
+            checked: !order.checked
           };
         }
-        return zone;
+        return { ...order };
       })
-    }
+  }),
+  [UPDATE_ORDERS_LIST]: (state, { orders }) => ({
+    ...state,
+    ordersList: orders
+  }),
+  [UPDATE_ORDERS_OBSERVATION]: (state, { observation }) => ({
+    ...state,
+    observation
+  }),
+  [PACKAGE_RECEPTION_REQUEST]: state => ({
+    ...state,
+    isSubmitting: true
+  }),
+  [PACKAGE_RECEPTION_SUCCESS]: state => ({
+    ...state,
+    observation: '',
+    ordersList: state.ordersList
+      .map(order => ({
+        ...order,
+        checked: false
+      })),
+    isSubmitting: false
+  }),
+  [PACKAGE_RECEPTION_FAILED]: state => ({
+    ...state,
+    observation: '',
+    ordersList: state.ordersList
+      .map(order => ({
+        ...order,
+        checked: false
+      })),
+    isSubmitting: false
   })
 };
 

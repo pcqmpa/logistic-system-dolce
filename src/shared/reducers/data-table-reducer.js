@@ -43,7 +43,7 @@ const initialState = {
 // -----------------------------------------------------------------------------
 
 /**
- * Form rules action handlers.
+ * Data table action handlers.
  * @type {Object}
  */
 const actionHandlers = {
