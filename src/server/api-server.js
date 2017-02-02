@@ -19,7 +19,8 @@ import { Log } from './utils/';
 import {
   securityController,
   userController,
-  transporterController
+  transporterController,
+  packageReceptionController
 } from './api-server/controllers/';
 
 // Constants.
@@ -62,6 +63,17 @@ app.post(
 app.post(
   '/api/callAssignDistributor',
   transporterController.callAssignDistributor
+);
+
+// Package Reception.
+app.get(
+  '/api/callGetOrdersList',
+  packageReceptionController.callGetOrdersList
+);
+
+app.post(
+  '/api/callCheckOrder',
+  packageReceptionController.callCheckOrder
 );
 
 //

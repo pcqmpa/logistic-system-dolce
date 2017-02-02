@@ -84,13 +84,30 @@ const toDataTablePaginators = data => (
  * @param {Array} data -> The array of data.
  * @return {Array} -> The serialized array.
  */
-// const toOrdersSummary = data => (
-//   data.map()
-// );
+const toOrdersSummary = data => (
+  data.reduce((orders, order) => {
+    if (!orders.has(order.StrZona)) {
+      orders.set(order.StrZona, new Map());
+    }
+
+    if (!orders.get(order.StrZona).has(order.StrTipoEmpaque)) {
+      orders.get(order.StrZona).set(order.StrTipoEmpaque, { quantity: 0 });
+    }
+
+    const packageOrder = orders
+      .get(order.StrZona)
+      .get(order.StrTipoEmpaque);
+
+    packageOrder.quantity += parseInt(order.IntCantidad, 10);
+
+    return orders;
+  }, new Map())
+);
 
 export default {
   toNewUser,
   toDistributorUsers,
   toDataTableSet,
-  toDataTablePaginators
+  toDataTablePaginators,
+  toOrdersSummary
 };

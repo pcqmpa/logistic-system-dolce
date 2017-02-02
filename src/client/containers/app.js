@@ -22,7 +22,7 @@ const App = ({ children, user }) => (
         width={20}
         className="app-content__nav-column"
       >
-        <SideNav />
+        <SideNav userType={user.data.IdTipo} />
       </GridCell>
     }
     <GridCell width={(user.isAuth) ? 80 : 100} className="app-content__main-column">

@@ -13,25 +13,23 @@ import 'rxjs/add/operator/concatMap';
 import { securityServices } from '../services';
 import { initState } from './';
 
+// TODO: Remove this if not needed.
 // Constants.
-import { ADMIN } from '../../../shared/constants/user-types';
+// import { ADMIN } from '../../../shared/constants/user-types';
 
 /**
  * Stream that validates user.
- * @returns {symbol.Observable} -> The validation stream.
+ * @returns {Symbol.Observable} -> The validation stream.
  */
 const authUser = payload => (
   securityServices.fetchUserRequest(payload)
-    .concatMap((user) => {
-      if (user.IdTipo === ADMIN) {
-        return initState()
-          .map(data => ({
-            user,
-            ...data
-          }));
-      }
-      return Observable.of(user);
-    })
+    .concatMap(user => (
+      initState(user)
+        .map(data => ({
+          user,
+          ...data
+        }))
+    ))
 );
 
 export default authUser;

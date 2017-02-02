@@ -60,3 +60,21 @@ export const callAssignTransporter = () => ('/api/callAssignTransporter');
  * @returns {String} -> With the URL request.
  */
 export const callAssignDistributor = () => ('/api/callAssignDistributor');
+
+//
+// Package Reception Services.
+// -----------------------------------------------------------------------------
+
+/**
+ * Service to request the list of a transporter's orders.
+ * @param {String} username -> The transporter username.
+ * @returns {String} -> With the URL request.
+ */
+export const callGetOrdersList = username =>
+  (`/api/callAssignDistributor?username=${username}`);
+
+/**
+ * Service to send the order to be checked.
+ * @returns {String} -> With the URL request.
+ */
+export const callCheckOrder = () => ('/api/callCheckOrder');

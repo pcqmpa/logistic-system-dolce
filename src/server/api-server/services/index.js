@@ -9,3 +9,5 @@ export { default as userServices } from './user-services';
 export { default as logisticTypesServices } from './logistic-types-services';
 
 export { default as transporterServices } from './transporter-services';
+
+export { default as packageReceptionServices } from './package-reception-services';

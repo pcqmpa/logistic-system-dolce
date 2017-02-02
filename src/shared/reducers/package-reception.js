@@ -53,7 +53,10 @@ const actionHandlers = {
   }),
   [UPDATE_ORDERS_LIST]: (state, { orders }) => ({
     ...state,
-    ordersList: orders
+    ordersList: orders.map(order => ({
+      ...order,
+      checked: false
+    }))
   }),
   [UPDATE_ORDERS_OBSERVATION]: (state, { observation }) => ({
     ...state,

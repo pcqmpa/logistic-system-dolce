@@ -51,7 +51,7 @@ import { NotFound } from '../../shared/components/';
 import { Html } from '../components/';
 
 // Constants.
-import { DISTRIBUTOR } from '../../shared/constants/user-types';
+import { ADMIN, DISTRIBUTOR } from '../../shared/constants/user-types';
 import {
   DISTRIBUTOR_FORM,
   TRANSPORTER_FORM
@@ -101,30 +101,36 @@ const renderHtml = (nextProps, store, markup) => {
  * @returns {void}
  */
 const handleRender = (req, res) => {
-  initState()
+  // Validate session.
+  const { user } = validateAuth(req.session);
+
+  initState(user)
     .subscribe((initialData) => {
+      console.log(user);
       const memoryHistory = createHistory(req.originalUrl);
       const store = configureStore(
         memoryHistory,
         reducer
       );
       const history = syncHistoryWithStore(memoryHistory, store);
-      // Validate session.
-      const user = validateAuth(req.session);
+
       if (user) {
         store.dispatch(loginSuccess(user));
         store.dispatch(updateUsersList(initialData.users));
         store.dispatch(updateUserTypes(initialData.types));
-        store.dispatch(initTransporterList(initialData.transporters));
-        store.dispatch(updateSerializedDataTable(
-          TRANSPORTER_FORM,
-          initialData.transporters
-        ));
-        store.dispatch(updateDistributorFormList(initialData.users));
-        store.dispatch(updateSerializedDataTable(
-          DISTRIBUTOR_FORM,
-          initialData.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
-        ));
+
+        if (user.IdTipo === ADMIN) {
+          store.dispatch(initTransporterList(initialData.transporters));
+          store.dispatch(updateSerializedDataTable(
+            TRANSPORTER_FORM,
+            initialData.transporters
+          ));
+          store.dispatch(updateDistributorFormList(initialData.users));
+          store.dispatch(updateSerializedDataTable(
+            DISTRIBUTOR_FORM,
+            initialData.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
+          ));
+        }
       }
 
       // Configure routes.

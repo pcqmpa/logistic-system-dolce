@@ -33,20 +33,26 @@ import { DASHBOARD } from '../constants/routes';
 import { LOGIN_REQUEST } from '../constants/actions';
 import { ERROR, BRAND } from '../constants/types';
 import { INVALID_USER, WELCOME } from '../constants/messages';
-import { DISTRIBUTOR } from '../constants/user-types';
+import {
+  ADMIN,
+  DISTRIBUTOR,
+  TRANSPORTER
+} from '../constants/user-types';
 import {
   TRANSPORTER_FORM,
   DISTRIBUTOR_FORM
 } from '../constants/strings';
 
 const loginSuccessEpic = (payload) => {
+  const { user } = payload;
   const toast = addToast({ type: BRAND, message: WELCOME });
+  let dispatches = [];
   if (!payload.user.LogEstado) {
     throw new Error(INVALID_USER);
   }
-  return Observable.merge(
-    Observable.of(loginSuccess(payload.user)),
-    Observable.of(
+
+  if (user.IdTipo === ADMIN) {
+    dispatches = [
       updateUsersList(payload.users),
       updateUserTypes(payload.types),
       initTransporterList(payload.transporters),
@@ -59,7 +65,18 @@ const loginSuccessEpic = (payload) => {
         DISTRIBUTOR_FORM,
         payload.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
       )
-    ),
+    ];
+  }
+
+  if (user.IdTipo === TRANSPORTER) {
+    dispatches = [
+      updateUsersList(payload.users),
+      updateUserTypes(payload.types)
+    ];
+  }
+  return Observable.merge(
+    Observable.of(loginSuccess(payload.user)),
+    Observable.of(...dispatches),
     Observable.of(routerActions.push(DASHBOARD)),
     Observable.of(
       hideLoading(),

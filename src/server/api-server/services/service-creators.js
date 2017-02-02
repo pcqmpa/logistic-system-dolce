@@ -17,7 +17,7 @@ import { API_SERVICE_URL } from '../../../../config/';
  */
 export const fetchUser =
   ({ username, password }) =>
-    (`${API_SERVICE_URL}/api/Seguridad?usuario=${username}&password=${password}&JSOPRequest=?`);
+    (`${API_SERVICE_URL}/api/Seguridad?usuario=${username}&password=${password}`);
 
 //
 // User Services.
@@ -68,3 +68,21 @@ export const assignTransporter = () => (`${API_SERVICE_URL}/api/Trasportador`);
  * @returns {String} -> With the URL request.
  */
 export const assignDistributor = () => (`${API_SERVICE_URL}/api/Usuarios`);
+
+//
+// Package Reception Services.
+// -----------------------------------------------------------------------------
+
+/**
+ * Service to get a list of current orders from a transporter.
+ * @param {String} username -> The transporte username.
+ * @returns {String} -> With the URL request.
+ */
+export const getOrdersList =
+  username => (`${API_SERVICE_URL}/api/PedidosTrasportador?strUsuario=${username}`);
+
+/**
+ * Service to check transporter's orders arrival.
+ * @returns {String} -> With the URL request.
+ */
+export const checkOrder = () => (`${API_SERVICE_URL}/api/PedidosTrasportador`);

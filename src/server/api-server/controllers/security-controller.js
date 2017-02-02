@@ -21,17 +21,18 @@ const callFetchUser = (req, res) => {
     .subscribe(
       (data) => {
         const { session } = req;
+        const { user } = data;
         const {
           username,
           password,
           rememberMe
         } = req.query;
-        const user = {
+        const userData = {
           username,
           password,
-          ...data.user
+          ...user
         };
-        const tokenOptions = { user };
+        const tokenOptions = { user: userData };
 
         // Set expiration if the remember flag is false.
         if (!rememberMe) {
@@ -42,7 +43,9 @@ const callFetchUser = (req, res) => {
         session.token = token;
 
         // Responds with the user data
-        res.status(responses.OK).send({ ...data, user });
+        res
+          .status(responses.OK)
+          .send({ ...data, user: userData });
       },
       () => {
         res.status(responses.UNAUTHORIZED).send({

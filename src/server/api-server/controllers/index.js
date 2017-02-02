@@ -9,3 +9,4 @@ export { default as userController } from './user-controller';
 
 export { default as transporterController } from './transporter-controller';
 
+export { default as packageReceptionController } from './package-reception-controller';

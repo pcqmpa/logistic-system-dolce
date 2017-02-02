@@ -14,16 +14,17 @@ import { TOKEN_SECRET } from '../../../config/';
  * @returns {Object} -> The user object.
  */
 const validateAuth = (session) => {
+  const defaultResponse = { user: null };
   const { token } = session;
   if (!token) {
-    return null;
+    return defaultResponse;
   }
 
   // Verify token.
   try {
     return jwt.verify(token, TOKEN_SECRET);
   } catch (err) {
-    return null;
+    return defaultResponse;
   }
 };
 

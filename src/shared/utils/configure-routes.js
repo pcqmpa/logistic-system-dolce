@@ -27,54 +27,84 @@ import {
 import { NotFound } from '../components/';
 
 /**
+ * Chains auth wrappers to the react-router onEnter event.
+ * @param {Array} listOfOnEnters -> The list of wrappers.
+ * @returns {Function} -> The final connector callback.
+ */
+const onEnterChain = (...listOfOnEnters) => (store, nextState, replace) => {
+  let redirected = false;
+  const wrappedReplace = (...args) => {
+    replace(...args);
+    redirected = true;
+  };
+  listOfOnEnters.forEach((onEnter) => {
+    if (!redirected) {
+      onEnter(store, nextState, wrappedReplace);
+    }
+  });
+};
+
+/**
  * Configure the routes with the auth settings.
  * @param {Object} store -> The redux store.
  * @returns {Any} -> The list of routes.
  */
 const configureRoutes = (store) => {
+  /**
+   * Connects the react-router onEnter event to the auth wrapper.
+   * @param {Function} fn -> The onEnter callback.
+   * @returns {Function} -> The connector function.
+   */
   const connect = fn =>
     (nextState, replaceState) => fn(store, nextState, replaceState);
+
+  const {
+    userIsAuthenticated,
+    userIsNotAuthenticated,
+    userIsAdmin,
+    userIsTransporter
+  } = authRules;
 
   return (
     <Route path={routes.DASHBOARD} component={App}>
       <IndexRoute
-        component={authRules.userIsAuthenticated(Dashboard)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(Dashboard)}
+        onEnter={connect(userIsAuthenticated.onEnter)}
       />
       <Route
         path={routes.LOGIN}
-        component={authRules.userIsNotAuthenticated(LoginContainer)}
-        onEnter={connect(authRules.userIsNotAuthenticated.onEnter)}
+        component={userIsNotAuthenticated(LoginContainer)}
+        onEnter={connect(userIsNotAuthenticated.onEnter)}
       />
       <Route
         path={routes.USERS_LIST}
-        component={authRules.userIsAuthenticated(UsersList)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsAdmin(UsersList))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter))}
       />
       <Route
         path={routes.NEW_USER}
-        component={authRules.userIsAuthenticated(NewUser)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsAdmin(NewUser))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter))}
       />
       <Route
         path={routes.ASSIGN_TRANSPORTER}
-        component={authRules.userIsAuthenticated(AssignTransporter)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsAdmin(AssignTransporter))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter))}
       />
       <Route
         path={routes.ASSIGN_DISTRIBUTORS}
-        component={authRules.userIsAuthenticated(AssignDistributors)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsAdmin(AssignDistributors))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter))}
       />
       <Route
         path={routes.PACKAGE_RECEPTION}
-        component={authRules.userIsAuthenticated(PackageReception)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsTransporter(PackageReception))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsTransporter.onEnter))}
       />
       <Route
         path={routes.ROUTES_ASSIGN}
-        component={authRules.userIsAuthenticated(RoutesAssign)}
-        onEnter={connect(authRules.userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(RoutesAssign)}
+        onEnter={connect(userIsAuthenticated.onEnter)}
       />
       <Route path="*" component={NotFound} status={404} />
     </Route>
