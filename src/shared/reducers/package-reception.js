@@ -5,11 +5,15 @@
 // Redux.
 import { createReducer } from 'redux-create-reducer';
 
+// Lib.
+import serializer from '../lib/serializer';
+
 // Actions.
 import {
   TOGGLE_ORDER,
   UPDATE_ORDERS_LIST,
   UPDATE_ORDERS_OBSERVATION,
+  TOGGLE_SHOW_ORDERS_SUMMARY,
   PACKAGE_RECEPTION_REQUEST,
   PACKAGE_RECEPTION_SUCCESS,
   PACKAGE_RECEPTION_FAILED
@@ -26,7 +30,9 @@ import {
 const initialState = {
   ordersList: [],
   observation: '',
-  isSubmitting: false
+  isSubmitting: false,
+  ordersSummary: [],
+  showSummary: false
 };
 
 //
@@ -53,14 +59,16 @@ const actionHandlers = {
   }),
   [UPDATE_ORDERS_LIST]: (state, { orders }) => ({
     ...state,
-    ordersList: orders.map(order => ({
-      ...order,
-      checked: false
-    }))
+    ordersList: orders,
+    ordersSummary: serializer.toOrdersSummary(orders)
   }),
   [UPDATE_ORDERS_OBSERVATION]: (state, { observation }) => ({
     ...state,
     observation
+  }),
+  [TOGGLE_SHOW_ORDERS_SUMMARY]: state => ({
+    ...state,
+    showSummary: !state.showSummary
   }),
   [PACKAGE_RECEPTION_REQUEST]: state => ({
     ...state,

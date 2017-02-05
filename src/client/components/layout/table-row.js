@@ -1,10 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const TableRow = ({ className, children }) => (
-  <div className={`c-table__row ${className || ''}`}>
-    {children}
-  </div>
-);
+const TableRow = ({ children, className }) => {
+  const componentClass = 'c-table__row';
+  const config = className || '';
+
+  return (
+    <div className={`${componentClass} ${config.trim()}`}>
+      {children}
+    </div>
+  );
+};
 
 TableRow.propTypes = {
   children: PropTypes.node.isRequired,

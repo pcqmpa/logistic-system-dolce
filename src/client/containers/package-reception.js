@@ -3,7 +3,9 @@
  * @module src/client/containers/assign-transporter
  */
 // React - Redux.
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 // Components.
 import {
@@ -22,6 +24,13 @@ import {
   CheckBox,
   TextArea
 } from '../components/';
+import { PackagesSummary } from './';
+
+// Actions.
+import {
+  updateOrdersObservation,
+  toggleShowOrdersSummary
+} from '../../shared/actions/package-reception-actions';
 
 // Constants.
 import {
@@ -33,6 +42,14 @@ import {
 import '../styles/assign-transporter.scss';
 
 class PackageReception extends Component {
+  static propTypes = {
+    observation: PropTypes.string,
+    ordersSummary: PropTypes.shape(),
+    showSummary: PropTypes.bool,
+    updateOrdersObservation: PropTypes.func,
+    toggleShowOrdersSummary: PropTypes.func
+  };
+
   constructor(props) {
     super(props);
 
@@ -45,7 +62,31 @@ class PackageReception extends Component {
     };
   }
 
+  /**
+   * Handles the show and hide of the summary modal.
+   * @returns {void}
+   */
+  handleShowSummary = () => {
+    this.props.toggleShowOrdersSummary();
+  };
+
+  /**
+   * Updates the package reception observation field.
+   * @param {DOMEvent} event -> The event object.
+   * @returns {void}
+   */
+  handleObservationUpdates = (event) => {
+    const { value } = event.target;
+    this.props.updateOrdersObservation(value);
+  };
+
   render() {
+    const {
+      observation,
+      showSummary,
+      ordersSummary
+    } = this.props;
+
     return (
       <BoxContainer
         pillar
@@ -54,7 +95,9 @@ class PackageReception extends Component {
         <h2 className="c-heading">Recepción de Paquetes</h2>
         <Grid noGutter>
           <GridCell width={20}>
-            <Button>
+            <Button
+              onClick={this.handleShowSummary}
+            >
               Resumen
             </Button>
           </GridCell>
@@ -102,7 +145,9 @@ class PackageReception extends Component {
           <GridCell width={50}>
             <TextArea
               rows={6}
+              value={observation}
               placeholder="Deje sus comentarios"
+              onChange={this.handleObservationUpdates}
             />
           </GridCell>
           <GridCell width={20} offset={5}>
@@ -114,9 +159,20 @@ class PackageReception extends Component {
             </Button>
           </GridCell>
         </Grid>
+        <PackagesSummary
+          showSummary={showSummary}
+          ordersSummary={ordersSummary}
+          handleCloseSummary={this.handleShowSummary}
+        />
       </BoxContainer>
     );
   }
 }
 
-export default PackageReception;
+export default connect(
+  state => ({ ...state.packageReception }),
+  dispatch => (bindActionCreators({
+    updateOrdersObservation,
+    toggleShowOrdersSummary
+  }, dispatch))
+)(PackageReception);

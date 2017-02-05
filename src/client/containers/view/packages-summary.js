@@ -4,7 +4,6 @@
  */
 // React - Redux.
 import React, { PropTypes, Component } from 'react';
-import { connect } from 'react-redux';
 
 // Components.
 import {
@@ -21,10 +20,17 @@ import {
 // Utils.
 import { array } from '../../../shared/utils/';
 
+// Constants.
+import { SUMMARY_MODAL } from '../../constants/layouts';
+
+// Styles.
+import '../../styles/layouts/_summary-modal.scss';
+
 class PackagesSummary extends Component {
   static propTypes = {
-    orders: PropTypes.arrayOf(PropTypes.object),
-    showSummary: PropTypes.bool
+    ordersSummary: PropTypes.shape(),
+    showSummary: PropTypes.bool,
+    handleCloseSummary: PropTypes.func
   };
 
   constructor(props) {
@@ -46,27 +52,43 @@ class PackagesSummary extends Component {
    */
   renderSummary = orders => (
     array.flat(
-
+      Object.keys(orders).map(zone => (
+        Object.keys(orders[zone]).map((packageType, key) => (
+          <TableRow key={`${zone}_${packageType}_${key}`}>
+            <TableCell center>
+              {zone}
+            </TableCell>
+            <TableCell center>
+              {packageType}
+            </TableCell>
+            <TableCell center>
+              {orders[zone][packageType].count}
+            </TableCell>
+          </TableRow>
+        ))
+      ))
     )
   );
 
   render() {
     const {
-      orders,
-      showSummary
+      ordersSummary,
+      showSummary,
+      handleCloseSummary
     } = this.props;
 
     return (
       <Modal
         show={showSummary}
+        layout={SUMMARY_MODAL}
       >
-        <ModalHeader>
+        <ModalHeader handleCloseClick={handleCloseSummary}>
           Resumen
         </ModalHeader>
         <ModalBody scroll>
           <Table>
             <TableHead titles={this.state.titles} />
-            {this.renderSummary(orders)}
+            {this.renderSummary(ordersSummary)}
           </Table>
         </ModalBody>
       </Modal>
@@ -74,9 +96,4 @@ class PackagesSummary extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    orders: state.packageReception.ordersList,
-    showSummary: state.packageReception.showSummary
-  })
-)(PackagesSummary);
+export default PackagesSummary;

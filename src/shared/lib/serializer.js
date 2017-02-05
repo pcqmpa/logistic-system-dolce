@@ -99,17 +99,17 @@ const toCheckedList = data => (
 const toOrdersSummary = data => (
   data.reduce((summary, order) => {
     const nextSummary = { ...summary };
-    if (!nextSummary[order.zone]) {
-      nextSummary[order.zone] = {};
+    if (!nextSummary[order.StrZona]) {
+      nextSummary[order.StrZona] = {};
     }
 
-    if (!nextSummary[order.zone][order.pack]) {
-      nextSummary[order.zone][order.pack] = {
+    if (!nextSummary[order.StrZona][order.StrTipoEmpaque]) {
+      nextSummary[order.StrZona][order.StrTipoEmpaque] = {
         count: 0
       };
     }
 
-    nextSummary[order.zone][order.pack]
+    nextSummary[order.StrZona][order.StrTipoEmpaque]
       .count += parseInt(order.IntCantidad, 10);
     return nextSummary;
   }, {})

@@ -8,13 +8,23 @@ import React, { PropTypes } from 'react';
 // Components.
 import { Button } from '../';
 
-const ModalHeader = ({ children, className }) => {
+const ModalHeader = ({
+  children,
+  className,
+  handleCloseClick
+}) => {
   const componentClass = 'cp-modal__header';
   const config = className || '';
 
   return (
     <div className={`c-card__header ${componentClass} ${config.trim()}`}>
-      <Button close className="cp-modal__close">×</Button>
+      <Button
+        close
+        className="cp-modal__close"
+        onClick={handleCloseClick}
+      >
+        ×
+      </Button>
       {children}
     </div>
   );
@@ -22,7 +32,8 @@ const ModalHeader = ({ children, className }) => {
 
 ModalHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  handleCloseClick: PropTypes.func
 };
 
 export default ModalHeader;

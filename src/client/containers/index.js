@@ -21,3 +21,4 @@ export { default as LoadingContainer } from './view/loading-container';
 export { default as ToastList } from './view/toast-list';
 export { default as ButtonsGrid } from '../components/view/buttons-grid';
 export { default as UsersFilterContainer } from './view/users-filter-container';
+export { default as PackagesSummary } from './view/packages-summary';

@@ -1,0 +1,10 @@
+$componentName: "cp-modal";
+.#{$componentName}--summary {
+  .#{$componentName}__content {
+    width: 50%;
+  }
+
+  .#{$componentName}__body {
+    height: 500px;
+  }
+}
