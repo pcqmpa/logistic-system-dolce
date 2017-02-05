@@ -17,14 +17,8 @@ import {
   BoxContainer,
   InputGroup,
 
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-
   Button,
   InputBox,
-  SelectBox,
   CheckBox,
   TextArea
 } from '../components/';
@@ -60,12 +54,9 @@ class PackageReception extends Component {
         <h2 className="c-heading">Recepción de Paquetes</h2>
         <Grid noGutter>
           <GridCell width={20}>
-            <SelectBox
-              id="select_distributor"
-              name="select_distributor"
-              placeholder="Selecione el ditribuidor"
-              options={[{ value: '1', text: 'distribuidor' }]}
-            />
+            <Button>
+              Resumen
+            </Button>
           </GridCell>
           <GridCell width={20} offset={10}>
             <InputBox
@@ -108,40 +99,19 @@ class PackageReception extends Component {
           </GridCell>
         </Grid>
         <Grid noGutter>
-          <GridCell width={25}>
-            <Table>
-              <TableHead titles={[{ text: 'Data 1' }, { text: 'Data 2' }]} />
-              <TableRow>
-                <TableCell>
-                  Data 1
-                </TableCell>
-                <TableCell>
-                  Data 2
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  Data 1
-                </TableCell>
-                <TableCell>
-                  Data 2
-                </TableCell>
-              </TableRow>
-            </Table>
-          </GridCell>
-          <GridCell width={50} offset={5}>
+          <GridCell width={50}>
             <TextArea
               rows={6}
               placeholder="Deje sus comentarios"
             />
-            <p>
-              <Button
-                size={XLARGE_SIZE}
-                onClick={this.handleSubmitForm}
-              >
-                Asignar
-              </Button>
-            </p>
+          </GridCell>
+          <GridCell width={20} offset={5}>
+            <Button
+              size={XLARGE_SIZE}
+              onClick={this.handleSubmitForm}
+            >
+              Recibir Pedidos
+            </Button>
           </GridCell>
         </Grid>
       </BoxContainer>

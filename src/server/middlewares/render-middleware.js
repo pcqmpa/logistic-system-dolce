@@ -17,6 +17,9 @@ import { Provider } from 'react-redux';
 import { env } from '../../../config/';
 import * as responses from '../constants/responses';
 
+// Lib.
+import serializer from '../../shared/lib/serializer';
+
 // Utils.
 import {
   Log,
@@ -38,6 +41,7 @@ import {
   initTransporterList,
   updateDistributorFormList
 } from '../../shared/actions/transporters-actions';
+import { updateOrdersList } from '../../shared/actions/package-reception-actions';
 
 // Services.
 import { initState } from '../api-server/streams/';
@@ -51,10 +55,15 @@ import { NotFound } from '../../shared/components/';
 import { Html } from '../components/';
 
 // Constants.
-import { ADMIN, DISTRIBUTOR } from '../../shared/constants/user-types';
+import {
+  ADMIN,
+  DISTRIBUTOR,
+  TRANSPORTER
+} from '../../shared/constants/user-types';
 import {
   DISTRIBUTOR_FORM,
-  TRANSPORTER_FORM
+  TRANSPORTER_FORM,
+  PACKAGE_RECEPTION_FORM
 } from '../../shared/constants/strings';
 
 /**
@@ -106,7 +115,6 @@ const handleRender = (req, res) => {
 
   initState(user)
     .subscribe((initialData) => {
-      console.log(user);
       const memoryHistory = createHistory(req.originalUrl);
       const store = configureStore(
         memoryHistory,
@@ -129,6 +137,15 @@ const handleRender = (req, res) => {
           store.dispatch(updateSerializedDataTable(
             DISTRIBUTOR_FORM,
             initialData.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
+          ));
+        }
+
+        if (user.IdTipo === TRANSPORTER) {
+          const checkedOrders = serializer.toCheckedList(initialData.orders);
+          store.dispatch(updateOrdersList(checkedOrders));
+          store.dispatch(updateSerializedDataTable(
+            PACKAGE_RECEPTION_FORM,
+            checkedOrders
           ));
         }
       }

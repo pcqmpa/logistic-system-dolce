@@ -24,6 +24,10 @@ import {
   updateDistributorFormList
 } from '../actions/transporters-actions';
 import { updateSerializedDataTable } from '../actions/data-table-actions';
+import { updateOrdersList } from '../actions/package-reception-actions';
+
+// Lib.
+import serializer from '../lib/serializer';
 
 // API services.
 import { callFetchUser } from '../utils/api-service-creators';
@@ -40,21 +44,23 @@ import {
 } from '../constants/user-types';
 import {
   TRANSPORTER_FORM,
-  DISTRIBUTOR_FORM
+  DISTRIBUTOR_FORM,
+  PACKAGE_RECEPTION_FORM
 } from '../constants/strings';
 
 const loginSuccessEpic = (payload) => {
   const { user } = payload;
   const toast = addToast({ type: BRAND, message: WELCOME });
-  let dispatches = [];
+  const dispatches = [
+    updateUsersList(payload.users),
+    updateUserTypes(payload.types)
+  ];
   if (!payload.user.LogEstado) {
     throw new Error(INVALID_USER);
   }
 
   if (user.IdTipo === ADMIN) {
-    dispatches = [
-      updateUsersList(payload.users),
-      updateUserTypes(payload.types),
+    dispatches.push(
       initTransporterList(payload.transporters),
       updateSerializedDataTable(
         TRANSPORTER_FORM,
@@ -65,15 +71,22 @@ const loginSuccessEpic = (payload) => {
         DISTRIBUTOR_FORM,
         payload.users.filter(rawUser => (rawUser.IdTipo === DISTRIBUTOR))
       )
-    ];
+    );
   }
 
   if (user.IdTipo === TRANSPORTER) {
-    dispatches = [
+    const checkedOrders = serializer.toCheckedList(payload.orders);
+    dispatches.push(
       updateUsersList(payload.users),
-      updateUserTypes(payload.types)
-    ];
+      updateUserTypes(payload.types),
+      updateOrdersList(checkedOrders),
+      updateSerializedDataTable(
+        PACKAGE_RECEPTION_FORM,
+        checkedOrders
+      )
+    );
   }
+
   return Observable.merge(
     Observable.of(loginSuccess(payload.user)),
     Observable.of(...dispatches),

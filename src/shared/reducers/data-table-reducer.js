@@ -35,7 +35,8 @@ const initialDataSet = {
  */
 const initialState = {
   transporterFormTable: initialDataSet,
-  distributorFormTable: initialDataSet
+  distributorFormTable: initialDataSet,
+  packageReceptionFormTable: initialDataSet
 };
 
 //

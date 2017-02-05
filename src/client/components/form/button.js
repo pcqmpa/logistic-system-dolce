@@ -15,6 +15,7 @@ const Button = ({
   group,
   size,
   block,
+  close,
   theme,
   layout
 }) => {
@@ -28,6 +29,10 @@ const Button = ({
 
   if (block) {
     config += `${componentClass}--block `;
+  }
+
+  if (close) {
+    config += `${componentClass}--close `;
   }
 
   if (size) {
@@ -58,6 +63,7 @@ Button.propTypes = {
   type: PropTypes.string,
   size: PropTypes.string,
   block: PropTypes.bool,
+  close: PropTypes.bool,
   theme: PropTypes.string,
   layout: PropTypes.string
 };

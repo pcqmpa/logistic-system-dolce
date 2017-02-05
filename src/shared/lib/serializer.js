@@ -27,14 +27,14 @@ const userTypes = [
  * Returns the user type based on the id.
  * @private
  * @param  {String} typeId -> The id of the type.
- * @return {String} -> The user type.
+ * @returns {String} -> The user type.
  */
 const getUserType = typeId => (userTypes[typeId - 1]);
 
 /**
  * Serialize new user form.
  * @param  {Object} data -> The form data.
- * @return {Object} -> The serialized object.
+ * @returns {Object} -> The serialized object.
  */
 const toNewUser = data => ({
   StrUsuario: data.username,
@@ -47,7 +47,7 @@ const toNewUser = data => ({
 /**
  * Serialize distributor users.
  * @param {Array} users -> The array of users.
- * @return {Array} -> The serialized array.
+ * @returns {Array} -> The serialized array.
  */
 const toDistributorUsers = users => (
   users
@@ -61,7 +61,7 @@ const toDistributorUsers = users => (
 /**
  * Serialize to data table set.
  * @param {Array} data -> The array of data.
- * @return {Array} -> The serialized array.
+ * @returns {Array} -> The serialized array.
  */
 const toDataTableSet = data => (
   splitArray(data, CHUNK_QUANTITY)
@@ -71,7 +71,7 @@ const toDataTableSet = data => (
 /**
  * Serialize to data table paginator data.
  * @param {Array} data -> The array of data.
- * @return {Array} -> The serialized array.
+ * @returns {Array} -> The serialized array.
  */
 const toDataTablePaginators = data => (
   data.map(chunk => (
@@ -80,28 +80,39 @@ const toDataTablePaginators = data => (
 );
 
 /**
+ * Serialize to checked list.
+ * @param {Array} data -> The array of data.
+ * @returns {Array} -> The serialized array.
+ */
+const toCheckedList = data => (
+  data.map(item => ({
+    ...item,
+    checked: false
+  }))
+);
+
+/**
  * Serialize to package reception orders summary.
  * @param {Array} data -> The array of data.
- * @return {Array} -> The serialized array.
+ * @returns {Array} -> The serialized array.
  */
 const toOrdersSummary = data => (
-  data.reduce((orders, order) => {
-    if (!orders.has(order.StrZona)) {
-      orders.set(order.StrZona, new Map());
+  data.reduce((summary, order) => {
+    const nextSummary = { ...summary };
+    if (!nextSummary[order.zone]) {
+      nextSummary[order.zone] = {};
     }
 
-    if (!orders.get(order.StrZona).has(order.StrTipoEmpaque)) {
-      orders.get(order.StrZona).set(order.StrTipoEmpaque, { quantity: 0 });
+    if (!nextSummary[order.zone][order.pack]) {
+      nextSummary[order.zone][order.pack] = {
+        count: 0
+      };
     }
 
-    const packageOrder = orders
-      .get(order.StrZona)
-      .get(order.StrTipoEmpaque);
-
-    packageOrder.quantity += parseInt(order.IntCantidad, 10);
-
-    return orders;
-  }, new Map())
+    nextSummary[order.zone][order.pack]
+      .count += parseInt(order.IntCantidad, 10);
+    return nextSummary;
+  }, {})
 );
 
 export default {
@@ -109,5 +120,6 @@ export default {
   toDistributorUsers,
   toDataTableSet,
   toDataTablePaginators,
+  toCheckedList,
   toOrdersSummary
 };

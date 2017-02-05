@@ -33,4 +33,16 @@ const findIndexById = (arr, id) => (
   ), 0)
 );
 
-export default { get, findIndexById };
+/**
+ * Flattens a two dimensional array.
+ * @param {Array} arr -> The two dimensional array.
+ * @returns {Array} -> The flatten array.
+ */
+const flat = arr => (
+  arr.reduce((flattended, element) => {
+    flattended.push(...element);
+    return flattended;
+  }, [])
+);
+
+export default { get, findIndexById, flat };

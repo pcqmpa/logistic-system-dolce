@@ -11,7 +11,8 @@ import 'rxjs/add/observable/empty';
 import {
   userServices,
   logisticTypesServices,
-  transporterServices
+  transporterServices,
+  packageReceptionServices
 } from '../services/';
 
 // Constants.
@@ -31,10 +32,14 @@ const initState = (user) => {
     return userServices.consultUsersRequest()
     .concatMap(users => (
       logisticTypesServices.consultLogisticTypesRequest()
-        .map(transporters => ({
-          users,
-          transporters
-        }))
+        .concatMap(types => (
+          packageReceptionServices.getOrdersListRequest(user.username)
+            .map(orders => ({
+              users,
+              orders,
+              types
+            }))
+        ))
     ));
   }
 

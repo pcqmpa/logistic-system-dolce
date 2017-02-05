@@ -38,6 +38,12 @@ export { default as ButtonsGrid } from './view/buttons-grid';
 export { default as ButtonGridCell } from './view/button-grid-cell';
 export { default as UsersFilter } from './view/users-filter';
 
+export { default as Modal } from './view/modal';
+export { default as ModalHeader } from './view/modal-header';
+export { default as ModalBody } from './view/modal-body';
+export { default as ModalFooter } from './view/modal-footer';
+
+
 // Form components.
 export { default as SelectBox } from './form/select-box';
 export { default as CheckBox } from './form/check-box';

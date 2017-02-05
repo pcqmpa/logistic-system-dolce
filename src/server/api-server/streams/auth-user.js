@@ -24,7 +24,7 @@ import { initState } from './';
 const authUser = payload => (
   securityServices.fetchUserRequest(payload)
     .concatMap(user => (
-      initState(user)
+      initState({ ...user, ...payload })
         .map(data => ({
           user,
           ...data
