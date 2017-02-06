@@ -26,11 +26,13 @@ const getOrdersListRequest = username => (
 /**
  * Creates a request to check a single order.
  * @param {Number} numOrder -> The order number.
+ * @param {String} observation -> The observation related to the order.
  * @returns {Symbol.Observable} -> The request.
  */
-const checkOrderRequest = numOrder => (
+const checkOrderRequest = (numOrder, observation) => (
   streams.fromAjaxRequest(POST, checkOrder(), {
-    numPedido: numOrder
+    numPedido: numOrder,
+    strObservacion: observation || ''
   })
 );
 

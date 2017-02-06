@@ -37,14 +37,14 @@ const callGetOrdersList = (req, res) => {
 };
 
 const callCheckOrder = (req, res) => {
-  const { numOrder } = req.body;
+  const { numOrder, observation } = req.body;
   if (!numOrder) {
     return res
       .status(responses.ERROR)
       .send({ err: ARGS_ABSENCE });
   }
   return packageReceptionServices
-    .checkOrderRequest(numOrder)
+    .checkOrderRequest(numOrder, observation)
       .subscribe(
         response => (
           // The user was successfully assigned.

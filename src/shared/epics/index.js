@@ -10,13 +10,15 @@ import logout from './logout-epic';
 import addUser from './add-user-epic';
 import assignTransporter from './assign-transporter-epic';
 import assignDistributors from './assign-distributors-epic';
+import packageReception from './package-reception-epic';
 
 const rootEpic = combineEpics(
   login,
   logout,
   addUser,
   assignTransporter,
-  assignDistributors
+  assignDistributors,
+  packageReception
 );
 
 export default rootEpic;
