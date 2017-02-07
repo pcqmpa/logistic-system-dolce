@@ -4,7 +4,7 @@
  * @module src/server/api-server/streams/auth-user
  */
 // Rxjs.
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatMap';
@@ -12,10 +12,6 @@ import 'rxjs/add/operator/concatMap';
 // Services.
 import { securityServices } from '../services';
 import { initState } from './';
-
-// TODO: Remove this if not needed.
-// Constants.
-// import { ADMIN } from '../../../shared/constants/user-types';
 
 /**
  * Stream that validates user.

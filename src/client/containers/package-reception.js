@@ -43,6 +43,11 @@ import '../styles/assign-transporter.scss';
 
 class PackageReception extends Component {
   static propTypes = {
+    dataTable: PropTypes.shape({
+      listData: PropTypes.array,
+      selectedData: PropTypes.object,
+      paginators: PropTypes.array
+    }),
     observation: PropTypes.string,
     ordersSummary: PropTypes.shape(),
     showSummary: PropTypes.bool,
@@ -55,11 +60,50 @@ class PackageReception extends Component {
 
     this.state = {
       headers: [
-        { text: 'Usuario', size: 40 },
-        { text: 'Nombre', size: 40 },
-        { text: 'Seleccionar', size: 20 }
+        { text: 'Zona' },
+        { text: 'Tipo de Empaque' },
+        { text: 'Número de Empaque' },
+        { text: 'Código de Producto' },
+        { text: 'Cantidad' },
+        { text: 'Recibido' }
       ]
     };
+  }
+
+  /**
+   * Maps the selected orders to be displayed.
+   * @param {Array} orders -> The seleted orders.
+   * @returns {Array} -> Array of Data Rows components.
+   */
+  mapSelectedOrders(orders) {
+    orders.map(order => (
+      <DataRow key={`order_${order.Id}`}>
+        <DataItem center>
+          {order.StrZona}
+        </DataItem>
+        <DataItem center>
+          {order.StrTipoEmpaque}
+        </DataItem>
+        <DataItem center>
+          {order.NumEmpaque}
+        </DataItem>
+        <DataItem center>
+          {order.StrCodigoProducto}
+        </DataItem>
+        <DataItem center>
+          {order.IntCantidad}
+        </DataItem>
+        <DataItem>
+          <InputGroup center>
+            <CheckBox
+              name="select_distributors"
+              value={distributor.Idusuario.toString()}
+              onChange={this.handleSelectDistributor(distributor.Idusuario)}
+            />
+          </InputGroup>
+        </DataItem>
+      </DataRow>
+    ))
   }
 
   /**
@@ -94,16 +138,21 @@ class PackageReception extends Component {
       >
         <h2 className="c-heading">Recepción de Paquetes</h2>
         <Grid noGutter>
-          <GridCell width={20}>
+          <GridCell width={10}>
             <Button
               onClick={this.handleShowSummary}
             >
               Resumen
             </Button>
           </GridCell>
-          <GridCell width={20} offset={10}>
+          <GridCell width={20}>
             <InputBox
-              placeholder="Filtrar transportadores"
+              placeholder="Filtrar zonas"
+            />
+          </GridCell>
+          <GridCell width={20} offset={5}>
+            <InputBox
+              placeholder="Filtrar pedidos"
             />
           </GridCell>
         </Grid>
@@ -112,7 +161,7 @@ class PackageReception extends Component {
           noGutter
           className="u-letter-box--medium"
         >
-          <GridCell width={80}>
+          <GridCell width={100}>
             <DataTable paginators={[]} >
               <DataHeader>
                 {this.state.headers.map((title, key) => (
@@ -123,13 +172,22 @@ class PackageReception extends Component {
               </DataHeader>
               <DataContent>
                 <DataRow>
-                  <DataItem center width={40}>
+                  <DataItem center>
                     Test
                   </DataItem>
-                  <DataItem center width={40}>
+                  <DataItem center>
                     Test
                   </DataItem>
-                  <DataItem width={20}>
+                  <DataItem center>
+                    Test
+                  </DataItem>
+                  <DataItem center>
+                    Test
+                  </DataItem>
+                  <DataItem center>
+                    Test
+                  </DataItem>
+                  <DataItem>
                     <InputGroup center>
                       <CheckBox
                         name="select_packages"
@@ -170,7 +228,10 @@ class PackageReception extends Component {
 }
 
 export default connect(
-  state => ({ ...state.packageReception }),
+  state => ({
+    ...state.packageReception,
+    dataTable: state.dataTable.packageReceptionFormTable
+  }),
   dispatch => (bindActionCreators({
     updateOrdersObservation,
     toggleShowOrdersSummary

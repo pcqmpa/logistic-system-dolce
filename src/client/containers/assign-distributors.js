@@ -260,7 +260,7 @@ class AssignDistributors extends Component {
               </DataHeader>
               <DataContent>
                 {(dataTable.selectedData.list) ?
-                  this.mapDistributors(dataTable.selectedData.list) : ''}
+                  this.mapDistributors(dataTable.selectedData.list) : null}
               </DataContent>
             </DataTable>
             <p>
