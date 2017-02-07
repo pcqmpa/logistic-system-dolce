@@ -31,12 +31,24 @@ import {
   updateOrdersObservation,
   toggleShowOrdersSummary
 } from '../../shared/actions/package-reception-actions';
+import {
+  toggleDataTableElement,
+  updateSelectedDataTable
+} from '../../shared/actions/data-table-actions';
 
 // Constants.
 import {
+  BRAND,
   MEDIUM_SIZE,
   XLARGE_SIZE
 } from '../../shared/constants/types';
+import {
+  PACKAGE_RECEPTION_FORM
+} from '../../shared/constants/strings';
+// import {
+//   PACKAGE_RECEPTION_ZONES_FILTER,
+//   PACKAGE_RECEPTION_ORDERS_FILTER
+// } from '../constants/strings';
 
 // Styles.
 import '../styles/assign-transporter.scss';
@@ -52,7 +64,9 @@ class PackageReception extends Component {
     ordersSummary: PropTypes.shape(),
     showSummary: PropTypes.bool,
     updateOrdersObservation: PropTypes.func,
-    toggleShowOrdersSummary: PropTypes.func
+    toggleShowOrdersSummary: PropTypes.func,
+    toggleDataTableElement: PropTypes.func,
+    updateSelectedDataTable: PropTypes.func
   };
 
   constructor(props) {
@@ -75,8 +89,8 @@ class PackageReception extends Component {
    * @param {Array} orders -> The seleted orders.
    * @returns {Array} -> Array of Data Rows components.
    */
-  mapSelectedOrders(orders) {
-    orders.map(order => (
+  mapOrders = orders => (
+    orders.list.map(order => (
       <DataRow key={`order_${order.Id}`}>
         <DataItem center>
           {order.StrZona}
@@ -96,15 +110,29 @@ class PackageReception extends Component {
         <DataItem>
           <InputGroup center>
             <CheckBox
-              name="select_distributors"
-              value={distributor.Idusuario.toString()}
-              onChange={this.handleSelectDistributor(distributor.Idusuario)}
+              name="check_order"
+              checked={order.checked}
+              onChange={this.handleToggleOrder(order.id, orders.id)}
             />
           </InputGroup>
         </DataItem>
       </DataRow>
     ))
-  }
+  );
+
+  /**
+   * Handle data table paginator click.
+   * @param {Number} cunkId -> The id of the chunk.
+   * @param {DOMEvent} event -> The element event.
+   * @returns {void}
+   */
+  handlePaginatorClick = chunkId => (event) => {
+    event.preventDefault();
+    this.props.updateSelectedDataTable(
+      PACKAGE_RECEPTION_FORM,
+      chunkId
+    );
+  };
 
   /**
    * Handles the show and hide of the summary modal.
@@ -124,8 +152,23 @@ class PackageReception extends Component {
     this.props.updateOrdersObservation(value);
   };
 
+  /**
+   * Toggles a specific order.
+   * @param {String} id -> The order id.
+   * @param {Number} chunkId -> The selected chunk id.
+   * @returns {void}
+   */
+  handleToggleOrder = (id, chunkId) => () => {
+    this.props.toggleDataTableElement(
+      PACKAGE_RECEPTION_FORM,
+      chunkId,
+      id
+    );
+  };
+
   render() {
     const {
+      dataTable,
       observation,
       showSummary,
       ordersSummary
@@ -133,18 +176,11 @@ class PackageReception extends Component {
 
     return (
       <BoxContainer
-        pillar
+        window
         size={MEDIUM_SIZE}
       >
         <h2 className="c-heading">Recepción de Paquetes</h2>
         <Grid noGutter>
-          <GridCell width={10}>
-            <Button
-              onClick={this.handleShowSummary}
-            >
-              Resumen
-            </Button>
-          </GridCell>
           <GridCell width={20}>
             <InputBox
               placeholder="Filtrar zonas"
@@ -155,6 +191,12 @@ class PackageReception extends Component {
               placeholder="Filtrar pedidos"
             />
           </GridCell>
+          <GridCell width={10} offset={45}>
+            <CheckBox
+              id="check_all_orders"
+              label="Seleccionar Todos"
+            />
+          </GridCell>
         </Grid>
         <Grid
           wrap
@@ -162,7 +204,11 @@ class PackageReception extends Component {
           className="u-letter-box--medium"
         >
           <GridCell width={100}>
-            <DataTable paginators={[]} >
+            <DataTable
+              paginators={dataTable.paginators}
+              selected={dataTable.selectedData.id}
+              onClickPaginator={this.handlePaginatorClick}
+            >
               <DataHeader>
                 {this.state.headers.map((title, key) => (
                   <DataItem key={key} width={title.size}>
@@ -171,30 +217,7 @@ class PackageReception extends Component {
                 ))}
               </DataHeader>
               <DataContent>
-                <DataRow>
-                  <DataItem center>
-                    Test
-                  </DataItem>
-                  <DataItem center>
-                    Test
-                  </DataItem>
-                  <DataItem center>
-                    Test
-                  </DataItem>
-                  <DataItem center>
-                    Test
-                  </DataItem>
-                  <DataItem center>
-                    Test
-                  </DataItem>
-                  <DataItem>
-                    <InputGroup center>
-                      <CheckBox
-                        name="select_packages"
-                      />
-                    </InputGroup>
-                  </DataItem>
-                </DataRow>
+                {this.mapOrders(dataTable.selectedData)}
               </DataContent>
             </DataTable>
           </GridCell>
@@ -216,6 +239,14 @@ class PackageReception extends Component {
               Recibir Pedidos
             </Button>
           </GridCell>
+          <GridCell width={10}>
+            <Button
+              theme={BRAND}
+              onClick={this.handleShowSummary}
+            >
+              Resumen
+            </Button>
+          </GridCell>
         </Grid>
         <PackagesSummary
           showSummary={showSummary}
@@ -234,6 +265,8 @@ export default connect(
   }),
   dispatch => (bindActionCreators({
     updateOrdersObservation,
-    toggleShowOrdersSummary
+    toggleShowOrdersSummary,
+    toggleDataTableElement,
+    updateSelectedDataTable
   }, dispatch))
 )(PackageReception);

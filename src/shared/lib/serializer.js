@@ -3,6 +3,7 @@
  * @module src/shared/utils/serializer
  */
 // Node.
+import shortid from 'shortid';
 import splitArray from 'split-array';
 
 // Constants.
@@ -65,7 +66,13 @@ const toDistributorUsers = users => (
  */
 const toDataTableSet = data => (
   splitArray(data, CHUNK_QUANTITY)
-    .map((chunk, id) => ({ id, list: chunk }))
+    .map((chunk, id) => ({
+      id,
+      list: chunk.map(chunkElement => ({
+        id: shortid.generate(),
+        ...chunkElement
+      }))
+    }))
 );
 
 /**

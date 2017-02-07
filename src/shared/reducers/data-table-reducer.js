@@ -12,7 +12,8 @@ import serializer from '../lib/serializer';
 import {
   UPDATE_SERIALIZED_DATA_TABLE,
   UPDATE_SELECTED_DATA_TABLE,
-  CLEAR_SERIALIZED_DATA_TABLE
+  CLEAR_SERIALIZED_DATA_TABLE,
+  TOGGLE_DATA_TABLE_ELEMENT
 } from '../constants/actions';
 
 //
@@ -42,6 +43,24 @@ const initialState = {
 //
 // Handlers.
 // -----------------------------------------------------------------------------
+
+/**
+ * Helper to handle the toggle of an element of the data set.
+ * @param {Array} chunk -> A chunk of the data set.
+ * @param {String} id -> The Id of the specific element.
+ * @returns {Array} -> The updated chunk.
+ */
+const toggleChunkElement = (chunk, id) => (
+  chunk.map((element) => {
+    if (element.id === id) {
+      return {
+        ...element,
+        checked: !element.checked
+      };
+    }
+    return element;
+  })
+);
 
 /**
  * Data table action handlers.
@@ -76,6 +95,28 @@ const actionHandlers = {
   [CLEAR_SERIALIZED_DATA_TABLE]: (state, { table }) => ({
     ...state,
     [table]: initialDataSet
+  }),
+  [TOGGLE_DATA_TABLE_ELEMENT]: (state, { table, chunkId, id }) => ({
+    ...state,
+    [table]: {
+      ...state[table],
+      listData: state[table].listData.map((chunk) => {
+        if (chunk.id === chunkId) {
+          return {
+            ...chunk,
+            list: toggleChunkElement(chunk.list, id)
+          };
+        }
+        return chunk;
+      }),
+      selectedData: {
+        ...state[table].selectedData,
+        list: toggleChunkElement(
+          state[table].selectedData.list,
+          id
+        )
+      }
+    }
   })
 };
 
