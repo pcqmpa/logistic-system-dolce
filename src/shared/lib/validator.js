@@ -26,7 +26,11 @@ const validateByType = (type, data) => ({
   [NUMBER]: data !== null && !string.empty(data.toString()),
   [ARRAY]: data !== null && data.length > 0,
   [OBJECT]: data !== null && Object.keys(data).length > 0,
-  [CHECKED_LIST]: data !== null && data.some(element => (element.checked))
+  [CHECKED_LIST]: (
+    data !== null &&
+    data.constructor === Array &&
+    data.some(element => (element.checked))
+  )
 }[type]);
 
 /**
@@ -40,6 +44,7 @@ const run = (rules, data) => {
   const resume = Object.keys(rules).reduce((validation, prop) => {
     let passed = true;
     if (rules[prop].rule === REQUIRED) {
+      console.log(rules[prop]);
       passed = validateByType(rules[prop].type, data[prop]);
     }
 
