@@ -16,6 +16,7 @@ import {
   STRING,
   NUMBER,
   ARRAY,
+  CHECKED_LIST,
 
   REQUIRED,
   OPTIONAL
@@ -48,6 +49,14 @@ const createRule = (type = STRING) => ({
   ...requiredRule,
   type
 });
+
+/**
+ * Package Reception form.
+ * @type {Object}
+ */
+const packageReceptionForm = {
+  ordersList: createRule(CHECKED_LIST)
+};
 
 /**
  * Users filter.
@@ -112,7 +121,8 @@ const initialState = {
   newUser,
   usersFilter,
   transporterForm,
-  distributorForm
+  distributorForm,
+  packageReceptionForm
 };
 
 /**

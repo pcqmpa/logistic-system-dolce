@@ -258,8 +258,7 @@ class AssignTransporter extends Component {
               </DataHeader>
               <DataContent>
                 {(dataTable.selectedData.list) ?
-                  this.mapMasters(dataTable.selectedData.list) : ''
-                }
+                  this.mapMasters(dataTable.selectedData.list) : ''}
               </DataContent>
             </DataTable>
             <p>

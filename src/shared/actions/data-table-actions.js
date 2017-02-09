@@ -6,7 +6,8 @@ import {
   UPDATE_SERIALIZED_DATA_TABLE,
   UPDATE_SELECTED_DATA_TABLE,
   CLEAR_SERIALIZED_DATA_TABLE,
-  TOGGLE_DATA_TABLE_ELEMENT
+  TOGGLE_DATA_TABLE_ELEMENT,
+  TOGGLE_DATA_TABLE_ELEMENTS
 } from '../constants/actions';
 
 export const updateSerializedDataTable = (table, data) => ({
@@ -31,4 +32,10 @@ export const toggleDataTableElement = (table, chunkId, id) => ({
   id,
   chunkId,
   table
+});
+
+export const toggleDataTableElements = (table, checked) => ({
+  type: TOGGLE_DATA_TABLE_ELEMENTS,
+  table,
+  checked
 });

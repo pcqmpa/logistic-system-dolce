@@ -15,6 +15,7 @@ export const NEW_USER_RULES = 'newUser';
 export const LOGIN_RULES = 'login';
 export const TRANSPORTER_FORM_RULES = 'transporterForm';
 export const DISTRIBUTOR_FORM_RULES = 'distributorForm';
+export const PACKAGE_RECEPTION_FORM_RULES = 'packageReceptionForm';
 
 // New form.
 export const USERNAME_INPUT = 'Usuario';
@@ -38,5 +39,5 @@ export const SELECT_MASTER = 'select_master';
 export const SELECT_TRANSPORTER_INPUT = 'Seleccionar Usuario';
 
 // Package Reception.
-export const PACKAGE_RECEPTION_ZONES_FILTER = 'zones_filter';
-export const PACKAGE_RECEPTION_ORDERS_FILTER = 'orders_filter';
+export const ZONES_FILTER = 'zonesFilter';
+export const ORDERS_FILTER = 'ordersFilter';

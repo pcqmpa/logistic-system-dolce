@@ -28,13 +28,25 @@ import { PackagesSummary } from './';
 
 // Actions.
 import {
+  toggleOrder,
+  toggleAllOrders,
   updateOrdersObservation,
-  toggleShowOrdersSummary
+  toggleShowOrdersSummary,
+  updatePackageReceptionFilter,
+  packageReceptionRequest
 } from '../../shared/actions/package-reception-actions';
 import {
   toggleDataTableElement,
-  updateSelectedDataTable
+  toggleDataTableElements,
+  updateSelectedDataTable,
+  updateSerializedDataTable
 } from '../../shared/actions/data-table-actions';
+import {
+  updateRulesValidation
+} from '../../shared/actions/form-rules-actions';
+
+// Lib.
+import validator from '../../shared/lib/validator';
 
 // Constants.
 import {
@@ -45,28 +57,45 @@ import {
 import {
   PACKAGE_RECEPTION_FORM
 } from '../../shared/constants/strings';
-// import {
-//   PACKAGE_RECEPTION_ZONES_FILTER,
-//   PACKAGE_RECEPTION_ORDERS_FILTER
-// } from '../constants/strings';
+import {
+  ZONES_FILTER,
+  ORDERS_FILTER,
+  PACKAGE_RECEPTION_FORM_RULES
+} from '../constants/strings';
 
 // Styles.
 import '../styles/assign-transporter.scss';
 
 class PackageReception extends Component {
   static propTypes = {
+    filters: PropTypes.shape({
+      zonesFilter: PropTypes.string,
+      ordersFilter: PropTypes.string
+    }),
     dataTable: PropTypes.shape({
       listData: PropTypes.array,
       selectedData: PropTypes.object,
       paginators: PropTypes.array
     }),
+    formRules: PropTypes.shape({
+      ordersList: PropTypes.object
+    }),
+    ordersList: PropTypes.arrayOf(PropTypes.object),
     observation: PropTypes.string,
     ordersSummary: PropTypes.shape(),
     showSummary: PropTypes.bool,
+    toggleOrders: PropTypes.bool,
+    toggleOrder: PropTypes.func,
+    toggleAllOrders: PropTypes.func,
     updateOrdersObservation: PropTypes.func,
     toggleShowOrdersSummary: PropTypes.func,
     toggleDataTableElement: PropTypes.func,
-    updateSelectedDataTable: PropTypes.func
+    toggleDataTableElements: PropTypes.func,
+    updateSelectedDataTable: PropTypes.func,
+    updateSerializedDataTable: PropTypes.func,
+    updatePackageReceptionFilter: PropTypes.func,
+    packageReceptionRequest: PropTypes.func,
+    updateRulesValidation: PropTypes.func
   };
 
   constructor(props) {
@@ -77,9 +106,10 @@ class PackageReception extends Component {
         { text: 'Zona' },
         { text: 'Tipo de Empaque' },
         { text: 'Número de Empaque' },
+        { text: 'Número de Pedido' },
         { text: 'Código de Producto' },
         { text: 'Cantidad' },
-        { text: 'Recibido' }
+        { text: 'Recibido', size: 10 }
       ]
     };
   }
@@ -87,11 +117,12 @@ class PackageReception extends Component {
   /**
    * Maps the selected orders to be displayed.
    * @param {Array} orders -> The seleted orders.
+   * @param {Bool} valid -> The forms validator.
    * @returns {Array} -> Array of Data Rows components.
    */
-  mapOrders = orders => (
+  mapOrders = (orders, valid) => (
     orders.list.map(order => (
-      <DataRow key={`order_${order.Id}`}>
+      <DataRow key={`order_${order.id}`}>
         <DataItem center>
           {order.StrZona}
         </DataItem>
@@ -102,15 +133,19 @@ class PackageReception extends Component {
           {order.NumEmpaque}
         </DataItem>
         <DataItem center>
+          {order.NumPedido}
+        </DataItem>
+        <DataItem center>
           {order.StrCodigoProducto}
         </DataItem>
         <DataItem center>
           {order.IntCantidad}
         </DataItem>
-        <DataItem>
+        <DataItem width={10}>
           <InputGroup center>
             <CheckBox
               name="check_order"
+              valid={valid}
               checked={order.checked}
               onChange={this.handleToggleOrder(order.id, orders.id)}
             />
@@ -122,7 +157,7 @@ class PackageReception extends Component {
 
   /**
    * Handle data table paginator click.
-   * @param {Number} cunkId -> The id of the chunk.
+   * @param {Number} chunkId -> The id of the chunk.
    * @param {DOMEvent} event -> The element event.
    * @returns {void}
    */
@@ -159,6 +194,7 @@ class PackageReception extends Component {
    * @returns {void}
    */
   handleToggleOrder = (id, chunkId) => () => {
+    this.props.toggleOrder(id);
     this.props.toggleDataTableElement(
       PACKAGE_RECEPTION_FORM,
       chunkId,
@@ -166,12 +202,82 @@ class PackageReception extends Component {
     );
   };
 
+  /**
+   * Handle the check of toggle all orders.
+   * @returns {void}
+   */
+  handleToggleOrders = () => {
+    this.props.toggleAllOrders();
+    this.props.toggleDataTableElements(
+      PACKAGE_RECEPTION_FORM,
+      !this.props.toggleOrders
+    );
+  };
+
+  /**
+   * Handle the filters updates.
+   * @param {String} type -> The type of filter.
+   * @param {DOMEvent} event -> The input event.
+   * @returns {void}
+   */
+  handleFiltersUpdates = type => (event) => {
+    const { ordersList, filters } = this.props;
+    const { value } = event.target;
+    const filteredOrders = this.filterOrders(
+      { ...filters, [type]: value },
+      ordersList
+    );
+    this.props.updatePackageReceptionFilter(type, value);
+    this.props.updateSerializedDataTable(
+      PACKAGE_RECEPTION_FORM,
+      filteredOrders
+    );
+  };
+
+  /**
+   * Handles the submit of the checked orders.
+   * @return {void}
+   */
+  handleSubmitForm = () => {
+    const { ordersList, formRules } = this.props;
+    const formValidation = validator.run(formRules, { ordersList });
+
+    this.props.updateRulesValidation(
+      PACKAGE_RECEPTION_FORM_RULES,
+      formValidation.resume
+    );
+
+    if (formValidation.valid) {
+      this.props.packageReceptionRequest();
+    }
+  }
+
+  /**
+   * Filters the orders based on the current filter values.
+   * @param {Object} filters -> The filters.
+   * @param {Array} orders -> The orders.
+   * @returns {Array} -> The filtered orders.
+   */
+  filterOrders = (filters, orders) => (
+    orders
+      .filter(order => (
+        order.StrZona.toUpperCase()
+          .includes(filters.zonesFilter.toUpperCase())
+      ))
+      .filter(order => (
+        order.NumPedido.toString().toUpperCase()
+          .includes(filters.ordersFilter.toUpperCase())
+      ))
+  );
+
   render() {
     const {
+      formRules,
       dataTable,
       observation,
       showSummary,
-      ordersSummary
+      ordersSummary,
+      toggleOrders
     } = this.props;
 
     return (
@@ -183,19 +289,27 @@ class PackageReception extends Component {
         <Grid noGutter>
           <GridCell width={20}>
             <InputBox
+              id={ZONES_FILTER}
               placeholder="Filtrar zonas"
+              onChange={this.handleFiltersUpdates(ZONES_FILTER)}
             />
           </GridCell>
           <GridCell width={20} offset={5}>
             <InputBox
+              id={ORDERS_FILTER}
               placeholder="Filtrar pedidos"
+              onChange={this.handleFiltersUpdates(ORDERS_FILTER)}
             />
           </GridCell>
-          <GridCell width={10} offset={45}>
+          <GridCell width={20} offset={35}>
             <CheckBox
               id="check_all_orders"
-              label="Seleccionar Todos"
-            />
+              label
+              checked={toggleOrders}
+              onChange={this.handleToggleOrders}
+            >
+              Seleccionar Todos
+            </CheckBox>
           </GridCell>
         </Grid>
         <Grid
@@ -217,7 +331,12 @@ class PackageReception extends Component {
                 ))}
               </DataHeader>
               <DataContent>
-                {this.mapOrders(dataTable.selectedData)}
+                { (dataTable.selectedData.list) ?
+                  this.mapOrders(
+                    dataTable.selectedData,
+                    formRules.ordersList.valid
+                  ) : ''
+                }
               </DataContent>
             </DataTable>
           </GridCell>
@@ -261,12 +380,20 @@ class PackageReception extends Component {
 export default connect(
   state => ({
     ...state.packageReception,
-    dataTable: state.dataTable.packageReceptionFormTable
+    dataTable: state.dataTable.packageReceptionFormTable,
+    formRules: state.formRules.packageReceptionForm
   }),
   dispatch => (bindActionCreators({
+    toggleOrder,
+    toggleAllOrders,
     updateOrdersObservation,
     toggleShowOrdersSummary,
     toggleDataTableElement,
-    updateSelectedDataTable
+    toggleDataTableElements,
+    updateSelectedDataTable,
+    updateSerializedDataTable,
+    updatePackageReceptionFilter,
+    packageReceptionRequest,
+    updateRulesValidation
   }, dispatch))
 )(PackageReception);

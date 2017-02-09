@@ -39,7 +39,7 @@ class PackagesSummary extends Component {
     this.state = {
       titles: [
         { text: 'Zona' },
-        { text: 'Tipo de Paquete' },
+        { text: 'Tipo de Empaque' },
         { text: 'Cantidad' }
       ]
     };

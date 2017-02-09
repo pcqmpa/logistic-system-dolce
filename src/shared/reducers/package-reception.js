@@ -11,9 +11,11 @@ import serializer from '../lib/serializer';
 // Actions.
 import {
   TOGGLE_ORDER,
+  TOGGLE_ALL_ORDERS,
   UPDATE_ORDERS_LIST,
   UPDATE_ORDERS_OBSERVATION,
   TOGGLE_SHOW_ORDERS_SUMMARY,
+  UPDATE_PACKAGE_RECEPTION_FILTER,
   PACKAGE_RECEPTION_REQUEST,
   PACKAGE_RECEPTION_SUCCESS,
   PACKAGE_RECEPTION_FAILED
@@ -24,15 +26,26 @@ import {
 // -----------------------------------------------------------------------------
 
 /**
+ * Filters initial state.
+ * @type {Object}
+ */
+const filters = {
+  zonesFilter: '',
+  ordersFilter: ''
+};
+
+/**
  * Initial state
  * @type {Object}
  */
 const initialState = {
+  filters,
   ordersList: [],
   observation: '',
-  isSubmitting: false,
   ordersSummary: [],
-  showSummary: false
+  showSummary: false,
+  toggleOrders: false,
+  isSubmitting: false
 };
 
 //
@@ -46,9 +59,9 @@ const initialState = {
 const actionHandlers = {
   [TOGGLE_ORDER]: (state, { orderId }) => ({
     ...state,
-    ordersForm: state.ordersList
+    ordersList: state.ordersList
       .map((order) => {
-        if (order.Id === orderId) {
+        if (order.id === orderId) {
           return {
             ...order,
             checked: !order.checked
@@ -57,6 +70,17 @@ const actionHandlers = {
         return { ...order };
       })
   }),
+  [TOGGLE_ALL_ORDERS]: (state) => {
+    const toggleValue = !state.toggleOrders;
+    return {
+      ...state,
+      ordersList: state.ordersList.map(order => ({
+        ...order,
+        checked: toggleValue
+      })),
+      toggleOrders: toggleValue
+    };
+  },
   [UPDATE_ORDERS_LIST]: (state, { orders }) => ({
     ...state,
     ordersList: orders,
@@ -69,6 +93,13 @@ const actionHandlers = {
   [TOGGLE_SHOW_ORDERS_SUMMARY]: state => ({
     ...state,
     showSummary: !state.showSummary
+  }),
+  [UPDATE_PACKAGE_RECEPTION_FILTER]: (state, { filter, value }) => ({
+    ...state,
+    filters: {
+      ...state.filters,
+      [filter]: value
+    }
   }),
   [PACKAGE_RECEPTION_REQUEST]: state => ({
     ...state,

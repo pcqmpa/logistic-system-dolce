@@ -13,7 +13,8 @@ import {
   UPDATE_SERIALIZED_DATA_TABLE,
   UPDATE_SELECTED_DATA_TABLE,
   CLEAR_SERIALIZED_DATA_TABLE,
-  TOGGLE_DATA_TABLE_ELEMENT
+  TOGGLE_DATA_TABLE_ELEMENT,
+  TOGGLE_DATA_TABLE_ELEMENTS
 } from '../constants/actions';
 
 //
@@ -115,6 +116,27 @@ const actionHandlers = {
           state[table].selectedData.list,
           id
         )
+      }
+    }
+  }),
+  [TOGGLE_DATA_TABLE_ELEMENTS]: (state, { table, checked }) => ({
+    ...state,
+    [table]: {
+      ...state[table],
+      listData: state[table].listData.map(chunk => ({
+        ...chunk,
+        list: chunk.list.map(element => ({
+          ...element,
+          checked
+        }))
+      })),
+      selectedData: {
+        ...state[table].selectedData,
+        list: state[table].selectedData
+          .list.map(element => ({
+            ...element,
+            checked
+          }))
       }
     }
   })

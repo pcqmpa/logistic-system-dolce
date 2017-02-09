@@ -11,6 +11,7 @@ import {
   NUMBER,
   OBJECT,
   ARRAY,
+  CHECKED_LIST,
   REQUIRED
 } from '../constants/types';
 
@@ -24,7 +25,8 @@ const validateByType = (type, data) => ({
   [STRING]: data !== null && !string.empty(data),
   [NUMBER]: data !== null && !string.empty(data.toString()),
   [ARRAY]: data !== null && data.length > 0,
-  [OBJECT]: data !== null && Object.keys(data).length > 0
+  [OBJECT]: data !== null && Object.keys(data).length > 0,
+  [CHECKED_LIST]: data !== null && data.some(element => (element.checked))
 }[type]);
 
 /**

@@ -68,11 +68,20 @@ const toDataTableSet = data => (
   splitArray(data, CHUNK_QUANTITY)
     .map((chunk, id) => ({
       id,
-      list: chunk.map(chunkElement => ({
-        id: shortid.generate(),
-        ...chunkElement
-      }))
+      list: chunk
     }))
+);
+
+/**
+ * Deserialize the data table set.
+ * @param {Array} data -> The arrat of data.
+ * @returns {Array} -> The deserialized data.
+ */
+const toDeserializedDataTableSet = data => (
+  data.reduce((flattened, chunk) => ([
+    ...flattened,
+    ...chunk.list
+  ]), [])
 );
 
 /**
@@ -94,6 +103,7 @@ const toDataTablePaginators = data => (
 const toCheckedList = data => (
   data.map(item => ({
     ...item,
+    id: shortid.generate(),
     checked: false
   }))
 );
@@ -126,6 +136,7 @@ export default {
   toNewUser,
   toDistributorUsers,
   toDataTableSet,
+  toDeserializedDataTableSet,
   toDataTablePaginators,
   toCheckedList,
   toOrdersSummary

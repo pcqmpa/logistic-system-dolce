@@ -22,7 +22,6 @@
     "indent": ["error", 2],
     "comma-dangle": ["error", "never"],
     "linebreak-style": "off",
-    "no-multi-assign": "off",
     "no-underscore-dangle": ["error", { "allow": ["__PRELOADED_STATE__", "_CLIENT_"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/require-default-props": "off",

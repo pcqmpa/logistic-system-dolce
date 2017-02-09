@@ -21,6 +21,9 @@ import {
   packageReceptionSuccess,
   packageReceptionFailed
 } from '../actions/package-reception-actions';
+import {
+  toggleDataTableElements
+} from '../actions/data-table-actions';
 import { addToast, removeToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 
@@ -32,6 +35,7 @@ import {
 // Constants.
 import { ERROR, BRAND } from '../constants/types';
 import { PACKAGE_RECEPTION_REQUEST } from '../constants/actions';
+import { PACKAGE_RECEPTION_FORM } from '../constants/strings';
 
 const packageReceptionRequestSuccess = (payload) => {
   const { message } = payload.response;
@@ -39,6 +43,10 @@ const packageReceptionRequestSuccess = (payload) => {
   return Observable.concat(
     Observable.of(
       packageReceptionSuccess(),
+      toggleDataTableElements(
+        PACKAGE_RECEPTION_FORM,
+        false
+      ),
       hideLoading(),
       toast
     ),

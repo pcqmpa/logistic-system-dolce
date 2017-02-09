@@ -3,6 +3,9 @@ import React, { PropTypes } from 'react';
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
 
+// Styles.
+import '../../styles/components/_check-box.scss';
+
 const CheckBox = ({
   id,
   children,
