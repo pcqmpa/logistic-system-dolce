@@ -44,7 +44,6 @@ const run = (rules, data) => {
   const resume = Object.keys(rules).reduce((validation, prop) => {
     let passed = true;
     if (rules[prop].rule === REQUIRED) {
-      console.log(rules[prop]);
       passed = validateByType(rules[prop].type, data[prop]);
     }
 
