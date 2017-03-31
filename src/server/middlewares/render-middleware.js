@@ -62,8 +62,7 @@ import {
 } from '../../shared/constants/user-types';
 import {
   DISTRIBUTOR_FORM,
-  TRANSPORTER_FORM,
-  PACKAGE_RECEPTION_FORM
+  TRANSPORTER_FORM
 } from '../../shared/constants/strings';
 
 /**
@@ -99,7 +98,7 @@ const renderHtml = (nextProps, store, markup) => {
     </Html>
   );
 
-  return render(content, preloadedState);
+  return render(content);
 };
 
 /**
@@ -143,10 +142,6 @@ const handleRender = (req, res) => {
         if (user.IdTipo === TRANSPORTER) {
           const checkedOrders = serializer.toCheckedList(initialData.orders);
           store.dispatch(updateOrdersList(checkedOrders));
-          store.dispatch(updateSerializedDataTable(
-            PACKAGE_RECEPTION_FORM,
-            checkedOrders
-          ));
         }
       }
 

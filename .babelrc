@@ -1,4 +1,4 @@
 {
-  "presets": ["es2016-node5", "react", "stage-0", "airbnb"],
+  "presets": ["es2015", "react", "stage-0", "airbnb"],
   "plugins": ["transform-class-properties"]
 }

@@ -9,7 +9,7 @@ export { default as LoginContainer } from './login-container';
 export { default as Dashboard } from './dashboard';
 export { default as UsersList } from './users-list';
 export { default as PackageReception } from './package-reception';
-export { default as RoutesAssign } from './routes-assign';
+export { default as AssignOrders } from './assign-orders';
 export { default as NewUser } from './new-user';
 export { default as AssignTransporter } from './assign-transporter';
 export { default as AssignDistributors } from './assign-distributors';

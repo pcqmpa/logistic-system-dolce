@@ -1,0 +1,848 @@
+{
+  "coverage": "17.92%",
+  "expectCount": 357,
+  "actualCount": 64,
+  "files": {
+    "src/client/constants/icons.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        15,
+        11,
+        13,
+        7,
+        9
+      ]
+    },
+    "src/shared/constants/actions.js": {
+      "expectCount": 63,
+      "actualCount": 1,
+      "undocumentLines": [
+        45,
+        43,
+        44,
+        14,
+        70,
+        68,
+        69,
+        99,
+        97,
+        98,
+        63,
+        61,
+        62,
+        19,
+        24,
+        51,
+        47,
+        11,
+        7,
+        56,
+        32,
+        30,
+        31,
+        33,
+        34,
+        89,
+        87,
+        88,
+        15,
+        46,
+        10,
+        82,
+        26,
+        27,
+        83,
+        93,
+        39,
+        84,
+        67,
+        65,
+        66,
+        94,
+        76,
+        42,
+        80,
+        81,
+        95,
+        92,
+        85,
+        38,
+        18,
+        23,
+        22,
+        73,
+        60,
+        59,
+        57,
+        37,
+        50,
+        49,
+        53,
+        77
+      ]
+    },
+    "src/shared/constants/user-types.js": {
+      "expectCount": 8,
+      "actualCount": 1,
+      "undocumentLines": [
+        19,
+        20,
+        15,
+        16,
+        11,
+        12,
+        8
+      ]
+    },
+    "src/shared/constants/messages.js": {
+      "expectCount": 9,
+      "actualCount": 1,
+      "undocumentLines": [
+        14,
+        22,
+        12,
+        20,
+        18,
+        16,
+        10,
+        27
+      ]
+    },
+    "src/shared/constants/types.js": {
+      "expectCount": 29,
+      "actualCount": 1,
+      "undocumentLines": [
+        8,
+        29,
+        41,
+        10,
+        30,
+        26,
+        33,
+        27,
+        15,
+        23,
+        16,
+        20,
+        7,
+        9,
+        46,
+        39,
+        36,
+        34,
+        35,
+        42,
+        45,
+        17,
+        40,
+        28,
+        13,
+        19,
+        14,
+        18
+      ]
+    },
+    "src/shared/constants/routes.js": {
+      "expectCount": 8,
+      "actualCount": 1,
+      "undocumentLines": [
+        20,
+        18,
+        8,
+        16,
+        12,
+        14,
+        10
+      ]
+    },
+    "src/shared/constants/strings.js": {
+      "expectCount": 14,
+      "actualCount": 1,
+      "undocumentLines": [
+        11,
+        19,
+        15,
+        9,
+        7,
+        23,
+        27,
+        26,
+        10,
+        18,
+        14,
+        8,
+        22
+      ]
+    },
+    "src/client/app-router.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/client/constants/themes.js": {
+      "expectCount": 3,
+      "actualCount": 1,
+      "undocumentLines": [
+        9,
+        7
+      ]
+    },
+    "src/client/components/layout/box-container.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        10
+      ]
+    },
+    "src/client/components/form/button.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/components/view/button-grid-cell.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/client/components/view/buttons-grid.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/shared/constants/values.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/client/components/form/check-box.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/constants/strings.js": {
+      "expectCount": 22,
+      "actualCount": 1,
+      "undocumentLines": [
+        35,
+        36,
+        9,
+        18,
+        30,
+        28,
+        29,
+        39,
+        40,
+        41,
+        37,
+        38,
+        7,
+        16,
+        31,
+        32,
+        14,
+        23,
+        11,
+        25,
+        20
+      ]
+    },
+    "src/server/constants/mocked-users.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/layout/data-content.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/layout/data-header.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/data-item.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/data-row.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/data-table.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        20,
+        31,
+        21,
+        63
+      ]
+    },
+    "src/server/constants/responses.js": {
+      "expectCount": 5,
+      "actualCount": 1,
+      "undocumentLines": [
+        8,
+        12,
+        10,
+        14
+      ]
+    },
+    "src/client/components/layout/field.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/client/components/layout/grid.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/layout/grid-cell.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/server/components/html.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        25,
+        19,
+        13,
+        31
+      ]
+    },
+    "src/client/components/view/icon.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/form/input-box.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/components/layout/input-group.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        14
+      ]
+    },
+    "src/client/components/layout/input-group-item.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/list.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        14
+      ]
+    },
+    "src/client/components/layout/list-item.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/layout/list-section.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/view/loading.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/client/components/view/login.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        16
+      ]
+    },
+    "src/client/components/view/modal.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        17
+      ]
+    },
+    "src/client/components/view/modal-body.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/view/modal-footer.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/view/modal-header.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/nav.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/client/components/layout/nav-content.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/layout/nav-item.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        7
+      ]
+    },
+    "src/shared/components/not-found.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        4
+      ]
+    },
+    "src/client/containers/view/packages-summary.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        29,
+        36,
+        30,
+        73,
+        39
+      ]
+    },
+    "src/client/containers/orders-table.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        17
+      ]
+    },
+    "src/client/components/layout/panel.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/form/radio-button.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/containers/routes-assign.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/constants/layouts.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/client/components/form/select-box.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/containers/view/side-nav.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        23,
+        28,
+        34,
+        24,
+        88,
+        78,
+        36
+      ]
+    },
+    "src/server/constants/values.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/client/components/layout/table.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        14
+      ]
+    },
+    "src/client/components/layout/table-cell.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/layout/table-head.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "src/client/components/layout/table-row.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/form/text-area.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "src/client/components/layout/toast.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/client/components/layout/toast-container.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "src/client/components/view/users-filter.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        35
+      ]
+    },
+    "src/shared/actions/users-actions.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        31,
+        27,
+        29,
+        36,
+        47,
+        34,
+        21,
+        49,
+        41,
+        39
+      ]
+    },
+    "src/shared/actions/toast-list-actions.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        14
+      ]
+    },
+    "src/server/api-server/services/service-creators.js": {
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "src/server/mock-api-server/services/service-creators.js": {
+      "expectCount": 13,
+      "actualCount": 13,
+      "undocumentLines": []
+    },
+    "src/shared/epics/add-user-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        76
+      ]
+    },
+    "src/server/middlewares/api-middleware.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/actions/transporters-actions.js": {
+      "expectCount": 14,
+      "actualCount": 0,
+      "undocumentLines": [
+        86,
+        78,
+        82,
+        57,
+        49,
+        53,
+        27,
+        73,
+        62,
+        67,
+        44,
+        38,
+        32,
+        91
+      ]
+    },
+    "src/shared/epics/assign-distributors-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        78
+      ]
+    },
+    "src/shared/actions/assign-orders-actions.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        46,
+        38,
+        42,
+        17,
+        27,
+        32,
+        22
+      ]
+    },
+    "src/shared/epics/assign-transporter-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        62
+      ]
+    },
+    "src/server/api-server/streams/auth-user.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/client/components/auth/auth-wrapper.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "src/shared/utils/api-service-creators.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/shared/actions/form-rules-actions.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/shared/actions/data-table-actions.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        25,
+        30,
+        37,
+        19,
+        13
+      ]
+    },
+    "src/shared/utils/configure-routes.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/utils/configure-store.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/actions/loading-actions.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        4
+      ]
+    },
+    "src/shared/actions/server-actions.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "src/server/api-server/streams/init-state.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/epics/login-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        111
+      ]
+    },
+    "src/shared/actions/user-actions.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        11,
+        17,
+        9,
+        15
+      ]
+    },
+    "src/shared/epics/logout-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        30
+      ]
+    },
+    "src/shared/epics/package-reception-epic.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        86
+      ]
+    },
+    "src/shared/actions/package-reception-actions.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        41,
+        37,
+        39,
+        25,
+        27,
+        29,
+        18,
+        20,
+        31
+      ]
+    },
+    "src/server/middlewares/render-middleware.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/epics/index.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        15
+      ]
+    },
+    "src/server/middlewares/session-middleware.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/server/middlewares/static-middleware.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/shared/actions/login-form-actions.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        10,
+        8
+      ]
+    },
+    "src/shared/actions/dashboard-actions.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        12
+      ]
+    },
+    "src/shared/utils/auth-rules.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        38,
+        27,
+        49
+      ]
+    },
+    "src/server/utils/validate-auth.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    }
+  }
+}

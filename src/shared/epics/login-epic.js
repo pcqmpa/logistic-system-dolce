@@ -44,8 +44,7 @@ import {
 } from '../constants/user-types';
 import {
   TRANSPORTER_FORM,
-  DISTRIBUTOR_FORM,
-  PACKAGE_RECEPTION_FORM
+  DISTRIBUTOR_FORM
 } from '../constants/strings';
 
 const loginSuccessEpic = (payload) => {
@@ -79,11 +78,7 @@ const loginSuccessEpic = (payload) => {
     dispatches.push(
       updateUsersList(payload.users),
       updateUserTypes(payload.types),
-      updateOrdersList(checkedOrders),
-      updateSerializedDataTable(
-        PACKAGE_RECEPTION_FORM,
-        checkedOrders
-      )
+      updateOrdersList(checkedOrders)
     );
   }
 

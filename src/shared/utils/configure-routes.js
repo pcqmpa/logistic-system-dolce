@@ -22,7 +22,7 @@ import {
   AssignTransporter,
   AssignDistributors,
   PackageReception,
-  RoutesAssign
+  AssignOrders
 } from '../../client/containers/';
 import { NotFound } from '../components/';
 
@@ -103,8 +103,8 @@ const configureRoutes = (store) => {
       />
       <Route
         path={routes.ROUTES_ASSIGN}
-        component={userIsAuthenticated(RoutesAssign)}
-        onEnter={connect(userIsAuthenticated.onEnter)}
+        component={userIsAuthenticated(userIsTransporter(AssignOrders))}
+        onEnter={connect(onEnterChain(userIsAuthenticated.onEnter, userIsTransporter.onEnter))}
       />
       <Route path="*" component={NotFound} status={404} />
     </Route>

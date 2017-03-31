@@ -87,7 +87,10 @@ class PackagesSummary extends Component {
         </ModalHeader>
         <ModalBody scroll>
           <Table>
-            <TableHead titles={this.state.titles} />
+            <TableHead
+              center
+              titles={this.state.titles}
+            />
             {this.renderSummary(ordersSummary)}
           </Table>
         </ModalBody>

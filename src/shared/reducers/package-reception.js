@@ -45,7 +45,8 @@ const initialState = {
   ordersSummary: [],
   showSummary: false,
   toggleOrders: false,
-  isSubmitting: false
+  isSubmitting: false,
+  failed: false
 };
 
 //
@@ -113,7 +114,8 @@ const actionHandlers = {
         ...order,
         checked: false
       })),
-    isSubmitting: false
+    isSubmitting: false,
+    failed: false
   }),
   [PACKAGE_RECEPTION_FAILED]: state => ({
     ...state,
@@ -123,7 +125,8 @@ const actionHandlers = {
         ...order,
         checked: false
       })),
-    isSubmitting: false
+    isSubmitting: false,
+    failed: true
   })
 };
 

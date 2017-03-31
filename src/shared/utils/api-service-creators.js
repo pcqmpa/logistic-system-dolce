@@ -78,3 +78,23 @@ export const callGetOrdersList = username =>
  * @returns {String} -> With the URL request.
  */
 export const callCheckOrder = () => ('/api/callCheckOrder');
+
+//
+// Assign Orders Services.
+// -----------------------------------------------------------------------------
+
+/**
+ * Service to request the list of orders to assign to
+ * a distributor assigned to a transporter.
+ * @param {String} username -> The transporter username.
+ * @returns {String} -> With the URL request.
+ */
+export const callGetOrdersToAssign = username =>
+  (`/api/callGetOrdersToAssign?username=${username}`);
+
+/**
+ * Service to assign a order to a specific distributor.
+ * @returns {String} -> With the URL request.
+ */
+export const callAssignOrderToDistributor = () =>
+  ('/api/callAssignOrderToDistributor');

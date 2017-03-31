@@ -48,12 +48,12 @@ import {
 } from '../../shared/constants/types';
 import { TRANSPORTER } from '../../shared/constants/user-types';
 import {
-  TRANSPORTER_FORM_RULES,
   SELECT_TRANSPORTER_INPUT
 } from '../constants/strings';
 import {
   TRANSPORTER_FORM,
-  TRANSPORTERS_FILTER
+  TRANSPORTERS_FILTER,
+  TRANSPORTER_FORM_RULES
 } from '../../shared/constants/strings';
 
 // Styles.

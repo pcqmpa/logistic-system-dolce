@@ -69,7 +69,7 @@ class SideNav extends Component {
           type: types.Link,
           link: routes.ASSIGN_ROUTES,
           content: 'Asignación de Rutas',
-          visible: true
+          visible: userType === TRANSPORTER
         }
       ]
     };

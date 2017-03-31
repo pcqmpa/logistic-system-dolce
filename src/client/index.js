@@ -6,9 +6,9 @@
 // React.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
 
 // Utils.
 import { configureStore } from '../shared/utils/';
@@ -17,11 +17,8 @@ import { configureStore } from '../shared/utils/';
 import { MOUNT_ID, env } from '../../config/';
 
 // App.
-import AppRouter from './app-router';
+import App from './app';
 import reducer from '../shared/reducers/';
-
-// Components.
-import { DevTools } from '../shared/containers/';
 
 //
 // Initialise App
@@ -46,23 +43,27 @@ const history = syncHistoryWithStore(browserHistory, store);
  * It will render the reactDOM app.
  * @returns {void}
  */
-const render = () => {
+const render = (Component) => {
   ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        <AppRouter history={history} store={store} />
-        { env.DEBUG && <DevTools /> }
-      </div>
-    </Provider>,
+    <AppContainer>
+      <Component
+        store={store}
+        history={history}
+      />
+    </AppContainer>,
     mountNode
   );
 };
 
 // Setup module hot reload.
 if (env.DEBUG && module.hot) {
-  module.hot.accept(render);
+  module.hot.accept('./app', () => {
+    render(App);
+  });
 }
 
 // Setup window onload event.
-window.onload = render;
+window.onload = () => {
+  render(App);
+};
 
