@@ -22,6 +22,10 @@ import {
   OPTIONAL
 } from '../constants/types';
 
+//
+// Initial State.
+// -----------------------------------------------------------------------------
+
 /**
  * Optional rule.
  * @type {Object}
@@ -49,6 +53,15 @@ const createRule = (type = STRING) => ({
   ...requiredRule,
   type
 });
+
+/**
+ * Assign orders to distributor form.
+ * @type {Object}
+ */
+const assignOrdersForm = {
+  distributorUser: createRule(STRING),
+  ordersToAssignList: createRule(CHECKED_LIST)
+};
 
 /**
  * Package Reception form.
@@ -122,8 +135,13 @@ const initialState = {
   usersFilter,
   transporterForm,
   distributorForm,
-  packageReceptionForm
+  packageReceptionForm,
+  assignOrdersForm
 };
+
+//
+// Handlers.
+// -----------------------------------------------------------------------------
 
 /**
  * Form rules action handlers.

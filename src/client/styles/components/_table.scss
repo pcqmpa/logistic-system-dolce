@@ -1,7 +1,30 @@
+@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+
+@import "../utils/_colors.scss";
+
 .c-table {
+  &__head {
+    &__cell {
+      &--center {
+        text-align: center !important;
+        justify-content: center;
+      }
+    }
+  }
+
+  &__row {
+    transition: 0.3s background-color;
+    background-color: tint($grey-lighter, 80%);
+
+    &:hover {
+      background-color: $grey-lighter;
+    }
+  }
+
   &__cell {
     &--center {
       text-align: center !important;
+      justify-content: center;
     }
   }
 }

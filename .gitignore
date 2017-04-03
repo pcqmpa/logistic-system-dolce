@@ -2,6 +2,7 @@
 yarn.lock
 server.json
 build
+.vscode
 
 # Test Reports
 # reports

@@ -20,7 +20,10 @@ import {
   securityController,
   userController,
   transporterController,
-  packageReceptionController
+  packageReceptionController,
+  assignOrdersController,
+  deliverOrdersController,
+  pictureStoreController
 } from './api-server/controllers/';
 
 // Constants.
@@ -33,8 +36,8 @@ const app = new Express();
 //
 // API Configuration.
 // -----------------------------------------------------------------------------
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Setup session.
 sessionMiddleware(app);
@@ -74,6 +77,39 @@ app.get(
 app.post(
   '/api/callCheckOrder',
   packageReceptionController.callCheckOrder
+);
+
+// Assign Orders To Distributor.
+app.get(
+  '/api/callGetOrdersToAssign',
+  assignOrdersController.callGetOrdersToAssign
+);
+
+app.post(
+  '/api/callAssignOrderToDistributor',
+  assignOrdersController.callAssignOrderToDistributor
+);
+
+// The Deliver of Orders.
+app.get(
+  '/api/callGetOrdersToDeliver',
+  deliverOrdersController.callGetOrdersToDeliver
+);
+
+app.post(
+  '/api/callDeliverOrder',
+  deliverOrdersController.callDeliverOrder
+);
+
+// The Picture Store Services.
+app.get(
+  '/api/picture/:pictureName',
+  pictureStoreController.getPicture
+);
+
+app.post(
+  '/api/saveOrderPicture',
+  pictureStoreController.saveOrderPicture
 );
 
 //

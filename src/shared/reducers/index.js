@@ -17,6 +17,7 @@ import loading from './loading';
 import loginForm from './login-form';
 import dashboard from './dashboard-reducer';
 import packageReception from './package-reception';
+import assignOrders from './assign-orders';
 
 // Root Reducer.
 export default combineReducers({
@@ -30,5 +31,6 @@ export default combineReducers({
   loading,
   loginForm,
   dashboard,
-  packageReception
+  packageReception,
+  assignOrders
 });

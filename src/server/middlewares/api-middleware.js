@@ -11,7 +11,11 @@ import { Log } from '../utils/';
 // App Config.
 import { env } from '../../../config/';
 
-const API_URL = `http://${env.HOST}:${env.API_PORT}`;
+let API_URL = `http://${env.HOST}:${env.API_PORT}`;
+
+if (env.MOCK_SERVER) {
+  API_URL = `http://${env.HOST}:${env.MOCK_API_PORT}`;
+}
 
 // Http Proxy instance.
 const proxy = httpProxy.createProxyServer({

@@ -14,10 +14,10 @@ const {
   ASSETS_DIR
 } = require('../../config/paths');
 
-const extractCSS = new ExtractTextPlugin(
-  'main-[chunkhash].css',
-  { allChunks: true }
-);
+const extractSass = new ExtractTextPlugin({
+  filename: '[name]-[chunkhash].css',
+  allChunks: true
+});
 
 module.exports = Config()
   .extend('./webpack/webpack.config.common.js')
@@ -34,32 +34,37 @@ module.exports = Config()
       publicPath: '/assets/'
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
           exclude: /(node_modules|bower_components|server)/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2016-node5', 'react', 'stage-0', 'airbnb'],
-            plugins: ['transform-class-properties']
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [['es2015', { modules: false }], 'react', 'stage-0', 'airbnb'],
+              plugins: ['transform-class-properties']
+            }
           }
         },
         {
           test: /\.scss$/,
           // loader: `style!${cssLoader}!postcss!${sassLoader}`,
-          loader: extractCSS.extract('style', 'css!postcss!sass'),
+          use: extractSass.extract({
+            use: [
+              {
+                loader: 'css-loader'
+              },
+              {
+                loader: 'sass-loader'
+              }
+            ]
+          }),
           exclude: /node_modules/
         }
       ]
     },
-    resolve: {
-      root: [
-        path.resolve('src'),
-        path.resolve('node_modules')
-      ]
-    },
     plugins: [
-      extractCSS,
+      extractSass,
       new CleanWebpackPlugin([path.relative(CONTEXT_SRC, ASSETS_DIR)], {
         root: CONTEXT_SRC
       }),
@@ -72,18 +77,8 @@ module.exports = Config()
         __DEVELOPMENT__: false,
         __DEVTOOLS__: false  // enable/disable redux-devtools
       }),
-      // Omit duplicate modules
-      new webpack.optimize.DedupePlugin(),
-      // Assign the module and chunk ids by occurrence count.
-      // Ids that are used often get lower (shorter) ids.
-      // This make ids predictable, reduces to total file size and is recommended.
-      new webpack.optimize.OccurenceOrderPlugin(),
       // Compresses javascript files
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      }),
+      new webpack.optimize.UglifyJsPlugin(),
       new WebpackIsomorphicToolsPlugin(
         webpackIsomorphicToolsConfig
       )

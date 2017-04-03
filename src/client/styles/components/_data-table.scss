@@ -10,6 +10,7 @@
   }
 
   &__row {
+    transition: 0.3s background-color;
     background-color: tint($grey-lighter, 80%);
 
     &:hover {

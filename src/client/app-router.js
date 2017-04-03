@@ -3,10 +3,12 @@
  * @module src/client/app-router
  */
 
-// React.
+// React - Router - Redux.
 import React, { PropTypes } from 'react';
-import { Router } from 'react-router';
-import { configureRoutes } from '../shared/utils/';
+import { ConnectedRouter } from 'react-router-redux';
+
+// Components.
+import { Routes } from '../shared/components/';
 
 /**
  * Client app router component.
@@ -14,10 +16,9 @@ import { configureRoutes } from '../shared/utils/';
  * @returns {ReactElement} -> The react router.
  */
 const AppRouter = ({ history, store }) => (
-  <Router
-    history={history}
-    routes={configureRoutes(store)}
-  />
+  <ConnectedRouter history={history}>
+    <Routes store={store} />
+  </ConnectedRouter>
 );
 
 /**

@@ -4,7 +4,6 @@
  * @module src/server/api-server/streams/auth-user
  */
 // Rxjs.
-// import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatMap';

@@ -45,6 +45,18 @@ const toNewUser = data => ({
   StrNombreTipoUsuario: getUserType(data.type)
 });
 
+const toOrderToAssign = data => ({
+  strUsuario: data.username,
+  idTrasportista: data.idTransporter,
+  numPedido: data.numOrder
+});
+
+const toOrderToDeliver = data => ({
+  numPedido: data.numOrder,
+  urlImagen: data.urlPicture,
+  urlCod: data.urlCode
+});
+
 /**
  * Serialize distributor users.
  * @param {Array} users -> The array of users.
@@ -134,6 +146,8 @@ const toOrdersSummary = data => (
 
 export default {
   toNewUser,
+  toOrderToAssign,
+  toOrderToDeliver,
   toDistributorUsers,
   toDataTableSet,
   toDeserializedDataTableSet,

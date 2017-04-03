@@ -1,9 +1,11 @@
 module.exports = {
   env: {
     DEBUG: process.env.NODE_ENV !== 'production',
+    MOCK_SERVER: !!process.env.MOCK_SERVER,
     SERVER_PORT: process.env.PORT || 3001,
     API_PORT: 3002,
     DEV_SERVER_PORT: 3003,
+    MOCK_API_PORT: 3004,
     HOST: process.env.HOST || 'localhost',
     MONGODB_HOST: process.env.MONGO_URL || 'mongodb://localhost/logistic-sytem-dolce'
   },

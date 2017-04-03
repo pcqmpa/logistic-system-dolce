@@ -42,9 +42,9 @@ import {
   USERNAME_INPUT,
   PASSWORD_INPUT,
   FULLNAME_INPUT,
-  USER_TYPE_INPUT,
-  NEW_USER_RULES
+  USER_TYPE_INPUT
 } from '../constants/strings';
+import { NEW_USER_RULES } from '../../shared/constants/strings';
 import { USERS_LIST } from '../../shared/constants/routes';
 import { ADMIN } from '../../shared/constants/user-types';
 

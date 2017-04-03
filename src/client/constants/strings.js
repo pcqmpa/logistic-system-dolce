@@ -10,13 +10,6 @@ export const FULLNAME = 'fullname';
 
 export const USER_TYPE = 'type';
 
-// Form Rules.
-export const NEW_USER_RULES = 'newUser';
-export const LOGIN_RULES = 'login';
-export const TRANSPORTER_FORM_RULES = 'transporterForm';
-export const DISTRIBUTOR_FORM_RULES = 'distributorForm';
-export const PACKAGE_RECEPTION_FORM_RULES = 'packageReceptionForm';
-
 // New form.
 export const USERNAME_INPUT = 'Usuario';
 
@@ -38,6 +31,11 @@ export const ID_TRANSPORTER = 'idTransporter';
 export const SELECT_MASTER = 'select_master';
 export const SELECT_TRANSPORTER_INPUT = 'Seleccionar Usuario';
 
-// Package Reception.
-export const ZONES_FILTER = 'zonesFilter';
-export const ORDERS_FILTER = 'ordersFilter';
+// Assign Orders To Distributor Form.
+export const DISTRIBUTOR_TO_ASSIGN_INPUT = 'Seleccionar distribuidor';
+export const DISTRIBUTOR_TO_ASSIGN_INPUT_ID = 'distributor_to_assign';
+export const ORDERS_ZONE_FILTER_INPUT = 'Filtro de zonas';
+export const ORDERS_ZONE_FILTER_INPUT_ID = 'orders_zone_filter';
+export const ORDERS_NUM_FILTER_INPUT = 'Filtro de paquetes';
+export const ORDERS_NUM_FILTER_INPUT_ID = 'orders_num_filter';
+export const ORDERS_TO_ASSIGN_INPUT_ID = 'orders_to_assign';

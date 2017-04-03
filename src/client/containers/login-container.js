@@ -24,9 +24,9 @@ import validator from '../../shared/lib/validator';
 // Constants.
 import {
   USERNAME,
-  PASSWORD,
-  LOGIN_RULES
+  PASSWORD
 } from '../constants/strings';
+import { LOGIN_RULES } from '../../shared/constants/strings';
 
 // Styles.
 import '../styles/login-container.scss';

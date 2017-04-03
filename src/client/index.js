@@ -3,12 +3,11 @@
  * @module src/client/
  */
 
-// React.
+// React - Router - Redux.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { AppContainer } from 'react-hot-loader';
 
 // Utils.
 import { configureStore } from '../shared/utils/';
@@ -17,26 +16,25 @@ import { configureStore } from '../shared/utils/';
 import { MOUNT_ID, env } from '../../config/';
 
 // App.
-import AppRouter from './app-router';
+import App from './app';
 import reducer from '../shared/reducers/';
 
-// Components.
-import { DevTools } from '../shared/containers/';
-
 //
-// Initialise App
+// Initialize App
 // -----------------------------------------------------------------------------
+
+// Configure browser history.
+const history = createBrowserHistory();
 
 // DOM root element.
 const mountNode = document.getElementById(MOUNT_ID);
+
 // Configure store.
 const store = configureStore(
-  browserHistory,
   reducer,
+  history,
   window.__PRELOADED_STATE__
 );
-// Redux browser history.
-const history = syncHistoryWithStore(browserHistory, store);
 
 //
 // Render App
@@ -46,23 +44,27 @@ const history = syncHistoryWithStore(browserHistory, store);
  * It will render the reactDOM app.
  * @returns {void}
  */
-const render = () => {
+const render = (Component) => {
   ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        <AppRouter history={history} store={store} />
-        { env.DEBUG && <DevTools /> }
-      </div>
-    </Provider>,
+    <AppContainer>
+      <Component
+        store={store}
+        history={history}
+      />
+    </AppContainer>,
     mountNode
   );
 };
 
 // Setup module hot reload.
 if (env.DEBUG && module.hot) {
-  module.hot.accept(render);
+  module.hot.accept('./app', () => {
+    render(App);
+  });
 }
 
 // Setup window onload event.
-window.onload = render;
+window.onload = () => {
+  render(App);
+};
 
