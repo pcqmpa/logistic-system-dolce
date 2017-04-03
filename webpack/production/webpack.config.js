@@ -14,10 +14,10 @@ const {
   ASSETS_DIR
 } = require('../../config/paths');
 
-const extractSass = new ExtractTextPlugin(
-  '[name]-[chunkhash].css',
-  { allChunks: true }
-);
+const extractSass = new ExtractTextPlugin({
+  filename: '[name]-[chunkhash].css',
+  allChunks: true
+});
 
 module.exports = Config()
   .extend('./webpack/webpack.config.common.js')
