@@ -3,11 +3,10 @@
  * @module src/client/
  */
 
-// React.
+// React - Router - Redux.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 import { AppContainer } from 'react-hot-loader';
 
 // Utils.
@@ -21,19 +20,21 @@ import App from './app';
 import reducer from '../shared/reducers/';
 
 //
-// Initialise App
+// Initialize App
 // -----------------------------------------------------------------------------
+
+// Configure browser history.
+const history = createBrowserHistory();
 
 // DOM root element.
 const mountNode = document.getElementById(MOUNT_ID);
+
 // Configure store.
 const store = configureStore(
-  browserHistory,
   reducer,
+  history,
   window.__PRELOADED_STATE__
 );
-// Redux browser history.
-const history = syncHistoryWithStore(browserHistory, store);
 
 //
 // Render App

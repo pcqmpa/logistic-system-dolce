@@ -2,8 +2,8 @@
  * Module with all the shared utils.
  * @module src/shared/utils/
  */
+export { default as noop } from './noop';
 export { default as configureStore } from './configure-store';
-export { default as configureRoutes } from './configure-routes';
 export { default as authRules } from './auth-rules';
 
 // Helpers.

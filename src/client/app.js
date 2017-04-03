@@ -15,6 +15,11 @@ import { env } from '../../config/';
 // Components.
 import { DevTools } from '../shared/containers/';
 
+/**
+ * The App component.
+ * Encapsulates all the react components tree.
+ * @returns {ReactElement} -> The react application.
+ */
 const App = ({
   store,
   history
@@ -27,6 +32,12 @@ const App = ({
   </Provider>
 );
 
+/**
+ * The component proptypes.
+ * @type {Object}
+ * @property {Object} store -> The actual redux store.
+ * @property {Object} history -> The browser history.
+ */
 App.propTypes = {
   store: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired

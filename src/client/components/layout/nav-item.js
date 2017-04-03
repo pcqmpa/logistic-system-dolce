@@ -1,5 +1,9 @@
+/**
+ * Module with the NavItem component.
+ * @module src/client/components/layout/NavItem
+ */
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 // Styles.
 import '../../styles/components/_nav-item.scss';

@@ -17,7 +17,7 @@ import { ADMIN, TRANSPORTER } from '../constants/user-types';
 // be redirected to the Dashboard route.
 const userIsAuthenticated = new UserAuthWrapper({
   authSelector: state => (state.user),
-  redirectAction: routerActions.push,
+  redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
   predicate: user => (user.isAuth)
 });
@@ -26,7 +26,7 @@ const userIsAuthenticated = new UserAuthWrapper({
 // be redirected to the Login route.
 export const userIsNotAuthenticated = new UserAuthWrapper({
   authSelector: state => (state.user),
-  redirectAction: routerActions.push,
+  redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsNotAuthenticated',
   predicate: user => (!user.isAuth),
   failureRedirectPath: () => (routes.LOGIN),
@@ -37,7 +37,7 @@ export const userIsNotAuthenticated = new UserAuthWrapper({
 // is of type ADMIN.
 export const userIsAdmin = new UserAuthWrapper({
   authSelector: state => (state.user),
-  redirectAction: routerActions.push,
+  redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAdmin',
   predicate: user => (user.data.IdTipo === ADMIN),
   failureRedirectPath: () => (routes.DASHBOARD),
@@ -48,7 +48,7 @@ export const userIsAdmin = new UserAuthWrapper({
 // is of type TRANSPORTER.
 export const userIsTransporter = new UserAuthWrapper({
   authSelector: state => (state.user),
-  redirectAction: routerActions.push,
+  redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsTransporter',
   predicate: user => (user.data.IdTipo === TRANSPORTER),
   failureRedirectPath: () => (routes.DASHBOARD),

@@ -20,14 +20,7 @@ module.exports = Config()
     context: CONTEXT_SRC,
     entry: {
       [appName]: [
-        // Activate HMR for React
         'react-hot-loader/patch',
-        // Bundle the client for webpack-dev-server
-        // and connect to the provided endpoint
-        `webpack-dev-server/client?http://${env.HOST}:${env.DEV_SERVER_PORT}`,
-        // Bundle the client for hot reloading
-        // only- means to only hot reload for successful updates
-        'webpack/hot/only-dev-server',
         // The entry point of the app
         './src/client/index.js'
       ]

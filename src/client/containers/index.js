@@ -4,7 +4,7 @@
  */
 
 // Containers.
-export { default as App } from './app';
+export { default as Main } from './main';
 export { default as LoginContainer } from './login-container';
 export { default as Dashboard } from './dashboard';
 export { default as UsersList } from './users-list';
