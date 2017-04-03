@@ -1,1 +1,25 @@
 $app-content-height: 100vh;
+
+// Animations.
+// ============================
+
+// Appear Left Transition.
+$translate-transition-x: -20px;
+$translate-transition-y: 0;
+$transition-duration: 500ms;
+
+// Components.
+// ============================
+
+// Loading.
+$loading-view-width: 100vw;
+$loading-view-height: 100vh;
+$animation-size: 100px;
+$animation-duration: 1.4s;
+$delay-range: 0.32s;
+
+// Layouts.
+// ============================
+
+// SideNav.
+$nav-height: 100vh;

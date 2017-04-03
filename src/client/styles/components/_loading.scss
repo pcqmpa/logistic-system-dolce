@@ -1,13 +1,8 @@
-@import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
-
-@import "../utils/_colors.scss";
 @import "../animations/_bounce.scss";
+@import "../utils/_colors.scss";
+@import "../utils/_variables.scss";
 
-$loading-view-width: 100vw;
-$loading-view-height: 100vh;
-$animation-size: 100px;
-$animation-duration: 1.4s;
-$delay-range: 0.32s;
+
 
 .loading-view {
   top: 0;
@@ -29,15 +24,14 @@ $delay-range: 0.32s;
     border-radius: 100%;
     display: inline-block;
     background-color: $brand-color;
-
-    @include animation(bounce $animation-duration ease-in-out 0s infinite both);
+    animation: bounce $animation-duration ease-in-out 0s infinite both;
 
     &[data-pos="1"] {
-      @include animation-delay(-$delay-range);
+      animation-delay: -$delay-range;
     }
 
     &[data-pos="2"] {
-      @include animation-delay(-$delay-range / 2);
+      animation-delay: -$delay-range / 2;
     }
   }
 }

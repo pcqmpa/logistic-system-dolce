@@ -1,7 +1,6 @@
 @import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
 
 @import "../utils/colors";
-@import "../mixins/transitions";
 
 .buttons-grid {
   width: 50%;
@@ -13,8 +12,8 @@
     font-size: 24px;
     border-radius: 4px;
     position: relative;
+    transition: background 0.2s;
     background-color: $button-grid-bg;
-    @include button-transition(background);
 
     &:hover {
       background-color: shade($button-grid-bg, 30%);
