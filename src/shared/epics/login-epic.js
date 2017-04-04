@@ -15,7 +15,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
 
 // Actions.
-import { addToast, removeToast } from '../actions/toast-list-actions';
+import { addToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 import { loginSuccess, loginFailed } from '../actions/user-actions';
 import { updateUsersList, updateUserTypes } from '../actions/users-actions';
@@ -49,7 +49,6 @@ import {
 
 const loginSuccessEpic = (payload) => {
   const { user } = payload;
-  const toast = addToast({ type: BRAND, message: WELCOME });
   const dispatches = [
     updateUsersList(payload.users),
     updateUserTypes(payload.types)
@@ -87,26 +86,23 @@ const loginSuccessEpic = (payload) => {
     Observable.of(...dispatches),
     Observable.of(routerActions.push(DASHBOARD)),
     Observable.of(
-      hideLoading(),
-      toast
+      hideLoading()
     ).delay(1000),
-    Observable.of(removeToast(toast.message.id))
-      .delay(5000)
+    Observable.of(addToast({ type: BRAND, message: WELCOME }))
+      .delay(200)
   );
 };
 
-const loginFailEpic = (err) => {
-  const toast = addToast({ type: ERROR, message: err.message });
-  return Observable.merge(
+const loginFailEpic = err => (
+  Observable.merge(
     Observable.of(
       loginFailed(err),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(6000)
-  );
-};
+    Observable.of(addToast({ type: ERROR, message: err.message }))
+      .delay(200)
+  )
+);
 
 const loginEpic = action$ =>
   action$.ofType(LOGIN_REQUEST)

@@ -20,7 +20,7 @@ import {
   addNewUserSuccess,
   addNewUserFailed
 } from '../actions/users-actions';
-import { addToast, removeToast } from '../actions/toast-list-actions';
+import { addToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 import { updateDistributorFormList } from '../actions/transporters-actions';
 
@@ -39,7 +39,6 @@ import { ADD_NEW_USER_REQUEST } from '../constants/actions';
 
 const registerNewUserSuccess = (payload) => {
   const { message } = payload.response;
-  const toast = addToast({ type: BRAND, message });
   return Observable.ajax
     .getJSON(callConsultUsers())
     .mergeMap(users => (
@@ -50,26 +49,23 @@ const registerNewUserSuccess = (payload) => {
         )),
         Observable.of(
           addNewUserSuccess(),
-          hideLoading(),
-          toast
+          hideLoading()
         ),
-        Observable.of(removeToast(toast.message.id))
-          .delay(4000)
+        Observable.of(addToast({ type: BRAND, message }))
+          .delay(200)
       )
     ));
 };
 
 const registerNewUserFailed = (payload) => {
   const { err } = payload.xhr.response;
-  const toast = addToast({ type: ERROR, message: err });
   return Observable.concat(
     Observable.of(
       addNewUserFailed(),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(4000)
+    Observable.of(addToast({ type: ERROR, message: err }))
+      .delay(200)
   );
 };
 

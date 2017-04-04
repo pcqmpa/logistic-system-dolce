@@ -24,7 +24,7 @@ import {
 import {
   toggleDataTableElements
 } from '../actions/data-table-actions';
-import { addToast, removeToast } from '../actions/toast-list-actions';
+import { addToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 
 // API services.
@@ -39,7 +39,6 @@ import { PACKAGE_RECEPTION_FORM } from '../constants/strings';
 
 const packageReceptionRequestSuccess = (payload) => {
   const { message } = payload.response;
-  const toast = addToast({ type: BRAND, message });
   return Observable.concat(
     Observable.of(
       packageReceptionSuccess(),
@@ -47,25 +46,22 @@ const packageReceptionRequestSuccess = (payload) => {
         PACKAGE_RECEPTION_FORM,
         false
       ),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(4000)
+    Observable.of(addToast({ type: BRAND, message }))
+      .delay(200)
   );
 };
 
 const packageReceptionRequestFailed = (payload) => {
   const { err } = payload.xhr.response;
-  const toast = addToast({ type: ERROR, message: err });
   return Observable.concat(
     Observable.of(
       packageReceptionFailed(),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(4000)
+    Observable.of(addToast({ type: ERROR, message: err }))
+      .delay(200)
   );
 };
 

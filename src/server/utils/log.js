@@ -84,6 +84,15 @@ prettyError.appendStyle({
 });
 
 /**
+ * Logs a debug message with a label and value args.
+ * @param {String} label -> The log label.
+ * @param {Any} value -> The debugger value.
+ */
+const debug = (label, value) => {
+  console.log(label, value);
+};
+
+/**
  * Logs errors in a clean way.
  * @param {Any} err -> The error to be logged.
  * @returns {void}
@@ -110,4 +119,5 @@ const log = (message) => {
   console.log(message);
 };
 
-export default { error, log, info };
+
+export default { debug, error, log, info };
