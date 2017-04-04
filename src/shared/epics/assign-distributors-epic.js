@@ -21,7 +21,7 @@ import {
   assignDistributorSuccess,
   assignDistributorFailed
 } from '../actions/transporters-actions';
-import { addToast, removeToast } from '../actions/toast-list-actions';
+import { addToast } from '../actions/toast-list-actions';
 import { showLoading, hideLoading } from '../actions/loading-actions';
 
 // API services.
@@ -35,29 +35,25 @@ import { ASSIGN_DISTRIBUTOR_REQUEST } from '../constants/actions';
 
 const assignDistributorsRequestSuccess = (payload) => {
   const { message } = payload.response;
-  const toast = addToast({ type: BRAND, message });
   return Observable.concat(
     Observable.of(
       assignDistributorSuccess(),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(4000)
+    Observable.of(addToast({ type: BRAND, message }))
+      .delay(200)
   );
 };
 
 const assignDistributorsRequestFailed = (payload) => {
   const { err } = payload.xhr.response;
-  const toast = addToast({ type: ERROR, message: err });
   return Observable.concat(
     Observable.of(
       assignDistributorFailed(),
-      hideLoading(),
-      toast
+      hideLoading()
     ),
-    Observable.of(removeToast(toast.message.id))
-      .delay(4000)
+    Observable.of(addToast({ type: ERROR, message: err }))
+      .delay(200)
   );
 };
 
