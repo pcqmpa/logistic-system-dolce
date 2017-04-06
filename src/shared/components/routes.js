@@ -99,45 +99,33 @@ class Routes extends Component {
           />
           <Route
             path={routes.USERS_LIST}
-            component={userIsAuthenticated(userIsAdmin(UsersList))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter)
-            )}
+            component={userIsAdmin(UsersList)}
+            onEnter={this.connect(userIsAdmin.onEnter)}
           />
           <Route
             path={routes.NEW_USER}
-            component={userIsAuthenticated(userIsAdmin(NewUser))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter)
-            )}
+            component={userIsAdmin(NewUser)}
+            onEnter={this.connect(userIsAdmin.onEnter)}
           />
           <Route
             path={routes.ASSIGN_TRANSPORTER}
-            component={userIsAuthenticated(userIsAdmin(AssignTransporter))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter)
-            )}
+            component={userIsAdmin(AssignTransporter)}
+            onEnter={this.connect(userIsAdmin.onEnter)}
           />
           <Route
             path={routes.ASSIGN_DISTRIBUTORS}
-            component={userIsAuthenticated(userIsAdmin(AssignDistributors))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsAdmin.onEnter)
-            )}
+            component={userIsAdmin(AssignDistributors)}
+            onEnter={this.connect(userIsAdmin.onEnter)}
           />
           <Route
             path={routes.PACKAGE_RECEPTION}
-            component={userIsAuthenticated(userIsTransporter(PackageReception))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsTransporter.onEnter)
-            )}
+            component={userIsTransporter(PackageReception)}
+            onEnter={this.connect(userIsTransporter.onEnter)}
           />
           <Route
             path={routes.ROUTES_ASSIGN}
-            component={userIsAuthenticated(userIsTransporter(AssignOrders))}
-            onEnter={this.connect(
-              this.onEnterChain(userIsAuthenticated.onEnter, userIsTransporter.onEnter)
-            )}
+            component={userIsTransporter(AssignOrders)}
+            onEnter={this.connect(userIsTransporter.onEnter)}
           />
           <Route component={NotFound} />
         </Switch>

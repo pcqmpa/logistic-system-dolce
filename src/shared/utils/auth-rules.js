@@ -19,7 +19,8 @@ const userIsAuthenticated = new UserAuthWrapper({
   authSelector: state => (state.user),
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAuthenticated',
-  predicate: user => (user.isAuth)
+  predicate: user => (user.isAuth),
+  failureRedirectPath: () => (routes.DASHBOARD)
 });
 
 // Rule when a user is not authenticated it will
@@ -39,7 +40,7 @@ export const userIsAdmin = new UserAuthWrapper({
   authSelector: state => (state.user),
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsAdmin',
-  predicate: user => (user.data.IdTipo === ADMIN),
+  predicate: user => (user.isAuth && user.data.IdTipo === ADMIN),
   failureRedirectPath: () => (routes.DASHBOARD),
   allowRedirectBack: false
 });
@@ -50,7 +51,7 @@ export const userIsTransporter = new UserAuthWrapper({
   authSelector: state => (state.user),
   redirectAction: routerActions.replace,
   wrapperDisplayName: 'UserIsTransporter',
-  predicate: user => (user.data.IdTipo === TRANSPORTER),
+  predicate: user => (user.isAuth && user.data.IdTipo === TRANSPORTER),
   failureRedirectPath: () => (routes.DASHBOARD),
   allowRedirectBack: false
 });

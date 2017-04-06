@@ -140,6 +140,7 @@ const handleRender = (req, res) => {
 
       // Rendering process.
       const content = renderHtml(store, req.url);
+      console.log('CONTENT_URL: ', content.url);
 
       // context.url will contain the URL to redirect to if a <Redirect> was used.
       if (content.context.url) {
