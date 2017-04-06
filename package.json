@@ -74,7 +74,7 @@
     "history": "^4.6.1",
     "http-proxy": "^1.16.2",
     "jsonwebtoken": "^7.2.1",
-    "mdi": "^1.7.22",
+    "mdi": "^1.9.33",
     "node-base64-image": "^1.0.3",
     "node-emoji": "^1.5.1",
     "node-sass": "^4.5.2",
