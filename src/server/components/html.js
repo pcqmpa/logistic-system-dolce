@@ -13,12 +13,12 @@ class Html extends Component {
   static propTypes = {
     assets: PropTypes.shape().isRequired,
     children: PropTypes.node.isRequired,
-    preloadedState: PropTypes.string.isRequired
+    preLoadedState: PropTypes.string.isRequired
   };
 
   mapStyles = styles => (
     Object.keys(styles).map((style, key) => (
-      <link key={key} rel="stylesheet" href={styles[style]} />
+      <link key={btoa((`style_${key}`))} rel="stylesheet" href={styles[style]} />
     ))
   );
 
@@ -29,7 +29,12 @@ class Html extends Component {
   );
 
   render() {
-    const { assets, children, preloadedState } = this.props;
+    const {
+      assets,
+      children,
+      preLoadedState
+    } = this.props;
+
     return (
       <html lang="en">
         <head>
@@ -43,7 +48,7 @@ class Html extends Component {
         <body className="c-text">
           {/* Render Content. */}
           <div id={MOUNT_ID}>{children}</div>
-          <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__ = ${preloadedState}` }} />
+          <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__ = ${preLoadedState}` }} />
           {/* Render Scripts. */}
           {this.mapScripts(assets.javascript)}
         </body>

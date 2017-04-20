@@ -62,7 +62,7 @@ import {
 /**
  * Render the content.
  * @private
- * @param {String} content -> The content to be rendered.
+ * @param {String} html -> The content to be rendered.
  * @returns {String} -> The html.
  */
 const render = html => (`<!DOCTYPE html>${html}`);
@@ -72,16 +72,16 @@ const render = html => (`<!DOCTYPE html>${html}`);
   * @private
   * @param {Object} store -> The redux store.
   * @param {String} url -> The url to be passed to the router.
-  * @returns {String} -> The rendered html.
+  * @returns {Object} -> The app content.
   */
 const renderHtml = (store, url) => {
   // This context object contains the results of the render.
   const context = {};
-  const preloadedState = serialize(store.getState());
+  const preLoadedState = serialize(store.getState());
   const html = renderToString(
     <Html
       assets={webpackIsomorphicTools.assets()}
-      preloadedState={preloadedState}
+      preLoadedState={preLoadedState}
     >
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
@@ -140,7 +140,6 @@ const handleRender = (req, res) => {
 
       // Rendering process.
       const content = renderHtml(store, req.url);
-      console.log('CONTENT_URL: ', content.url);
 
       // context.url will contain the URL to redirect to if a <Redirect> was used.
       if (content.context.url) {
@@ -154,28 +153,6 @@ const handleRender = (req, res) => {
       return res
         .status(responses.OK)
         .send(render(content.html));
-      // match({ history, routes, location: req.originalUrl },
-      // (err, redirectLocation, renderProps) => {
-      //   if (err) {
-      //     // Display error if exists.
-      //     Log.error(err);
-      //     return res.status(responses.ERROR)
-      //       .send(err.message);
-      //   } else if (redirectLocation) {
-      //     // In case of redirect propagate the redirect to the browser.
-      //     return res.redirect(
-      //       responses.REDIRECT,
-      //       redirectLocation.pathname + redirectLocation.search
-      //     );
-      //   } else if (!renderProps) {
-      //     // Route not found.
-      //     return res.status(responses.NOT_FOUND)
-      //       .send(renderHtml(null, null, <NotFound />));
-      //   }
-
-      //   return res.status(responses.OK)
-      //     .send(renderHtml(renderProps, store));
-      // });
     });
 };
 
