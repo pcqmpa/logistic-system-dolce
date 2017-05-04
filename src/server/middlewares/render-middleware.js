@@ -39,14 +39,12 @@ import { updateOrdersList } from '../../shared/actions/package-reception-actions
 
 // Services.
 import { initState } from '../api-server/streams/';
-// import { logisticTypesServices } from '../api-server/services/';
 
 // App.
 import reducer from '../../shared/reducers/';
 
 // Components.
-import { Html } from '../components/';
-import { Routes } from '../../shared/components/';
+import { Html, ServerRoutes } from '../components/';
 
 // Constants.
 import {
@@ -85,7 +83,7 @@ const renderHtml = (store, url) => {
     >
       <Provider store={store}>
         <StaticRouter location={url} context={context}>
-          <Routes store={store} />
+          <ServerRoutes />
         </StaticRouter>
       </Provider>
     </Html>

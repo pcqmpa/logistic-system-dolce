@@ -10,3 +10,5 @@ export { default as validateAuth } from './validate-auth';
 export { default as streams } from './server-streams';
 
 export { default as mockedData } from './mocked-data';
+
+export { default as configAuth } from './config-auth';

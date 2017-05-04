@@ -3,8 +3,7 @@
  * Module with the dev server config.
  * @module src/server/dev-server
  */
-
-import Express from 'express';
+import express from 'express';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -22,7 +21,7 @@ import { DEV_SIGNAL } from '../shared/constants/messages';
 //
 // Server Configuration
 // -----------------------------------------------------------------------------
-const app = new Express();
+const app = express();
 const compiler = webpack(webpackConfig);
 const serverOptions = {
   contentBase: `http://${env.HOST}:${env.DEV_SERVER_PORT}`,
@@ -38,7 +37,13 @@ const serverOptions = {
   },
   publicPath: webpackConfig.output.publicPath,
   headers: { 'Access-Controls-Allow-Origin': '*' },
-  stats: { colors: true }
+  stats: {
+    chunks: true,
+    colors: true,
+    timings: true
+  },
+  progress: true,
+  serverSideRender: true
 };
 
 app.use(webpackMiddleware(compiler, serverOptions));
