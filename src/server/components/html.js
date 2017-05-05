@@ -3,9 +3,6 @@
  * Module with the render html component.
  * @module src/server/components/html
  */
-// Node.
-import crypto from 'crypto';
-
 // React.
 import React, { Component, PropTypes } from 'react';
 

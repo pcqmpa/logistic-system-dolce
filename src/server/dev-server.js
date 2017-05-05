@@ -36,7 +36,11 @@ const serverOptions = {
     errors: true
   },
   publicPath: webpackConfig.output.publicPath,
-  headers: { 'Access-Controls-Allow-Origin': '*' },
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET',
+    'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+  },
   stats: {
     chunks: true,
     colors: true,

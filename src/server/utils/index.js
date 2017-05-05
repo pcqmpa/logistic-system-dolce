@@ -12,3 +12,7 @@ export { default as streams } from './server-streams';
 export { default as mockedData } from './mocked-data';
 
 export { default as configAuth } from './config-auth';
+
+export { default as string64 } from './string-base64';
+
+export { default as initGlobals } from './init-globals';

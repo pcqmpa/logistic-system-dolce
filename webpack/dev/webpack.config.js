@@ -24,7 +24,7 @@ module.exports = Config()
         'react-hot-loader/patch',
         // Bundle the client for webpack-dev-server
         // and connect to the provided endpoint
-        `webpack-dev-server/client?http://${env.HOST}:${env.DEV_SERVER_PORT}`,
+        // `webpack-dev-server/client?http://${env.HOST}:${env.DEV_SERVER_PORT}`,
         // Bundle the client for hot reloading
         // only- means to only hot reload for successful updates
         'webpack/hot/only-dev-server',

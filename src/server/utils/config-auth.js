@@ -10,6 +10,7 @@ import { Redirect } from 'react-router';
 
 // Constants.
 import { DASHBOARD, LOGIN } from '../../shared/constants/routes';
+import { ALL_USERS } from '../../shared/constants/user-types';
 
 const configAuth = (WrappedComponent, {
   userType = null,
@@ -18,13 +19,16 @@ const configAuth = (WrappedComponent, {
 }) => {
   const AuthComponent = ({
     user,
+    match,
     ...props
   }) => {
-    if (!user.isAuth) {
+    if (!user.isAuth && match.path !== LOGIN) {
       return (<Redirect to={LOGIN} />);
     }
 
-    if ((user.data.IdTipo !== userType || noAuth) && user.isAuth && !home) {
+    const userTypeNoMatch = (user.data && user.data.IdTipo !== userType);
+
+    if ((userTypeNoMatch || noAuth) && user.isAuth && !home) {
       return (<Redirect to={DASHBOARD} />);
     }
 
@@ -32,11 +36,20 @@ const configAuth = (WrappedComponent, {
   };
 
   AuthComponent.propTypes = {
+    match: PropTypes.shape({
+      path: PropTypes.string
+    }),
     redirectAction: PropTypes.func,
     user: PropTypes.shape({
       isAuth: PropTypes.bool,
       IdTipo: PropTypes.number
     })
+  };
+
+  AuthComponent.defaultProps = {
+    user: {
+      data: { IdTipo: ALL_USERS }
+    }
   };
 
   const mapStateToProps = state => ({
