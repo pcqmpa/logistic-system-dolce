@@ -10,13 +10,16 @@ import compression from 'compression';
 import { env } from '../../config/';
 
 // Utils.
-import { Log } from './utils/';
+import { Log, initGlobals } from './utils/';
 
 // Constants.
 import { SIGNAL } from '../shared/constants/messages';
 
 // Middlewares.
 import * as middlewares from './middlewares/';
+
+// App global configuration.
+initGlobals();
 
 // Express server
 const app = new Express();

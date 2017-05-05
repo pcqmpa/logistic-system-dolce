@@ -49,7 +49,7 @@ const SelectBox = ({
         >
           <option value="none">{placeholder}</option>
           {options.map((option, key) => (
-            <option key={key} value={option.value}>
+            <option key={btoa(`option_${key}`)} value={option.value}>
               {option.text}
             </option>
           ))}
@@ -68,7 +68,7 @@ const SelectBox = ({
     >
       <option value="none">{placeholder}</option>
       {options.map((option, key) => (
-        <option key={key} value={option.value}>
+        <option key={btoa(`option_${key}`)} value={option.value}>
           {option.text}
         </option>
       ))}

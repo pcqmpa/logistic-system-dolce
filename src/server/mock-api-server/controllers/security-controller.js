@@ -3,7 +3,7 @@
  * @module src/server/mock-api-server/controllers/security-controller
  */
 // Node.
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 // Services.
 import { securityServices } from '../services/';

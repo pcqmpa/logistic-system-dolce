@@ -3,15 +3,18 @@
  * @module src/shared/constants/user-types
  */
 
-// Transportador.
+// All.
+export const ALL_USERS = 0;
+
+// Transporter.
 export const TRANSPORTER = 1;
 export const TRANSPORTER_STRING = 'Transportista';
 
-// Distribuidor.
+// Distributor.
 export const DISTRIBUTOR = 2;
 export const DISTRIBUTOR_STRING = 'Distribuidor';
 
-// Directora.
+// Director.
 export const DIRECTOR = 3;
 export const DIRECTOR_STRING = 'Directora';
 

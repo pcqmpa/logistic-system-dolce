@@ -26,7 +26,7 @@ const App = ({
 }) => (
   <Provider store={store}>
     <div>
-      <AppRouter history={history} store={store} />
+      <AppRouter history={history} />
       { env.DEBUG && <DevTools /> }
     </div>
   </Provider>

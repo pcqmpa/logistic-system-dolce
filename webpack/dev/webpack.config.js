@@ -20,7 +20,14 @@ module.exports = Config()
     context: CONTEXT_SRC,
     entry: {
       [appName]: [
+        // Activate HMR for React
         'react-hot-loader/patch',
+        // Bundle the client for webpack-dev-server
+        // and connect to the provided endpoint
+        // `webpack-dev-server/client?http://${env.HOST}:${env.DEV_SERVER_PORT}`,
+        // Bundle the client for hot reloading
+        // only- means to only hot reload for successful updates
+        'webpack/hot/only-dev-server',
         // The entry point of the app
         './src/client/index.js'
       ]
@@ -40,21 +47,8 @@ module.exports = Config()
           use: {
             loader: 'babel-loader',
             options: {
-              presets: [['es2015', { modules: false }], 'react', 'stage-0'],
-              plugins: [
-                'react-hot-loader/babel',
-                'transform-class-properties',
-                [
-                  'react-transform', {
-                    transforms: [
-                      {
-                        transform: 'react-transform-catch-errors',
-                        imports: ['react', 'redbox-react']
-                      }
-                    ]
-                  }
-                ]
-              ]
+              presets: [['latest', { modules: false }], 'react', 'stage-3'],
+              plugins: ['react-hot-loader/babel', 'transform-class-properties']
             }
           }
         },

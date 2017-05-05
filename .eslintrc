@@ -3,7 +3,8 @@
     "browser": true,
     "node": true,
     "commonjs": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "globals": {
     "webpackIsomorphicTools": true,
@@ -25,7 +26,6 @@
     "linebreak-style": "off",
     "no-underscore-dangle": ["error", { "allow": ["__PRELOADED_STATE__", "_CLIENT_"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/require-default-props": "off",
-    "react/no-array-index-key": "off"
+    "react/require-default-props": "off"
   }
 }
