@@ -28,7 +28,7 @@ const TableHead = ({
     >
       {titles.map((title, key) => (
         <TableCell
-          key={key}
+          key={btoa(`table_head_${key}`)}
           className={`${childrenClass} ${childrenConfig.trim()} ${title.className || ''}`}
         >
           {title.text}

@@ -18,7 +18,7 @@ const ButtonsGrid = ({
     {cells.map((cell, key) => (
       <ButtonGridCell
         id={`${groupName}_${key}`}
-        key={key}
+        key={btoa(`button_grid_${key}`)}
         value={cell.value}
         name={groupName}
         checked={cell.checked}

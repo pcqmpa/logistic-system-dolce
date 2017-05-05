@@ -103,7 +103,7 @@ class AssignTransporter extends Component {
    */
   mapMasters = masters => (
     masters.map((master, key) => (
-      <DataRow key={key}>
+      <DataRow key={btoa(`transporter_${key}`)}>
         <DataItem width={40}>{master.StrNombre}</DataItem>
         <DataItem center width={40}>{master.StrDocumento}</DataItem>
         <DataItem width={20}>
@@ -251,7 +251,7 @@ class AssignTransporter extends Component {
             >
               <DataHeader>
                 {this.state.headers.map((title, key) => (
-                  <DataItem key={key} width={title.size}>
+                  <DataItem key={btoa(`title_${key}`)} width={title.size}>
                     {title.text}
                   </DataItem>
                 ))}

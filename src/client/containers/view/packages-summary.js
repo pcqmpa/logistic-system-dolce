@@ -54,7 +54,7 @@ class PackagesSummary extends Component {
     array.flat(
       Object.keys(orders).map(zone => (
         Object.keys(orders[zone]).map((packageType, key) => (
-          <TableRow key={`${zone}_${packageType}_${key}`}>
+          <TableRow key={btoa(`${zone}_${packageType}_${key}`)}>
             <TableCell center>
               {zone}
             </TableCell>

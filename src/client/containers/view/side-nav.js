@@ -79,7 +79,7 @@ class SideNav extends Component {
     items
       .filter(item => item.visible)
       .map((item, index) => (
-        <NavItem key={`nav_${index}`} link={item.link}>
+        <NavItem key={btoa(`nav_${index}`)} link={item.link}>
           {item.content}
         </NavItem>
       ))

@@ -102,7 +102,7 @@ class AssignDistributors extends Component {
    */
   mapDistributors = distributors => (
     distributors.map((distributor, key) => (
-      <DataRow key={key}>
+      <DataRow key={btoa(`distributor_${key}`)}>
         <DataItem center width={40}>{distributor.Strusuario}</DataItem>
         <DataItem center width={40}>{distributor.StrNombre}</DataItem>
         <DataItem width={20}>
@@ -253,7 +253,7 @@ class AssignDistributors extends Component {
             >
               <DataHeader>
                 {this.state.headers.map((title, key) => (
-                  <DataItem key={key} width={title.size}>
+                  <DataItem key={btoa(`title_${key}`)} width={title.size}>
                     {title.text}
                   </DataItem>
                 ))}
