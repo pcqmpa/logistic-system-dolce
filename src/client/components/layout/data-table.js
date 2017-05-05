@@ -44,7 +44,7 @@ class DataTable extends Component {
               `c-button--active ${paginatorClass}--active` : '';
           return (
             <Button
-              key={key}
+              key={btoa(`data_table_paginator_${key}`)}
               theme={BRAND}
               size={SMALL_SIZE}
               className={`${paginatorClass} ${selectedClass.trim()}`}

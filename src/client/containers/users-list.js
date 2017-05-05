@@ -87,7 +87,7 @@ class UsersList extends Component {
 
   mapUsers = users => (
     this.filterUsers(users).map((user, key) => (
-      <ListItem key={key}>
+      <ListItem key={btoa(`user_${key}`)}>
         <ListSection width={30}>{user.Strusuario}</ListSection>
         <ListSection width={30}>{user.StrNombre}</ListSection>
         <ListSection width={20}>{this.getUserTypeString(user.IdTipo)}</ListSection>
@@ -132,7 +132,7 @@ class UsersList extends Component {
             <List>
               <ListItem header noGutter>
                 {this.state.headers.map((header, key) => (
-                  <ListSection key={key} width={header.size}>
+                  <ListSection key={btoa(`section_${key}`)} width={header.size}>
                     {header.text}
                   </ListSection>
                 ))}
