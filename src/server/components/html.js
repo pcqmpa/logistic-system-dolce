@@ -18,13 +18,13 @@ class Html extends Component {
 
   mapStyles = styles => (
     Object.keys(styles).map((style, key) => (
-      <link key={btoa((`style_${key}`))} rel="stylesheet" href={styles[style]} />
+      <link key={btoa(`style_${key}`)} rel="stylesheet" href={styles[style]} />
     ))
   );
 
   mapScripts = scripts => (
     Object.keys(scripts).map((script, key) => (
-      <script key={key} src={scripts[script]} />
+      <script key={btoa(`script_${key}`)} src={scripts[script]} />
     ))
   );
 

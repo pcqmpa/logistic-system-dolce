@@ -3,7 +3,7 @@
  * @module src/server/api-server/controllers/picture-store-controller
  */
 // Node.
-import path from 'path';
+// import path from 'path';
 
 // Streams.
 import { streams } from '../../utils/';

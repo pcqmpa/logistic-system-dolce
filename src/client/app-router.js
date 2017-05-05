@@ -8,16 +8,16 @@ import React, { PropTypes } from 'react';
 import { ConnectedRouter } from 'react-router-redux';
 
 // Components.
-import { Routes } from '../shared/components/';
+import Routes from './routes';
 
 /**
  * Client app router component.
  * @param {Object} props -> The component properties.
  * @returns {ReactElement} -> The react router.
  */
-const AppRouter = ({ history, store }) => (
+const AppRouter = ({ history }) => (
   <ConnectedRouter history={history}>
-    <Routes store={store} />
+    <Routes />
   </ConnectedRouter>
 );
 
@@ -27,8 +27,7 @@ const AppRouter = ({ history, store }) => (
  * @property {Object} store -> The redux store.
  */
 AppRouter.propTypes = {
-  history: PropTypes.shape().isRequired,
-  store: PropTypes.shape().isRequired
+  history: PropTypes.shape().isRequired
 };
 
 export default AppRouter;
