@@ -1,17 +1,22 @@
 /**
  * Module with form validator.
- * @module src/shared/lib/validator
+ * @module src/lib/validator
  */
 // Utils.
-import { string } from '../utils/';
+import {
+  string,
+  number,
+  object,
+  validation
+} from '../utils/';
 
 // Constants.
 import {
+  CHECKED_LIST,
   STRING,
   NUMBER,
   OBJECT,
   ARRAY,
-  CHECKED_LIST,
   REQUIRED
 } from '../constants/types';
 
@@ -21,12 +26,12 @@ import {
  * @param {Any} data -> The data to validate.
  * @returns {Bool} -> The result of the validation.
  */
-const validateByType = (type, data) => ({
-  [STRING]: data !== null && !string.empty(data),
-  [NUMBER]: data !== null && !string.empty(data.toString()),
-  [ARRAY]: data !== null && data.length > 0,
-  [OBJECT]: data !== null && Object.keys(data).length > 0,
-  [CHECKED_LIST]: (
+const validateByType = type => ({
+  [STRING]: data => (string.isString(data)),
+  [NUMBER]: data => (number.isNumber(data)),
+  [ARRAY]: data => (Array.isArray(data)),
+  [OBJECT]: data => (object.isObject(data)),
+  [CHECKED_LIST]: data => (
     data !== null &&
     data.constructor === Array &&
     data.some(element => (element.checked))
@@ -41,14 +46,17 @@ const validateByType = (type, data) => ({
  * @returns {Object} -> The data validation.
  */
 const run = (rules, data) => {
-  const resume = Object.keys(rules).reduce((validation, prop) => {
+  const resume = Object.keys(rules).reduce((validationProc, prop) => {
     let passed = true;
     if (rules[prop].rule === REQUIRED) {
-      passed = validateByType(rules[prop].type, data[prop]);
+      passed = (
+        !validation.isEmpty(data[prop]) &&
+        validateByType(rules[prop].type)(data[prop])
+      );
     }
 
     return {
-      ...validation,
+      ...validationProc,
       [prop]: passed
     };
   }, {});
