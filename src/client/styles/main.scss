@@ -1,16 +1,13 @@
-@import "../../../node_modules/blaze/scss/blaze.scss";
-@import "../../../node_modules/mdi/scss/materialdesignicons.scss";
-
-@import "animations/_base.scss";
-@import "mixins/_base.scss";
-@import "utils/_base.scss";
+@import "~blaze/scss/blaze.scss";
+@import "~mdi/scss/materialdesignicons.scss";
+@import "utils/variables";
 
 body {
-  background: #FFF;
+  background: #fff;
 }
 
-button, a {
-
+a,
+button {
   &:focus {
     outline: none !important;
   }

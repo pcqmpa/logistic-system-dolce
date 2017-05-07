@@ -1,14 +1,11 @@
 @import "../../../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
-
 @import "../utils/_colors.scss";
 
 .cp-radio-button {
   &--invalid {
     border-radius: 50%;
     border: 1px solid $error-color !important;
-    -webkit-box-shadow: 0px 0px 5px 1px $error-color;
-    -moz-box-shadow: 0px 0px 5px 1px $error-color;
-    box-shadow: 0px 0px 5px 1px $error-color;
+    box-shadow: 0 0 5px 1px $error-color;
     background-color: tint($error-color, 90%) !important;
   }
 }

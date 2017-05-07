@@ -3,16 +3,18 @@
 .appear-left-transition {
   &-enter {
     opacity: 0.01;
-    transform: translate(
-      $translate-transition-x,
-      $translate-transition-y
-    );
+    transform:
+      translate(
+        $translate-transition-x,
+        $translate-transition-y
+      );
 
     &-active {
       opacity: 1;
       transform: translate(0, 0);
-      transition: opacity $transition-duration ease-in,
-       transform $transition-duration ease-in;
+      transition:
+        opacity $transition-duration ease-in,
+        transform $transition-duration ease-in;
     }
   }
 
@@ -21,12 +23,14 @@
 
     &-active {
       opacity: 0.01;
-      transform :translate(
-        $translate-transition-x,
-        $translate-transition-y
-      );
-      transition: opacity $transition-duration ease-in,
-       transform $transition-duration ease-in;
+      transform:
+        translate(
+          $translate-transition-x,
+          $translate-transition-y
+        );
+      transition:
+        opacity $transition-duration ease-in,
+        transform $transition-duration ease-in;
     }
   }
 }

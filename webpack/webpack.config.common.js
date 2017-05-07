@@ -1,3 +1,5 @@
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+
 module.exports = {
   module: {
     rules: [
@@ -9,23 +11,38 @@ module.exports = {
       },
       {
         test: /\.(jpg|png)$/,
-        use: 'url-loader?limit=65000'
+        use: {
+          loader: 'url-loader',
+          options: { limit: 65000 }
+        }
       },
       {
         test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9]+)?$/,
-        use: 'url-loader?limit=65000&mimetype=image/svg+xml'
+        use: {
+          loader: 'url-loader',
+          options: { limit: 65000 }
+        }
       },
       {
         test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9]+)?$/,
-        use: 'url-loader?limit=65000&mimetype=application/font-woff'
+        use: {
+          loader: 'url-loader',
+          options: { limit: 65000 }
+        }
       },
       {
         test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9]+)?$/,
-        use: 'url-loader?limit=65000&mimetype=application/font-woff2'
+        use: {
+          loader: 'url-loader',
+          options: { limit: 65000 }
+        }
       },
       {
         test: /\.[ot]tf(\?v=[0-9]\.[0-9]\.[0-9]+)?$/,
-        use: 'url-loader?limit=65000&mimetype=application/octet-stream'
+        use: {
+          loader: 'url-loader',
+          options: { limit: 65000 }
+        }
       },
       {
         test: /\.eot(\?v=[0-9]\.[0-9]\.[0-9]+)?$/,
@@ -33,5 +50,10 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new StyleLintPlugin({
+      context: 'src/client/styles/',
+      syntax: 'scss'
+    })
+  ]
 };
