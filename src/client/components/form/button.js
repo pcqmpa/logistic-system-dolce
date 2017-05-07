@@ -1,4 +1,9 @@
-import React, { PropTypes } from 'react';
+/**
+ * Module with the Button component.
+ * @module src/client/components/form/button
+ */
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Utils.
 import { componentHelpers } from '../../../shared/utils/';
