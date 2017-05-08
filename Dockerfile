@@ -1,21 +1,20 @@
-
-FROM node:boron
+FROM kkarczmarczyk/node-yarn:latest
 MAINTAINER Dolce SAS
-LABEL Name=logistic-system-dolce Version=0.0.2 
+LABEL Name=logistic-system-dolce Version=0.2.0
 
-RUN npm install -g concurrently babel-cli
+RUN yarn global add concurrently babel-cli
 
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 # Install app dependencies
 COPY package.json /usr/src/app
-RUN npm install
+RUN yarn install
 # Bundle app source
 COPY . /usr/src/app
-RUN npm run build
+RUN yarn run build
 RUN ls
 
 
-EXPOSE 3001
-CMD ["npm", "run", "prod"]
+EXPOSE 8080
+CMD ["yarn", "run", "prod"]

@@ -1,6 +1,4 @@
-
 version: '2'
-
 services:
   logistic-system-dolce:
     image: logistic-system-dolce:latest
@@ -14,11 +12,11 @@ services:
       - /usr/src/app/build
       - /usr/src/app/node_modules
     environment:
-      PORT: 3001
+      PORT: 8080
       NODE_ENV: production
       MONGO_URL: mongodb://db:27017/logistic-system-dolce
     ports:
-      - 3001:3001
+      - 80:8080
       - 3002:3002
   db:
     image: mongo:latest
