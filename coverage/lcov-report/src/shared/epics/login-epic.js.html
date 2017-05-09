@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/shared/epics/login-epic.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/shared/epics</a> login-epic.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">15.79% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">15.79% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/19</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// TODO: see if this can be refactor.
+/**
+ * Module with the login epic.
+ * @module src/shared/epics/login-epic.
+ */
+ // React - Redux.
+import { routerActions } from 'react-router-redux';
+&nbsp;
+// Rxjs.
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/dom/ajax';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/catch';
+&nbsp;
+// Actions.
+import { addToast } from '../actions/toast-list-actions';
+import { showLoading, hideLoading } from '../actions/loading-actions';
+import { loginSuccess, loginFailed } from '../actions/user-actions';
+import { updateUsersList, updateUserTypes } from '../actions/users-actions';
+import {
+  initTransporterList,
+  updateDistributorFormList
+} from '../actions/transporters-actions';
+import { updateSerializedDataTable } from '../actions/data-table-actions';
+import { updateOrdersList } from '../actions/package-reception-actions';
+&nbsp;
+// Lib.
+import serializer from '../lib/serializer';
+&nbsp;
+// API services.
+import { callFetchUser } from '../utils/api-service-creators';
+&nbsp;
+// Constants.
+import { DASHBOARD } from '../constants/routes';
+import { LOGIN_REQUEST } from '../constants/actions';
+import { ERROR, BRAND } from '../constants/types';
+import { INVALID_USER, WELCOME } from '../constants/messages';
+import {
+  ADMIN,
+  DISTRIBUTOR,
+  TRANSPORTER
+} from '../constants/user-types';
+import {
+  TRANSPORTER_FORM,
+  DISTRIBUTOR_FORM
+} from '../constants/strings';
+&nbsp;
+const loginSuccessEpic = <span class="fstat-no" title="function not covered" >(p</span>ayload) =&gt; {
+  const { user } = <span class="cstat-no" title="statement not covered" >payload;</span>
+  const dispatches = <span class="cstat-no" title="statement not covered" >[</span>
+    updateUsersList(payload.users),
+    updateUserTypes(payload.types)
+  ];
+<span class="cstat-no" title="statement not covered" >  if (!payload.user.LogEstado) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error(INVALID_USER);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (user.IdTipo === ADMIN) {</span>
+<span class="cstat-no" title="statement not covered" >    dispatches.push(</span>
+      initTransporterList(payload.transporters),
+      updateSerializedDataTable(
+        TRANSPORTER_FORM,
+        payload.transporters
+      ),
+      updateDistributorFormList(payload.users),
+      updateSerializedDataTable(
+        DISTRIBUTOR_FORM,
+        payload.users.filter(<span class="fstat-no" title="function not covered" >ra</span>wUser =&gt; (<span class="cstat-no" title="statement not covered" >rawUser.IdTipo === DISTRIBUTOR)</span>)
+      )
+    );
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (user.IdTipo === TRANSPORTER) {</span>
+    const checkedOrders = <span class="cstat-no" title="statement not covered" >serializer.toCheckedList(payload.orders);</span>
+<span class="cstat-no" title="statement not covered" >    dispatches.push(</span>
+      updateUsersList(payload.users),
+      updateUserTypes(payload.types),
+      updateOrdersList(checkedOrders)
+    );
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return Observable.merge(</span>
+    Observable.of(loginSuccess(payload.user)),
+    Observable.of(...dispatches),
+    Observable.of(routerActions.push(DASHBOARD)),
+    Observable.of(
+      hideLoading()
+    ).delay(1000),
+    Observable.of(addToast({ type: BRAND, message: WELCOME }))
+      .delay(200)
+  );
+};
+&nbsp;
+const loginFailEpic = <span class="fstat-no" title="function not covered" >er</span>r =&gt; (
+<span class="cstat-no" title="statement not covered" >  Observable.merge(</span>
+    Observable.of(
+      loginFailed(err),
+      hideLoading()
+    ),
+    Observable.of(addToast({ type: ERROR, message: err.message }))
+      .delay(200)
+  )
+);
+&nbsp;
+const loginEpic = <span class="fstat-no" title="function not covered" >ac</span>tion$ =&gt;
+<span class="cstat-no" title="statement not covered" >  action$.ofType(LOGIN_REQUEST)</span>
+    .mergeMap(<span class="fstat-no" title="function not covered" >ac</span>tion =&gt; (
+<span class="cstat-no" title="statement not covered" >      Observable.ajax</span>
+        .getJSON(callFetchUser(action.payload))
+        .delay(3000)
+        .concatMap(<span class="fstat-no" title="function not covered" >pa</span>yload =&gt; (<span class="cstat-no" title="statement not covered" >loginSuccessEpic(payload))</span>)
+        .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; (<span class="cstat-no" title="statement not covered" >loginFailEpic(err))</span>)
+        .startWith(showLoading())
+    ));
+&nbsp;
+export default loginEpic;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun May 07 2017 00:06:26 GMT-0500 (-05)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
