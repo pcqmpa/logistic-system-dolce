@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/shared/reducers/data-table-reducer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/shared/reducers</a> data-table-reducer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Module with the data serialized for the table set.
+ * @module src/shared/reducers/data-table-reducer
+ */
+// Redux.
+import { createReducer } from 'redux-create-reducer';
+&nbsp;
+// Lib.
+import serializer from '../lib/serializer';
+&nbsp;
+// Actions.
+import {
+  UPDATE_SERIALIZED_DATA_TABLE,
+  UPDATE_SELECTED_DATA_TABLE,
+  CLEAR_SERIALIZED_DATA_TABLE,
+  TOGGLE_DATA_TABLE_ELEMENT,
+  TOGGLE_DATA_TABLE_ELEMENTS
+} from '../constants/actions';
+&nbsp;
+//
+// Initial State.
+// -----------------------------------------------------------------------------
+&nbsp;
+/**
+ * Initial data set.
+ * @type {Object}
+ */
+const initialDataSet = {
+  listData: [],
+  selectedData: {},
+  paginators: []
+};
+&nbsp;
+/**
+ * Reducer initial state.
+ * @type {Object}
+ */
+const initialState = {
+  transporterFormTable: initialDataSet,
+  distributorFormTable: initialDataSet
+};
+&nbsp;
+//
+// Handlers.
+// -----------------------------------------------------------------------------
+&nbsp;
+/**
+ * Helper to handle the toggle of an element of the data set.
+ * @param {Array} chunk -&gt; A chunk of the data set.
+ * @param {String} id -&gt; The Id of the specific element.
+ * @returns {Array} -&gt; The updated chunk.
+ */
+const toggleChunkElement = <span class="fstat-no" title="function not covered" >(c</span>hunk, id) =&gt; (
+<span class="cstat-no" title="statement not covered" >  chunk.map(<span class="fstat-no" title="function not covered" >(e</span>lement) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (element.id === id) {</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        ...element,
+        checked: !element.checked
+      };
+    }
+<span class="cstat-no" title="statement not covered" >    return element;</span>
+  })
+);
+&nbsp;
+/**
+ * Data table action handlers.
+ * @type {Object}
+ */
+const actionHandlers = {
+  [UPDATE_SERIALIZED_DATA_TABLE]: <span class="fstat-no" title="function not covered" >(s</span>tate, { table, data }) =&gt; {
+    const listData = <span class="cstat-no" title="statement not covered" >serializer.toDataTableSet(data);</span>
+    const paginators = <span class="cstat-no" title="statement not covered" >serializer.toDataTablePaginators(listData);</span>
+    const [selectedData] = <span class="cstat-no" title="statement not covered" >listData;</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      ...state,
+      [table]: {
+        ...state[table],
+        listData,
+        paginators,
+        selectedData: selectedData || {}
+      }
+    };
+  },
+  [UPDATE_SELECTED_DATA_TABLE]: <span class="fstat-no" title="function not covered" >(s</span>tate, { table, selected }) =&gt; {
+    const [selectedData] = <span class="cstat-no" title="statement not covered" >state[table].listData</span>
+      .filter(<span class="fstat-no" title="function not covered" >ch</span>unk =&gt; (<span class="cstat-no" title="statement not covered" >chunk.id === selected)</span>);
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      ...state,
+      [table]: {
+        ...state[table],
+        selectedData
+      }
+    };
+  },
+  [CLEAR_SERIALIZED_DATA_TABLE]: <span class="fstat-no" title="function not covered" >(s</span>tate, { table }) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+    ...state,
+    [table]: initialDataSet
+  }),
+  [TOGGLE_DATA_TABLE_ELEMENT]: <span class="fstat-no" title="function not covered" >(s</span>tate, { table, chunkId, id }) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+    ...state,
+    [table]: {
+      ...state[table],
+      listData: state[table].listData.map(<span class="fstat-no" title="function not covered" >(c</span>hunk) =&gt; {
+<span class="cstat-no" title="statement not covered" >        if (chunk.id === chunkId) {</span>
+<span class="cstat-no" title="statement not covered" >          return {</span>
+            ...chunk,
+            list: toggleChunkElement(chunk.list, id)
+          };
+        }
+<span class="cstat-no" title="statement not covered" >        return chunk;</span>
+      }),
+      selectedData: {
+        ...state[table].selectedData,
+        list: toggleChunkElement(
+          state[table].selectedData.list,
+          id
+        )
+      }
+    }
+  }),
+  [TOGGLE_DATA_TABLE_ELEMENTS]: <span class="fstat-no" title="function not covered" >(s</span>tate, { table, checked }) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+    ...state,
+    [table]: {
+      ...state[table],
+      listData: state[table].listData.map(<span class="fstat-no" title="function not covered" >ch</span>unk =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+        ...chunk,
+        list: chunk.list.map(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+          ...element,
+          checked
+        }))
+      })),
+      selectedData: {
+        ...state[table].selectedData,
+        list: state[table].selectedData
+          .list.map(<span class="fstat-no" title="function not covered" >el</span>ement =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+            ...element,
+            checked
+          }))
+      }
+    }
+  })
+};
+&nbsp;
+export default createReducer(initialState, actionHandlers);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun May 07 2017 00:06:26 GMT-0500 (-05)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
