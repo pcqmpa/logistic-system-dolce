@@ -22,6 +22,7 @@ import reducer from '../shared/reducers/';
 //
 // Initialize App
 // -----------------------------------------------------------------------------
+window._CLIENT_ = true;
 
 // Configure browser history.
 const history = createBrowserHistory();
