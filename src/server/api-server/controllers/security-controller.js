@@ -13,8 +13,57 @@ import { authUser } from '../streams/';
 
 // Constants.
 import * as responses from '../../constants/responses';
-import { TOKEN_EXPIRATION } from '../../constants/values';
-import { INVALID_USER } from '../../../shared/constants/messages';
+import {
+  TOKEN_ALGORITHM,
+  TOKEN_EXPIRATION
+} from '../../constants/values';
+import { INVALID_USER, SYSTEM_ERROR } from '../../../shared/constants/messages';
+
+const callAuthMobileUser = (req, res) => {
+  authUser(req.body)
+    .subscribe(
+      (data) => {
+        const { user } = data;
+        const {
+          username,
+          password
+        } = req.query;
+        const userData = {
+          username,
+          password,
+          ...user
+        };
+        const tokenOptions = {
+          ...userData,
+          expiresIn: TOKEN_EXPIRATION
+        };
+
+        // Sign token with user data.
+        jwt.sign(
+          tokenOptions,
+          TOKEN_SECRET,
+          { algorithm: TOKEN_ALGORITHM },
+          (err, token) => {
+            if (err) {
+              return res
+                .status(responses.ERROR)
+                .send({ message: SYSTEM_ERROR });
+            }
+
+            // Responds with the user data and token.
+            return res
+              .status(responses.OK)
+              .send({ ...data, user: userData, token });
+          }
+        );
+      },
+      () => (
+        res
+          .status(responses.ERROR)
+          .send({ message: INVALID_USER })
+      )
+    );
+};
 
 const callFetchUser = (req, res) => {
   authUser(req.query)
@@ -68,4 +117,8 @@ const destroyUserSession = (req, res) => {
   });
 };
 
-export default { callFetchUser, destroyUserSession };
+export default {
+  callAuthMobileUser,
+  callFetchUser,
+  destroyUserSession
+};

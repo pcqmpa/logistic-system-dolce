@@ -11,6 +11,9 @@ import { decode } from 'node-base64-image';
 // Rxjs.
 import { Observable } from 'rxjs/Observable';
 
+// Constants.
+import { POST, PATCH } from '../../shared/constants/types';
+
 /**
  * Creates an Observable of an Ajax request.
  * @param {String} method -> The request method.
@@ -21,12 +24,20 @@ import { Observable } from 'rxjs/Observable';
 const fromAjaxRequest = (method, url, body = {}) => (
   Observable.create((observer) => {
     let reject = false;
-    request({
+    const requestData = {
       method,
-      body,
       uri: url,
-      json: true
-    }, (err, response, reqBody) => {
+      headers: {
+        'User-Agent': 'request'
+      }
+    };
+
+    if (method === POST || method === PATCH) {
+      requestData.body = body;
+      requestData.json = true;
+    }
+
+    request(requestData, (err, response, reqBody) => {
       if (err) {
         return observer.error(err);
       }

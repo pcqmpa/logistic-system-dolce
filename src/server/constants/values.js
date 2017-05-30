@@ -6,3 +6,5 @@
 export const dumm = 1;
 
 export const TOKEN_EXPIRATION = '1d';
+
+export const TOKEN_ALGORITHM = 'RS256';
