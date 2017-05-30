@@ -10,7 +10,7 @@ import bodyParser from 'body-parser';
 import { env } from '../../config/';
 
 // Middlewares.
-import sessionMiddleware from './middlewares/session-middleware';
+import * as middlewares from './middlewares/';
 
 // Utils.
 import { Log } from './utils/';
@@ -33,8 +33,12 @@ const app = new Express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-// Setup session.
-sessionMiddleware(app);
+// Middlewares.
+
+// I. session.
+middlewares.sessionMiddleware(app);
+// II. Authentication.
+middlewares.authMiddleware(app);
 
 //
 // API Services.
