@@ -14,23 +14,19 @@ import { TOKEN_SECRET } from '../../../../config/';
 // Constants.
 import * as responses from '../../constants/responses';
 import { INVALID_USER } from '../../../shared/constants/messages';
-import {
-  TOKEN_ALGORITHM,
-  TOKEN_EXPIRATION
-} from '../../constants/values';
+import { TOKEN_EXPIRATION } from '../../constants/values';
 
 const callAuthMobileUser = (req, res) => {
   const { username } = req.body;
   const data = securityServices.fetchUserRequest({ username });
   const tokenOptions = {
-    ...data,
     expiresIn: TOKEN_EXPIRATION
   };
 
   jwt.sign(
-    tokenOptions,
+    data.user,
     TOKEN_SECRET,
-    { algorithm: TOKEN_ALGORITHM },
+    tokenOptions,
     (err, token) => {
       if (err) {
         return res
