@@ -16,5 +16,5 @@ RUN yarn run build
 RUN ls
 
 
-EXPOSE 8080
+EXPOSE 8080 3002 27017
 CMD ["yarn", "run", "prod"]
