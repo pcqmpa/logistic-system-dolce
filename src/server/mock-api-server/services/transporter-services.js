@@ -2,25 +2,32 @@
  * Module with the transporter services.
  * @module src/server/api-server/services/transporter-services
  */
+// Rxjs.
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/empty';
+
 // API Creators.
-import {
-  getTransporters,
-  assignTransporter,
-  assignDistributor
-} from './service-creators';
+// import {
+//   getTransporters,
+//   assignTransporter,
+//   assignDistributor
+// } from './service-creators';
 
 // Utils.
-import { streams } from '../../utils/';
+// import { streams } from '../../utils/';
 
 // Constants.
-import { GET, POST } from '../../../shared/constants/types';
+// import { GET, POST } from '../../../shared/constants/types';
+
+// TODO: Add the mocked services.
 
 /**
  * Creates a request consulting the list of transporter masters.
  * @returns {Symbol.Observable} -> The request.
  */
 const getTransportersRequest = () => (
-  streams.fromAjaxRequest(GET, getTransporters())
+  // streams.fromAjaxRequest(GET, getTransporters())
+  Observable.empty()
 );
 
 /**
@@ -29,12 +36,13 @@ const getTransportersRequest = () => (
  * @param {String} idTranporter -> The transporter master id.
  * @returns {Symbol.Observable} -> The request.
  */
-const assignTransporterRequest = (idUser, idTranporter) => (
-  streams.fromAjaxRequest(
-    POST,
-    assignTransporter(),
-    { idUsuario: idUser, idTranportador: idTranporter }
-  )
+const assignTransporterRequest = () => (
+  // streams.fromAjaxRequest(
+  //   POST,
+  //   assignTransporter(),
+  //   { idUsuario: idUser, idTranportador: idTranporter }
+  // )
+  Observable.empty()
 );
 
 /**
@@ -43,12 +51,13 @@ const assignTransporterRequest = (idUser, idTranporter) => (
  * @param {String} idDistributor -> The distributor user id.
  * @returns {Symbol.Observable} -> The request.
  */
-const assignDistributorRequest = (idTranporter, idDistributor) => (
-  streams.fromAjaxRequest(
-    POST,
-    assignDistributor(),
-    { idTransportista: idTranporter, idDistribuidor: idDistributor }
-  )
+const assignDistributorRequest = () => (
+  // streams.fromAjaxRequest(
+  //   POST,
+  //   assignDistributor(),
+  //   { idTransportista: idTranporter, idDistribuidor: idDistributor }
+  // )
+  Observable.empty()
 );
 
 export default {

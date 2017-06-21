@@ -2,20 +2,26 @@
  * Module with the services for a distributor deliver orders.
  * @module src/server/api-server/services/deliver-orders-services
  */
+// Rxjs.
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/empty';
+
 // API Creators.
-import {
-  deliverOrder,
-  getOrdersToDeliver
-} from './service-creators';
+// import {
+//   deliverOrder,
+//   getOrdersToDeliver
+// } from './service-creators';
 
 // Utils.
-import { streams } from '../../utils/';
+// import { streams } from '../../utils/';
 
 // Lib.
-import serializer from '../../../shared/lib/serializer';
+// import serializer from '../../../shared/lib/serializer';
 
 // Constants.
-import { GET, POST } from '../../../shared/constants/types';
+// import { GET, POST } from '../../../shared/constants/types';
+
+// TODO: Add the mocked services.
 
 /**
  * Creates a request consulting the list orders that
@@ -23,8 +29,9 @@ import { GET, POST } from '../../../shared/constants/types';
  * @param {String} username -> The distributor username.
  * @returns {Symbol.Observable} -> The request.
  */
-const getOrdersToDeliverRequest = username => (
-  streams.fromAjaxRequest(GET, getOrdersToDeliver(username))
+const getOrdersToDeliverRequest = () => (
+  // streams.fromAjaxRequest(GET, getOrdersToDeliver(username))
+  Observable.empty()
 );
 
 /**
@@ -34,20 +41,17 @@ const getOrdersToDeliverRequest = username => (
  * @param {String} urlCode -> The url of the order's code picture.
  * @returns {Symbol.Observable} -> The request.
  */
-const deliverOrderRequest = (
-  numOrder,
-  urlPicture,
-  urlCode
-) => (
-  streams.fromAjaxRequest(
-    POST,
-    deliverOrder(),
-    serializer.toOrderToDeliver({
-      numOrder,
-      urlPicture,
-      urlCode
-    })
-  )
+const deliverOrderRequest = () => (
+  // streams.fromAjaxRequest(
+  //   POST,
+  //   deliverOrder(),
+  //   serializer.toOrderToDeliver({
+  //     numOrder,
+  //     urlPicture,
+  //     urlCode
+  //   })
+  // )
+  Observable.empty()
 );
 
 export default {

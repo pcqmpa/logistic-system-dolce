@@ -10,7 +10,8 @@ import bodyParser from 'body-parser';
 import { env } from '../../config/';
 
 // Middlewares.
-import * as middlewares from './middlewares/';
+import authMiddleware from './middlewares/auth-middleware';
+import sessionMiddleware from './middlewares/session-middleware';
 
 // Utils.
 import { Log } from './utils/';
@@ -42,9 +43,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // Middlewares.
 
 // I. session.
-middlewares.sessionMiddleware(app);
+sessionMiddleware(app);
 // II. Authentication.
-middlewares.authMiddleware(app);
+authMiddleware(app);
 
 
 //
