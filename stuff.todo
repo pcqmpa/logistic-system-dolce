@@ -1,0 +1,10 @@
+Server:
+
+API:
+  ✔ Update the save picture service on the mock to save base64 images again @rejected. @done (6/30/2017, 11:54:07 PM)
+  ✔ Update the deliver service to remove the saving picture functionality @rejected. @done (6/30/2017, 11:54:13 PM)
+  ✘ Change save picture to use blobs. @cancelled (7/1/2017, 9:41:16 PM)
+  ✘ If the implementation works remove all base64 related included dependencies.a @cancelled (7/1/2017, 9:41:25 PM)
+  ✔ Remove base64 image dependencies no longer needed. @done (7/2/2017, 11:55:58 PM)
+
+Frontend:

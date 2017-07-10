@@ -4,7 +4,9 @@
  */
 // Node.
 import Express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
+import multer from 'multer';
 
 // App Config.
 import { env } from '../../config/';
@@ -18,6 +20,8 @@ import { Log } from './utils/';
 
 // Controllers.
 import {
+  deliverOrdersController,
+  pictureStoreController,
   securityController
 } from './mock-api-server/controllers/';
 
@@ -27,12 +31,16 @@ import * as messages from '../shared/constants/messages';
 
 // Express server.
 const app = new Express();
+const upload = multer();
+
+app.use(cors());
 
 //
 // API Configuration.
 // -----------------------------------------------------------------------------
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.raw({ limit: '100mb' }));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 // Middlewares.
 
@@ -54,6 +62,24 @@ app.get(
 app.post(
   '/api/callAuthMobileUser',
   securityController.callAuthMobileUser
+);
+
+// Orders Delivery.
+app.get(
+  '/api/callGetOrdersToDeliver',
+  deliverOrdersController.callGetOrdersToDeliver
+);
+
+app.post(
+  '/api/callDeliverOrder',
+  deliverOrdersController.callDeliverOrder
+);
+
+// The Picture Store Services.
+app.post(
+  '/api/savePicture',
+  upload.fields([{ name: 'picture', maxCount: 1 }]),
+  pictureStoreController.savePicture
 );
 
 //

@@ -25,6 +25,7 @@ const authUser = payload => (
           ...data
         }))
     ))
+    .catch((err) => { throw new Error(err); })
 );
 
 export default authUser;

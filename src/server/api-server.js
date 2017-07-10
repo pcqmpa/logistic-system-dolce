@@ -4,7 +4,9 @@
  */
 // Node.
 import Express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
+import multer from 'multer';
 
 // App Config.
 import { env } from '../../config/';
@@ -33,12 +35,15 @@ import * as messages from '../shared/constants/messages';
 
 // Express server.
 const app = new Express();
+const upload = multer();
+
+app.use(cors());
 
 //
 // API Configuration.
 // -----------------------------------------------------------------------------
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 // Middlewares.
 
@@ -115,8 +120,9 @@ app.get(
 );
 
 app.post(
-  '/api/saveOrderPicture',
-  pictureStoreController.saveOrderPicture
+  '/api/savePicture',
+  upload.fields([{ name: 'picture', maxCount: 1 }]),
+  pictureStoreController.savePicture
 );
 
 //

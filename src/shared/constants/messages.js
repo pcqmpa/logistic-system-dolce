@@ -23,7 +23,7 @@ export const ARGS_ABSENCE = 'Los datos son insuficientes.';
 
 export const UNAUTHORIZED_USER = 'No existe una sesión activa';
 
-export const SYSTEM_ERROR = 'Error en el systema';
+export const SYSTEM_ERROR = 'Error en el sistema';
 
 //
 // Login Messages

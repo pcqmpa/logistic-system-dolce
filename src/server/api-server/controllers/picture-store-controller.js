@@ -11,7 +11,8 @@ import { PICTURES_DIR } from '../../../../config/paths';
 
 // Constants.
 import * as responses from '../../constants/responses';
-import { ARGS_ABSENCE } from '../../../shared/constants/messages';
+import { PICTURE_EXTENSION } from '../../constants/values';
+import { ARGS_ABSENCE, SYSTEM_ERROR } from '../../../shared/constants/messages';
 
 const getPicture = (req, res) => {
   const { pictureName } = req.params;
@@ -40,37 +41,48 @@ const getPicture = (req, res) => {
   });
 };
 
-const saveOrderPicture = (req, res) => {
-  const { picture, pictureData } = req.body;
+const savePicture = (req, res) => {
+  const { picture } = req.files;
 
-  if (!picture || !pictureData) {
+  if (!picture) {
     return res
       .status(responses.ERROR)
-      .send({ err: ARGS_ABSENCE });
+      .send({ message: ARGS_ABSENCE });
   }
 
-  return streams
-    .fromBase64ToImage(
-      picture, { ...pictureData, filePath: PICTURES_DIR }
-    ).subscribe(
-      newImage => (
-        // The picture was successfully stored.
-        res
-          .status(responses.OK)
-          .send({
-            storedPath: `http://${env.HOST}:${env.SERVER_PORT}/api/picture/${newImage}`
-          })
-      ),
-      err => (
-        // There was an error while storing the file.
-        res
-          .status(responses.ERROR)
-          .send({ err })
-      )
-    );
+  try {
+    const [pictureData] = picture;
+    const imageData = {
+      extension: PICTURE_EXTENSION,
+      filePath: PICTURES_DIR
+    };
+
+    return streams
+      .fromBufferToImage(pictureData, imageData)
+      .subscribe(
+        (newImage) => {
+          // The picture was successfully stored.
+          return res
+            .status(responses.OK)
+            .send({
+              storedPath: `http://${env.HOST}:${env.SERVER_PORT}/api/picture/${newImage}`
+            });
+        },
+        (err) => {
+          // There was an error while storing the file.
+          res
+            .status(responses.ERROR)
+            .send({ err });
+        }
+      );
+  } catch (e) {
+    return res
+      .status(responses.ERROR)
+      .send({ message: SYSTEM_ERROR });
+  }
 };
 
 export default {
   getPicture,
-  saveOrderPicture
+  savePicture
 };

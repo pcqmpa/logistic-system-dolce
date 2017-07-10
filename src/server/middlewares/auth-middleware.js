@@ -20,11 +20,11 @@ const isPrivateUrl = currentUrl => (
 
 const validateAuthentication = (req, res, next) => {
   const {
-    isMobile,
+    ismobile,
     token
   } = req.headers;
 
-  if (isMobile && isPrivateUrl(req.originalUrl)) {
+  if (ismobile && isPrivateUrl(req.originalUrl)) {
     return jwt.verify(token, TOKEN_SECRET, (err) => {
       if (err) {
         return res

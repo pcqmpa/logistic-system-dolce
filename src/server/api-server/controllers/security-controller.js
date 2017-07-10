@@ -13,10 +13,7 @@ import { authUser } from '../streams/';
 
 // Constants.
 import * as responses from '../../constants/responses';
-import {
-  TOKEN_ALGORITHM,
-  TOKEN_EXPIRATION
-} from '../../constants/values';
+import { TOKEN_EXPIRATION } from '../../constants/values';
 import { INVALID_USER, SYSTEM_ERROR } from '../../../shared/constants/messages';
 
 const callAuthMobileUser = (req, res) => {
@@ -34,15 +31,14 @@ const callAuthMobileUser = (req, res) => {
           ...user
         };
         const tokenOptions = {
-          ...userData,
           expiresIn: TOKEN_EXPIRATION
         };
 
         // Sign token with user data.
         jwt.sign(
-          tokenOptions,
+          userData,
           TOKEN_SECRET,
-          { algorithm: TOKEN_ALGORITHM },
+          tokenOptions,
           (err, token) => {
             if (err) {
               return res

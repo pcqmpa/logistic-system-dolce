@@ -5,12 +5,8 @@
 // Services.
 import { deliverOrdersServices } from '../services';
 
-// Streams.
-// import { streams } from '../../utils/';
-
-// Config.
-// import { env } from '../../../../config/';
-// import { PICTURES_DIR } from '../../../../config/paths';
+// Utils.
+import { validateParams } from '../../utils/validations';
 
 // Constants.
 import * as responses from '../../constants/responses';
@@ -47,33 +43,33 @@ const callGetOrdersToDeliver = (req, res) => {
 const callDeliverOrder = (req, res) => {
   const {
     numOrder,
-    urlPicture,
-    urlCode
+    urlCode,
+    urlPackage
   } = req.body;
-  if (!numOrder) {
+
+  const requiredParams = ['numOrder', 'urlPackage', 'urlCode'];
+  if (!validateParams(req.body, requiredParams)) {
     return res
       .status(responses.ERROR)
       .send({ err: ARGS_ABSENCE });
   }
+
   return deliverOrdersServices
-    .deliverOrderRequest(
-      numOrder,
-      urlPicture,
-      urlCode
-    ).subscribe(
-        response => (
-          // The order was successfully delivered.
-          res
-            .status(responses.OK)
-            .send({ message: response.Message })
-        ),
-        err => (
-          // There was an external server error.
-          res
-            .status(responses.ERROR)
-            .send({ err: err.Message })
-        )
-      );
+    .deliverOrderRequest(numOrder, urlPackage, urlCode)
+    .subscribe(
+      (response) => {
+        // The order was successfully delivered.
+        return res
+          .status(responses.OK)
+          .send({ message: response.Message });
+      },
+      (err) => {
+        // There was an external server error.
+        return res
+          .status(responses.ERROR)
+          .send({ message: err.Message });
+      }
+    );
 };
 
 export default {
