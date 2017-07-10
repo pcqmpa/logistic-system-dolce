@@ -5,6 +5,7 @@
 import Express from 'express';
 import { Server } from 'http';
 import compression from 'compression';
+import cors from 'cors';
 
 // App config.
 import { env } from '../../config/';
@@ -28,6 +29,8 @@ const server = new Server(app);
 //
 // Express Configuration
 // -----------------------------------------------------------------------------
+
+app.use(cors());
 
 // Compression.
 if (!env.DEBUG) {

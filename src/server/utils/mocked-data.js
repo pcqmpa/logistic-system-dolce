@@ -15,6 +15,7 @@ import { DISTRIB_1 } from '../constants/mocked-users';
  */
 const orders = [
   {
+    Id: 1,
     StrCampaña: '001',
     IdTransportista: 1,
     NumPedido: 15523656,
@@ -27,7 +28,93 @@ const orders = [
     StrDepartamento: 'Antioquia',
     StrCiudad: 'Medellin',
     StrPoblacion: 'Medellin',
-    StrTipoEmpaque: 'Paquete'
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
+  },
+  {
+    Id: 2,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523657,
+    StrZona: '002',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
+  },
+  {
+    Id: 3,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523658,
+    StrZona: '002',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
+  },
+  {
+    Id: 4,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523668,
+    StrZona: '004',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
+  },
+  {
+    Id: 5,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523669,
+    StrZona: '004',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
+  },
+  {
+    Id: 6,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523688,
+    StrZona: '006',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Paquete',
+    Entegado: false
   }
 ];
 

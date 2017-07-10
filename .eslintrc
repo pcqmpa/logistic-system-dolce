@@ -6,13 +6,17 @@
     "es6": true,
     "jest": true
   },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "globals": {
     "webpackIsomorphicTools": true,
     "_CLIENT_": true
   },
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "installedESLint": true,
   "plugins": [
     "react",
     "jsx-a11y",
@@ -26,6 +30,9 @@
     "linebreak-style": "off",
     "no-underscore-dangle": ["error", { "allow": ["__PRELOADED_STATE__", "_CLIENT_"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "arrow-body-style":"off",
+    "import/prefer-default-export": "off"
   }
 }

@@ -115,7 +115,7 @@ export const assignOrderToDistributor = () =>
  * @returns {String} -> With the URL request.
  */
 export const getOrdersToDeliver = username =>
-  (`${API_SERVICE_URL}/api/PedidosDistribuidor?strUsuario=${username}`);
+  (`${API_SERVICE_URL}/api/EntregaPedido?strUsuario=${username}`);
 
 /**
  * Service to confirm the delivery of a order.

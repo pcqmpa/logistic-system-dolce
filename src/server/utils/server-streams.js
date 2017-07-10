@@ -6,10 +6,14 @@
 import fs from 'fs';
 import request from 'request';
 import shortId from 'shortid';
-import { decode } from 'node-base64-image';
+// import { decode } from 'node-base64-image';
+// import base64Img from 'base64-img';
 
 // Rxjs.
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/bindNodeCallback';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 // Constants.
 import { POST, PATCH } from '../../shared/constants/types';
@@ -28,7 +32,8 @@ const fromAjaxRequest = (method, url, body = {}) => (
       method,
       uri: url,
       headers: {
-        'User-Agent': 'request'
+        'User-Agent': 'request',
+        'content-type': 'application/json'
       }
     };
 
@@ -63,40 +68,47 @@ const fromAjaxRequest = (method, url, body = {}) => (
  * Stream that converts a base64 image into a file.
  * @param {String} image -> The base64 image.
  * @param {String} imageName -> The name of the file.
- * @param {String} targetPath -> The path to save the file.
- * @returns {Symbol.Observable} -> The stream to process the image.
+ * @returns {Observable} -> The stream to process the image.
  */
-const fromBase64ToImage = (imageString, imageData) => (
-  Observable.create((observer) => {
-    let reject = false;
-    const { filePath, extension } = imageData;
-    const buffer = new Buffer(imageString, 'base64');
-    const imageKey = shortId.generate();
-    const filename = `${filePath}/${imageKey}`;
-    const storedPath = `${imageKey}.${extension}`;
+const fromBase64ToImage = (image, imageData) => {
+  const { filePath, extension } = imageData;
+  const base64Image = image.replace(/^data:image\/jpeg;base64,/, '');
+  const buffer = Buffer.from(base64Image, 'base64');
+  const imageKey = shortId.generate();
+  const filename = `${filePath}/${imageKey}.${extension}`;
+  const storedPath = `${imageKey}.${extension}`;
 
-    decode(buffer, { filename }, (err) => {
-      if (err) {
-        return observer.error(err);
-      }
-
-      if (reject) {
-        fs.unlinkSync(storedPath);
-      } else {
-        observer.next(storedPath);
-      }
-
-      return observer.complete();
+  const writeImage$ = Observable
+    .bindNodeCallback(fs.writeFile)(filename, buffer)
+    .map(() => (storedPath))
+    .catch((err) => {
+      fs.unlinkSync(filename);
+      throw new Error(err);
     });
 
-    return function dispose() {
-      reject = true;
-    };
-  })
-);
+  return writeImage$;
+};
 
+const fromBufferToImage = (image, options) => {
+  const { buffer } = image;
+  const { filePath, extension } = options;
+  const imageKey = shortId.generate();
+  const filename = `${filePath}/${imageKey}.${extension}`;
+  const storedPath = `${imageKey}.${extension}`;
+
+  const writeImage$ = Observable
+    .bindNodeCallback(fs.writeFile)(filename, buffer)
+    .map(() => (storedPath))
+    .catch((err) => {
+      fs.unlinkSync(filename);
+      throw new Error(err);
+    });
+
+  return writeImage$;
+};
 
 export default {
   fromAjaxRequest,
-  fromBase64ToImage
+  fromBase64ToImage,
+  fromBufferToImage
 };
