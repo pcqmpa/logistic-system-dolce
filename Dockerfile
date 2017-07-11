@@ -18,4 +18,4 @@ RUN mkdir -p /usr/src/app/build/orders-pictures
 
 
 EXPOSE 8080 3002 27017
-CMD ["yarn", "run", "prod:mock"]
+CMD ["yarn", "run", "prod"]
