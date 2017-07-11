@@ -2,8 +2,9 @@
  * Module with the data table header component.
  * @module src/client/components/layout/data-header
  */
- // React.
-import React, { PropTypes } from 'react';
+// React.
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components.
 import { Grid } from '../';

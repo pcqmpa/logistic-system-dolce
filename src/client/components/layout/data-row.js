@@ -2,8 +2,9 @@
  * Module with the data table row component.
  * @module src/client/components/layout/data-row
  */
- // React.
-import React, { PropTypes } from 'react';
+// React.
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components.
 import { Grid } from '../';

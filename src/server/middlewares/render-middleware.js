@@ -65,7 +65,7 @@ import {
  */
 const render = html => (`<!DOCTYPE html>${html}`);
 
- /**
+/**
   * Configure the settings to render the html.
   * @private
   * @param {Object} store -> The redux store.

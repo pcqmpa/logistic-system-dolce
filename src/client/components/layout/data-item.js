@@ -2,8 +2,9 @@
  * Module with the data table item component.
  * @module src/client/components/layout/data-item
  */
- // React.
-import React, { PropTypes } from 'react';
+// React.
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Component.
 import { GridCell } from '../';

@@ -149,16 +149,15 @@ const actionHandlers = {
     distributorForm: {
       ...state.distributorForm,
       distributors: state.distributorForm
-        .distributors
-          .map((distributor) => {
-            if (distributor.id !== idDistributor) {
-              return distributor;
-            }
-            return {
-              ...distributor,
-              assign: !distributor.assign
-            };
-          })
+        .distributors.map((distributor) => {
+          if (distributor.id !== idDistributor) {
+            return distributor;
+          }
+          return {
+            ...distributor,
+            assign: !distributor.assign
+          };
+        })
     }
   }),
   [ASSIGN_DISTRIBUTOR_REQUEST]: state => ({
@@ -190,8 +189,7 @@ const actionHandlers = {
       failed: true
     }
   }),
-  [UPDATE_TRANSPORTERS_FILTER]:
-    filters.actionHandlers[UPDATE_TRANSPORTERS_FILTER]
+  [UPDATE_TRANSPORTERS_FILTER]: filters.actionHandlers[UPDATE_TRANSPORTERS_FILTER]
 };
 
 export default createReducer(initialState, actionHandlers);

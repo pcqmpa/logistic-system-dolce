@@ -2,7 +2,7 @@
  * Module with the toast epic.
  * @module src/shared/epics/toast-epic
  */
- // Rxjs.
+// Rxjs.
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';

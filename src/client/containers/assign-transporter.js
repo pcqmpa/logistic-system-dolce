@@ -3,7 +3,8 @@
  * @module src/client/containers/assign-transporter
  */
 // React - Redux.
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -188,7 +189,7 @@ class AssignTransporter extends Component {
   handleFilterChanges = (event) => {
     const { value } = event.target;
     const filteredUsers = this.props.transporters
-        .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
+      .filter(user => (user.StrNombre.toUpperCase().includes(value.toUpperCase())));
 
     this.props.actions.updateTransportersFilter(
       TRANSPORTERS_FILTER,

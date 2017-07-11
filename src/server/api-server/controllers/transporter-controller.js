@@ -15,18 +15,18 @@ import {
 const callGetTransporters = (req, res) => (
   transporterServices
     .getTransportersRequest()
-      .subscribe(
-        data => (
-          // Responds with the transporter master list.
-          res.status(responses.OK).send({ data })
-        ),
-        err => (
-          res.status(responses.ERROR).send({
-            err,
-            serverMessage: EXTERNAL_SERVER_ERROR
-          })
-        )
+    .subscribe(
+      data => (
+        // Responds with the transporter master list.
+        res.status(responses.OK).send({ data })
+      ),
+      err => (
+        res.status(responses.ERROR).send({
+          err,
+          serverMessage: EXTERNAL_SERVER_ERROR
+        })
       )
+    )
 );
 
 const callAssignTransporter = (req, res) => {
@@ -37,20 +37,20 @@ const callAssignTransporter = (req, res) => {
   }
   return transporterServices
     .assignTransporterRequest(idUser, idTransporter)
-      .subscribe(
-        response => (
-          // The user was successfully assigned.
-          res
-            .status(responses.OK)
-            .send({ message: response.Message })
-        ),
-        err => (
-          // There was an external server error.
-          res
-            .status(responses.ERROR)
-            .send({ err: err.Message })
-        )
-      );
+    .subscribe(
+      response => (
+        // The user was successfully assigned.
+        res
+          .status(responses.OK)
+          .send({ message: response.Message })
+      ),
+      err => (
+        // There was an external server error.
+        res
+          .status(responses.ERROR)
+          .send({ err: err.Message })
+      )
+    );
 };
 
 const callAssignDistributor = (req, res) => {
@@ -61,20 +61,20 @@ const callAssignDistributor = (req, res) => {
   }
   return transporterServices
     .assignDistributorRequest(idDistributor, idTransporter)
-      .subscribe(
-        message => (
-          // The user was successfully assigned.
-          res
-            .status(responses.OK)
-            .send({ message })
-        ),
-        err => (
-          // There was an external server error.
-          res
-            .status(responses.ERROR)
-            .send({ err })
-        )
-      );
+    .subscribe(
+      message => (
+        // The user was successfully assigned.
+        res
+          .status(responses.OK)
+          .send({ message })
+      ),
+      err => (
+        // There was an external server error.
+        res
+          .status(responses.ERROR)
+          .send({ err })
+      )
+    );
 };
 
 export default {

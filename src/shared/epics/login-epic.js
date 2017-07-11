@@ -3,7 +3,7 @@
  * Module with the login epic.
  * @module src/shared/epics/login-epic.
  */
- // React - Redux.
+// React - Redux.
 import { routerActions } from 'react-router-redux';
 
 // Rxjs.

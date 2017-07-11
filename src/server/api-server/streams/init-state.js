@@ -30,17 +30,17 @@ const initState = (user) => {
 
   if (user.IdTipo === TRANSPORTER) {
     return userServices.consultUsersRequest()
-    .concatMap(users => (
-      logisticTypesServices.consultLogisticTypesRequest()
-        .concatMap(types => (
-          packageReceptionServices.getOrdersListRequest(user.username)
-            .map(orders => ({
-              users,
-              orders,
-              types
-            }))
-        ))
-    ));
+      .concatMap(users => (
+        logisticTypesServices.consultLogisticTypesRequest()
+          .concatMap(types => (
+            packageReceptionServices.getOrdersListRequest(user.username)
+              .map(orders => ({
+                users,
+                orders,
+                types
+              }))
+          ))
+      ));
   }
 
   return userServices.consultUsersRequest()

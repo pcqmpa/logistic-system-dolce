@@ -45,20 +45,20 @@ const callCheckOrder = (req, res) => {
   }
   return packageReceptionServices
     .checkOrderRequest(numOrder, observation)
-      .subscribe(
-        response => (
-          // The user was successfully assigned.
-          res
-            .status(responses.OK)
-            .send({ message: response.Message })
-        ),
-        err => (
-          // There was an external server error.
-          res
-            .status(responses.ERROR)
-            .send({ err: err.Message })
-        )
-      );
+    .subscribe(
+      response => (
+        // The user was successfully assigned.
+        res
+          .status(responses.OK)
+          .send({ message: response.Message })
+      ),
+      err => (
+        // There was an external server error.
+        res
+          .status(responses.ERROR)
+          .send({ err: err.Message })
+      )
+    );
 };
 
 export default {

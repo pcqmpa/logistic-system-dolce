@@ -2,8 +2,9 @@
  * Module with the data table content component.
  * @module src/client/components/layout/data-content
  */
- // React.
-import React, { PropTypes } from 'react';
+// React.
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const DataContent = ({ children, className }) => {
   const componentClass = 'cp-data-table__content';

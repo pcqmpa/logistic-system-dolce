@@ -2,8 +2,9 @@
  * Module with the data table component.
  * @module src/client/components/layout/data-table
  */
- // React.
-import React, { PropTypes, Component } from 'react';
+// React.
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // Components.
 import { Button } from '../';

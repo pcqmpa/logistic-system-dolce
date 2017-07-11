@@ -18,17 +18,17 @@ import {
 const callConsultUsers = (req, res) => {
   userServices
     .consultUsersRequest(req.query.username)
-      .subscribe(
-        (data) => {
-          // Responds with the user data
-          res.status(responses.OK).send({ data });
-        },
-        () => {
-          res.status(responses.ERROR).send({
-            err: EXTERNAL_SERVER_ERROR
-          });
-        }
-      );
+    .subscribe(
+      (data) => {
+        // Responds with the user data
+        res.status(responses.OK).send({ data });
+      },
+      () => {
+        res.status(responses.ERROR).send({
+          err: EXTERNAL_SERVER_ERROR
+        });
+      }
+    );
 };
 
 const callAddUser = (req, res) => {
@@ -41,20 +41,20 @@ const callAddUser = (req, res) => {
 
   return userServices
     .addUserRequest(user)
-      .subscribe(
-        (message) => {
-          // The user was created succesfully.
-          res
-            .status(responses.OK)
-            .send({ message });
-        },
-        (err) => {
-          // There was an external error.
-          res
-            .status(responses.ERROR)
-            .send({ err });
-        }
-      );
+    .subscribe(
+      (message) => {
+        // The user was created succesfully.
+        res
+          .status(responses.OK)
+          .send({ message });
+      },
+      (err) => {
+        // There was an external error.
+        res
+          .status(responses.ERROR)
+          .send({ err });
+      }
+    );
 };
 
 export default { callConsultUsers, callAddUser };
