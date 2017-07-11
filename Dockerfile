@@ -17,4 +17,4 @@ RUN ls
 
 
 EXPOSE 8080 3002 27017
-CMD ["yarn", "run", "prod"]
+CMD ["yarn", "run", "prod:mock"]
