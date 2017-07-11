@@ -14,6 +14,7 @@ RUN yarn install
 COPY . /usr/src/app
 RUN yarn run build
 RUN ls
+RUN mkdir -p /usr/src/app/build/order-pictures
 
 
 EXPOSE 8080 3002 27017
