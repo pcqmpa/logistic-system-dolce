@@ -23,6 +23,12 @@ const callAuthMobileUser = (req, res) => {
     expiresIn: TOKEN_EXPIRATION
   };
 
+  if (!data) {
+    return res
+      .status(responses.UNAUTHORIZED)
+      .send({ message: INVALID_USER });
+  }
+
   jwt.sign(
     data.user,
     TOKEN_SECRET,
@@ -30,7 +36,7 @@ const callAuthMobileUser = (req, res) => {
     (err, token) => {
       if (err) {
         return res
-          .status(responses.ERROR)
+          .status(responses.UNAUTHORIZED)
           .send({ message: INVALID_USER });
       }
 
