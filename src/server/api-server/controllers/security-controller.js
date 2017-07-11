@@ -77,20 +77,33 @@ const callFetchUser = (req, res) => {
           password,
           ...user
         };
-        const tokenOptions = { user: userData };
+        const tokenOptions = {};
 
         // Set expiration if the remember flag is false.
         if (!rememberMe) {
           tokenOptions.expiresIn = TOKEN_EXPIRATION;
         }
-        const token = jwt.sign(tokenOptions, TOKEN_SECRET);
-        // Save token in the session object.
-        session.token = token;
 
-        // Responds with the user data
-        res
-          .status(responses.OK)
-          .send({ ...data, user: userData });
+        jwt.sign(
+          userData,
+          TOKEN_SECRET,
+          tokenOptions,
+          (err, token) => {
+            if (err) {
+              return res
+                .status(responses.ERROR)
+                .send({ message: SYSTEM_ERROR });
+            }
+
+            // Save token in the session object.
+            session.token = token;
+
+            // Responds with the user data
+            return res
+              .status(responses.OK)
+              .send({ ...data, user: userData });
+          }
+        );
       },
       () => {
         res.status(responses.UNAUTHORIZED).send({
