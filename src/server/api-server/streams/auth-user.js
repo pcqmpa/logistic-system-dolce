@@ -4,6 +4,7 @@
  * @module src/server/api-server/streams/auth-user
  */
 // Rxjs.
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatMap';
@@ -18,14 +19,22 @@ import { initState } from './';
  */
 const authUser = payload => (
   securityServices.fetchUserRequest(payload)
-    .concatMap(user => (
-      initState({ ...user, ...payload })
+    .concatMap((userString) => {
+      const user = JSON.parse(userString);
+
+      if (!user) {
+        return Observable.of(null);
+      }
+
+      return initState({ ...user, ...payload })
         .map(data => ({
           user,
           ...data
-        }))
-    ))
-    .catch((err) => { throw new Error(err); })
+        }));
+    })
+    .catch((err) => {
+      console.log(new Error(err)); // eslint-disable-line
+    })
 );
 
 export default authUser;

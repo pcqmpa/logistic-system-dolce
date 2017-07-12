@@ -20,6 +20,12 @@ const callAuthMobileUser = (req, res) => {
   authUser(req.body)
     .subscribe(
       (data) => {
+        if (!data) {
+          return res
+            .status(responses.ERROR)
+            .send({ message: INVALID_USER });
+        }
+
         const { user } = data;
         const {
           username,
@@ -56,7 +62,7 @@ const callAuthMobileUser = (req, res) => {
       () => (
         res
           .status(responses.ERROR)
-          .send({ message: INVALID_USER })
+          .send({ message: SYSTEM_ERROR })
       )
     );
 };
@@ -65,6 +71,13 @@ const callFetchUser = (req, res) => {
   authUser(req.query)
     .subscribe(
       (data) => {
+        if (!data) {
+          return res.status(responses.UNAUTHORIZED).send({
+            loginFailed: true,
+            message: INVALID_USER
+          });
+        }
+
         const { session } = req;
         const { user } = data;
         const {
@@ -106,10 +119,9 @@ const callFetchUser = (req, res) => {
         );
       },
       () => {
-        res.status(responses.UNAUTHORIZED).send({
-          loginFailed: true,
-          message: INVALID_USER
-        });
+        res
+          .status(responses.ERROR)
+          .send({ message: SYSTEM_ERROR });
       }
     );
 };

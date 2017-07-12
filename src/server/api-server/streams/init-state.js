@@ -6,17 +6,21 @@
 // Rxjs.
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/map';
 
 // Services.
 import {
-  userServices,
+  deliverOrdersServices,
   logisticTypesServices,
+  packageReceptionServices,
   transporterServices,
-  packageReceptionServices
+  userServices
 } from '../services/';
 
 // Constants.
-import { TRANSPORTER } from '../../../shared/constants/user-types';
+import { DISTRIBUTOR, TRANSPORTER } from '../../../shared/constants/user-types';
 
 /**
  * Stream that request the admin init state.
@@ -30,31 +34,55 @@ const initState = (user) => {
 
   if (user.IdTipo === TRANSPORTER) {
     return userServices.consultUsersRequest()
-      .concatMap(users => (
-        logisticTypesServices.consultLogisticTypesRequest()
-          .concatMap(types => (
-            packageReceptionServices.getOrdersListRequest(user.username)
-              .map(orders => ({
-                users,
-                orders,
-                types
-              }))
-          ))
-      ));
+      .concatMap((usersString) => {
+        const users = JSON.parse(usersString);
+        return logisticTypesServices.consultLogisticTypesRequest()
+          .concatMap((typesString) => {
+            const types = JSON.parse(typesString);
+            return packageReceptionServices.getOrdersListRequest(user.username)
+              .map((ordersString) => {
+                const orders = JSON.parse(ordersString);
+                return {
+                  orders,
+                  types,
+                  users
+                };
+              });
+          });
+      })
+      .catch((err) => {
+        console.log(new Error(err)); // eslint-disable-line
+      });
+  }
+
+  if (user.IdTipo === DISTRIBUTOR) {
+    return deliverOrdersServices.getOrdersToDeliverRequest(user.username)
+      .map((ordersString) => {
+        const orders = JSON.parse(ordersString);
+        return { orders };
+      });
   }
 
   return userServices.consultUsersRequest()
-    .concatMap(users => (
-      logisticTypesServices.consultLogisticTypesRequest()
-        .concatMap(types => (
-          transporterServices.getTransportersRequest()
-            .map(transporters => ({
-              users,
-              types,
-              transporters
-            }))
-        ))
-    ));
+    .concatMap((usersString) => {
+      const users = JSON.parse(usersString);
+      return logisticTypesServices.consultLogisticTypesRequest()
+        .concatMap((typesString) => {
+          const types = JSON.parse(typesString);
+          return transporterServices.getTransportersRequest()
+            .map((transportersString) => {
+              const transporters = JSON.parse(transportersString);
+              return {
+                transporters,
+                types,
+                users
+              };
+            });
+        });
+    })
+    .catch((err) => {
+      console.log(new Error(err)); // eslint-disable-line
+    });
 };
 
 export default initState;

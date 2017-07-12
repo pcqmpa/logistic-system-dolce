@@ -36,7 +36,7 @@ import { callFetchUser } from '../utils/api-service-creators';
 import { DASHBOARD } from '../constants/routes';
 import { LOGIN_REQUEST } from '../constants/actions';
 import { ERROR, BRAND } from '../constants/types';
-import { INVALID_USER, WELCOME } from '../constants/messages';
+import { WELCOME } from '../constants/messages';
 import {
   ADMIN,
   DISTRIBUTOR,
@@ -53,9 +53,6 @@ const loginSuccessEpic = (payload) => {
     updateUsersList(payload.users),
     updateUserTypes(payload.types)
   ];
-  if (!payload.user.LogEstado) {
-    throw new Error(INVALID_USER);
-  }
 
   if (user.IdTipo === ADMIN) {
     dispatches.push(

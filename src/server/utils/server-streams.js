@@ -32,8 +32,7 @@ const fromAjaxRequest = (method, url, body = {}) => (
       method,
       uri: url,
       headers: {
-        'User-Agent': 'request',
-        'content-type': 'application/json'
+        'User-Agent': 'request'
       }
     };
 
@@ -63,6 +62,46 @@ const fromAjaxRequest = (method, url, body = {}) => (
     };
   })
 );
+
+/**
+ * Creates a promise with an ajax request.
+ * @param {String} method -> The request method.
+ * @param {String} url -> The service url.
+ * @param {Object} body -> The request body.
+ * @returns {Promise} -> The Ajax request.
+ */
+const promiseRequest = (method, url, body = {}) => {
+  return new Promise((resolve, reject) => {
+    const requestData = {
+      method,
+      uri: url,
+      headers: {
+        'User-Agent': 'request'
+      }
+    };
+
+    if (method === POST || method === PATCH) {
+      requestData.body = body;
+      requestData.json = true;
+    }
+
+    request(requestData, (err, response, reqBody) => {
+      if (err) {
+        return reject(err);
+      }
+
+      if (!reject) {
+        try {
+          const data = reqBody;
+          resolve(data);
+        } catch (error) {
+          reject(error);
+        }
+      }
+      return undefined;
+    });
+  });
+};
 
 /**
  * Stream that converts a base64 image into a file.
@@ -110,5 +149,6 @@ const fromBufferToImage = (image, options) => {
 export default {
   fromAjaxRequest,
   fromBase64ToImage,
-  fromBufferToImage
+  fromBufferToImage,
+  promiseRequest
 };
