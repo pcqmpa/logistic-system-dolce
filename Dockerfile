@@ -17,5 +17,5 @@ RUN ls
 RUN mkdir -p /usr/src/app/build/orders-pictures
 
 
-EXPOSE 8080 3002 27017
+EXPOSE 80 3002 27017
 CMD ["yarn", "run", "prod"]
