@@ -121,4 +121,6 @@ export const getOrdersToDeliver = username =>
  * Service to confirm the delivery of a order.
  * @returns {String} -> With the URL request.
  */
-export const deliverOrder = () => (`${API_SERVICE_URL}/api/EntregaPedido`);
+export const deliverOrder = (numOrder, urlPackage, urlCode) => (
+  `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}`
+);

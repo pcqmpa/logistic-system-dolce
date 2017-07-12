@@ -12,7 +12,7 @@ import {
 import { streams } from '../../utils/';
 
 // Lib.
-import serializer from '../../../shared/lib/serializer';
+// import serializer from '../../../shared/lib/serializer';
 
 // Constants.
 import { GET, POST } from '../../../shared/constants/types';
@@ -41,12 +41,7 @@ const deliverOrderRequest = (
 ) => (
   streams.fromAjaxRequest(
     POST,
-    deliverOrder(),
-    serializer.toOrderToDeliver({
-      numOrder,
-      urlPicture,
-      urlCode
-    })
+    deliverOrder(numOrder, urlPicture, urlCode)
   )
 );
 

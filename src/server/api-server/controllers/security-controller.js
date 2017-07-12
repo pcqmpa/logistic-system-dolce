@@ -30,7 +30,7 @@ const callAuthMobileUser = (req, res) => {
         const {
           username,
           password
-        } = req.query;
+        } = req.body;
         const userData = {
           username,
           password,

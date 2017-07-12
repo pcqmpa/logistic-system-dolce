@@ -26,6 +26,10 @@ const callGetOrdersToDeliver = (req, res) => {
 
   return deliverOrdersServices
     .getOrdersToDeliverRequest(username)
+    .map((ordersString) => {
+      const orders = JSON.parse(ordersString);
+      return orders;
+    })
     .subscribe(
       data => (
         // Responds with the transporter master list.
@@ -64,6 +68,7 @@ const callDeliverOrder = (req, res) => {
           .send({ message: response.Message });
       },
       (err) => {
+        console.log(err);
         // There was an external server error.
         return res
           .status(responses.ERROR)
