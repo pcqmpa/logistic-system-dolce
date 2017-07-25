@@ -47,6 +47,7 @@ const callAuthMobileUser = (req, res) => {
           tokenOptions,
           (err, token) => {
             if (err) {
+              console.log(err); // eslint-disable-line
               return res
                 .status(responses.ERROR)
                 .send({ message: SYSTEM_ERROR });
@@ -59,11 +60,12 @@ const callAuthMobileUser = (req, res) => {
           }
         );
       },
-      () => (
-        res
+      (err) => {
+        console.log(err); // eslint-disable-line
+        return res
           .status(responses.ERROR)
-          .send({ message: SYSTEM_ERROR })
-      )
+          .send({ message: SYSTEM_ERROR });
+      }
     );
 };
 

@@ -13,7 +13,8 @@
   },
   "globals": {
     "webpackIsomorphicTools": true,
-    "_CLIENT_": true
+    "_CLIENT_": true,
+    "encodeUriComponent": true
   },
   "parser": "babel-eslint",
   "extends": "airbnb",

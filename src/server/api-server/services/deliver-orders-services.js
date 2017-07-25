@@ -5,7 +5,8 @@
 // API Creators.
 import {
   deliverOrder,
-  getOrdersToDeliver
+  getOrdersToDeliver,
+  notDelivered
 } from './service-creators';
 
 // Utils.
@@ -21,7 +22,7 @@ import { GET, POST } from '../../../shared/constants/types';
  * Creates a request consulting the list orders that
  * the user distributor is going to deliver.
  * @param {String} username -> The distributor username.
- * @returns {Symbol.Observable} -> The request.
+ * @returns {Observable} -> The request.
  */
 const getOrdersToDeliverRequest = username => (
   streams.fromAjaxRequest(GET, getOrdersToDeliver(username))
@@ -32,7 +33,7 @@ const getOrdersToDeliverRequest = username => (
  * @param {Number} numOrder -> The number of the order.
  * @param {String} urlPicture -> The url of this specific order picture.
  * @param {String} urlCode -> The url of the order's code picture.
- * @returns {Symbol.Observable} -> The request.
+ * @returns {Observable} -> The request.
  */
 const deliverOrderRequest = (
   numOrder,
@@ -45,7 +46,22 @@ const deliverOrderRequest = (
   )
 );
 
+/**
+ * Creates a request to notify a not delivered order.
+ * @param {Number} numOrder -> The number of the order.
+ * @param {String} message -> The message of the notification.
+ * @returns {Observable} -> The request.
+ */
+const notifyNotDeliveredOrder = (numOrder, message) => {
+  const request = streams.fromAjaxRequest(
+    POST,
+    notDelivered(numOrder, message)
+  );
+  return request;
+};
+
 export default {
   deliverOrderRequest,
-  getOrdersToDeliverRequest
+  getOrdersToDeliverRequest,
+  notifyNotDeliveredOrder
 };
