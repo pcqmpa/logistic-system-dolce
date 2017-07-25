@@ -23,7 +23,7 @@ const authUser = payload => (
     .concatMap((userString) => {
       const user = JSON.parse(userString);
 
-      if (!user) {
+      if (!user || !user.LogValido) {
         return Observable.of(null);
       }
 
