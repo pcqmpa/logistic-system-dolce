@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
 // Services.
@@ -50,7 +51,7 @@ const initState = (user) => {
               });
           });
       })
-      .catch((err) => {
+      .do(null, (err) => {
         console.log(new Error(err)); // eslint-disable-line
       });
   }
@@ -59,7 +60,13 @@ const initState = (user) => {
     return deliverOrdersServices.getOrdersToDeliverRequest(user.username)
       .map((ordersString) => {
         const orders = JSON.parse(ordersString);
+        if (typeof orders === 'string') {
+          return { orders: [] };
+        }
         return { orders };
+      })
+      .do(null, (err) => {
+        console.log(err); // eslint-disable-line
       });
   }
 
@@ -80,7 +87,7 @@ const initState = (user) => {
             });
         });
     })
-    .catch((err) => {
+    .do(null, (err) => {
       console.log(new Error(err)); // eslint-disable-line
     });
 };

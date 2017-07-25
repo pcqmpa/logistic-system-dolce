@@ -114,8 +114,9 @@ export const assignOrderToDistributor = () =>
  * @param {String} username -> The distributor username.
  * @returns {String} -> With the URL request.
  */
-export const getOrdersToDeliver = username =>
-  (`${API_SERVICE_URL}/api/EntregaPedido?strUsuario=${username}`);
+export const getOrdersToDeliver = username => (
+  `${API_SERVICE_URL}/api/EntregaPedido?strUsuario=${username}`
+);
 
 /**
  * Service to confirm the delivery of a order.
@@ -123,4 +124,14 @@ export const getOrdersToDeliver = username =>
  */
 export const deliverOrder = (numOrder, urlPackage, urlCode) => (
   `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}`
+);
+
+/**
+ * Service to notify a not delivered order.
+ * @param {Number} numOrder -> The number of the order.
+ * @param {String} message -> The message of the notification.
+ * @returns {String} -> With the request URL.
+ */
+export const notDelivered = (numOrder, message) => (
+  `${API_SERVICE_URL}/api/NoEntregado?pedido=${numOrder}&comentario=${message}"`
 );

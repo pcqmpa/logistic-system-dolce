@@ -113,6 +113,11 @@ app.post(
   deliverOrdersController.callDeliverOrder
 );
 
+app.post(
+  '/api/callNotifyNotDeliveredOrder',
+  deliverOrdersController.callNotifyNotDeliveredOrder
+);
+
 // The Picture Store Services.
 app.get(
   '/api/picture/:pictureName',

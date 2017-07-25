@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/do';
 
 // Services.
 import { securityServices } from '../services';
@@ -32,7 +33,7 @@ const authUser = payload => (
           ...data
         }));
     })
-    .catch((err) => {
+    .do(null, (err) => {
       console.log(new Error(err)); // eslint-disable-line
     })
 );

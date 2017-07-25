@@ -28,6 +28,9 @@ const callGetOrdersToDeliver = (req, res) => {
     .getOrdersToDeliverRequest(username)
     .map((ordersString) => {
       const orders = JSON.parse(ordersString);
+      if (typeof orders === 'string') {
+        return [];
+      }
       return orders;
     })
     .subscribe(
@@ -68,7 +71,37 @@ const callDeliverOrder = (req, res) => {
           .send({ message: response.Message });
       },
       (err) => {
-        console.log(err);
+        console.log(err); // eslint-disable-line
+        // There was an external server error.
+        return res
+          .status(responses.ERROR)
+          .send({ message: err.Message });
+      }
+    );
+};
+
+const callNotifyNotDeliveredOrder = (req, res) => {
+  console.log(req.body);
+  const requiredParams = ['numOrder', 'message'];
+
+  if (!validateParams(req.body, requiredParams)) {
+    return res
+      .status(responses.ERROR)
+      .send({ err: ARGS_ABSENCE });
+  }
+
+  const { numOrder, message } = req.body;
+
+  return deliverOrdersServices.notifyNotDeliveredOrder(numOrder, message)
+    .subscribe(
+      (response) => {
+        console.log(response);
+        return res
+          .status(responses.OK)
+          .send({ message: response.Message });
+      },
+      (err) => {
+        console.log(err); // eslint-disable-line
         // There was an external server error.
         return res
           .status(responses.ERROR)
@@ -79,5 +112,6 @@ const callDeliverOrder = (req, res) => {
 
 export default {
   callDeliverOrder,
-  callGetOrdersToDeliver
+  callGetOrdersToDeliver,
+  callNotifyNotDeliveredOrder
 };
