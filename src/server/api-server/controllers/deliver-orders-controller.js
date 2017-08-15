@@ -50,11 +50,12 @@ const callGetOrdersToDeliver = (req, res) => {
 const callDeliverOrder = (req, res) => {
   const {
     numOrder,
+    orderType,
     urlCode,
     urlPackage
   } = req.body;
 
-  const requiredParams = ['numOrder', 'urlPackage', 'urlCode'];
+  const requiredParams = ['numOrder', 'orderType', 'urlPackage', 'urlCode'];
   if (!validateParams(req.body, requiredParams)) {
     return res
       .status(responses.ERROR)
@@ -62,7 +63,7 @@ const callDeliverOrder = (req, res) => {
   }
 
   return deliverOrdersServices
-    .deliverOrderRequest(numOrder, urlPackage, urlCode)
+    .deliverOrderRequest(numOrder, orderType, urlPackage, urlCode)
     .subscribe(
       (response) => {
         // The order was successfully delivered.
@@ -80,8 +81,40 @@ const callDeliverOrder = (req, res) => {
     );
 };
 
+/**
+ * Controller to deliver a list of orders.
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ */
+const callDeliverOrders = (req, res) => {
+  const requiredParams = ['username', 'message'];
+
+  if (!validateParams(req.body, requiredParams)) {
+    return res
+      .status(responses.ERROR)
+      .send({ err: ARGS_ABSENCE });
+  }
+
+  const { username, orders } = req.body;
+
+  return deliverOrdersServices
+    .deliverOrdersRequest(username, orders)
+    .subscribe(
+      (response) => {
+        return res
+          .status(responses.OK)
+          .send({ message: response.Message });
+      },
+      (err) => {
+        console.log(err); // eslint-disable-line
+        return res
+          .status(responses.ERROR)
+          .send({ message: err.Message });
+      }
+    );
+};
+
 const callNotifyNotDeliveredOrder = (req, res) => {
-  console.log(req.body);
   const requiredParams = ['numOrder', 'message'];
 
   if (!validateParams(req.body, requiredParams)) {
@@ -95,7 +128,6 @@ const callNotifyNotDeliveredOrder = (req, res) => {
   return deliverOrdersServices.notifyNotDeliveredOrder(numOrder, message)
     .subscribe(
       (response) => {
-        console.log(response);
         return res
           .status(responses.OK)
           .send({ message: response.Message });
@@ -112,6 +144,7 @@ const callNotifyNotDeliveredOrder = (req, res) => {
 
 export default {
   callDeliverOrder,
+  callDeliverOrders,
   callGetOrdersToDeliver,
   callNotifyNotDeliveredOrder
 };

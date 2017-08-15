@@ -114,6 +114,11 @@ app.post(
 );
 
 app.post(
+  '/api/callDeliverOrders',
+  deliverOrdersController.callDeliverOrders
+);
+
+app.post(
   '/api/callNotifyNotDeliveredOrder',
   deliverOrdersController.callNotifyNotDeliveredOrder
 );
