@@ -83,11 +83,11 @@ const callDeliverOrder = (req, res) => {
 
 /**
  * Controller to deliver a list of orders.
- * @param {Express.Request} req 
- * @param {Express.Response} res 
+ * @param {Express.Request} req
+ * @param {Express.Response} res
  */
 const callDeliverOrders = (req, res) => {
-  const requiredParams = ['username', 'message'];
+  const requiredParams = ['username', 'orders'];
 
   if (!validateParams(req.body, requiredParams)) {
     return res
@@ -101,6 +101,7 @@ const callDeliverOrders = (req, res) => {
     .deliverOrdersRequest(username, orders)
     .subscribe(
       (response) => {
+        console.log(response); // eslint-disable-line
         return res
           .status(responses.OK)
           .send({ message: response.Message });

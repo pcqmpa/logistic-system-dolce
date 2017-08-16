@@ -53,8 +53,8 @@ const deliverOrderRequest = (numOrder, orderType, urlPicture, urlCode) => (
 const deliverOrdersRequest = (username, orders) => (
   streams.fromAjaxRequest(
     POST,
-    deliverOrders(),
-    { strUsuario: username, modelo: orders }
+    deliverOrders(username),
+    { modelo: orders }
   )
 );
 

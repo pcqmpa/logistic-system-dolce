@@ -127,15 +127,16 @@ export const getOrdersToDeliver = username => (
  * @returns {String} -> With the URL request.
  */
 export const deliverOrder = (numOrder, orderType, urlPackage, urlCode) => (
-  `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}`
+  `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}&strTipoEmpaque=${orderType}`
 );
 
 /**
  * Service to deliver a list of orders.
+ * @param {String} -> The username.
  * @return {String} -> With the URL request.
  */
-export const deliverOrders = () =>
-  (`${API_SERVICE_URL}/api/PedidosMasivos`);
+export const deliverOrders = username =>
+  (`${API_SERVICE_URL}/api/PedidosMasivos?strUsuario=${username}`);
 
 /**
  * Service to notify a not delivered order.
