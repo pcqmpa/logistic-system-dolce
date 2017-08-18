@@ -1,6 +1,5 @@
 *.spec.js.snap
 .tern-project
-yarn.lock
 server.json
 build
 .vscode
