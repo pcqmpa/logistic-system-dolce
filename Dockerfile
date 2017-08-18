@@ -14,8 +14,6 @@ RUN yarn install
 # Bundle app source
 RUN yarn run build
 RUN ls
-RUN mkdir -p /usr/src/app/build/orders-pictures
-
 
 EXPOSE 80 3002 27017
 CMD ["yarn", "run", "prod"]
