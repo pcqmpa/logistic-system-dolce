@@ -120,11 +120,23 @@ export const getOrdersToDeliver = username => (
 
 /**
  * Service to confirm the delivery of a order.
+ * @param {Number} numOrder -> The number of the order.
+ * @param {String} orderType -> The type of the package,
+ * @param {String} urlPackage -> The package picture url.
+ * @param {String} urlCoce -> The code picture url.
  * @returns {String} -> With the URL request.
  */
-export const deliverOrder = (numOrder, urlPackage, urlCode) => (
-  `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}`
+export const deliverOrder = (numOrder, orderType, urlPackage, urlCode) => (
+  `${API_SERVICE_URL}/api/EntregaPedido?numPedido=${numOrder}&urlImagen=${urlPackage}&urlCod=${urlCode}&strTipoEmpaque=${orderType}`
 );
+
+/**
+ * Service to deliver a list of orders.
+ * @param {String} -> The username.
+ * @return {String} -> With the URL request.
+ */
+export const deliverOrders = username =>
+  (`${API_SERVICE_URL}/api/PedidosMasivos?strUsuario=${username}`);
 
 /**
  * Service to notify a not delivered order.

@@ -5,6 +5,7 @@
 // API Creators.
 import {
   deliverOrder,
+  deliverOrders,
   getOrdersToDeliver,
   notDelivered
 } from './service-creators';
@@ -29,20 +30,31 @@ const getOrdersToDeliverRequest = username => (
 );
 
 /**
- * Creates a request to deliver a order.
+ * Creates a request to deliver an order.
  * @param {Number} numOrder -> The number of the order.
+ * @param {String} orderType -> The type of the package,
  * @param {String} urlPicture -> The url of this specific order picture.
  * @param {String} urlCode -> The url of the order's code picture.
  * @returns {Observable} -> The request.
  */
-const deliverOrderRequest = (
-  numOrder,
-  urlPicture,
-  urlCode
-) => (
+const deliverOrderRequest = (numOrder, orderType, urlPicture, urlCode) => (
   streams.fromAjaxRequest(
     POST,
-    deliverOrder(numOrder, urlPicture, urlCode)
+    deliverOrder(numOrder, orderType, urlPicture, urlCode)
+  )
+);
+
+/**
+ * Creates a request to deliver a list of order.
+ * @param {String} username -> The distributor username.
+ * @param {Array} orders -> The list of orders to deliver.
+ * @returns {Observable} -> The request.
+ */
+const deliverOrdersRequest = (username, orders) => (
+  streams.fromAjaxRequest(
+    POST,
+    deliverOrders(username),
+    { modelo: orders }
   )
 );
 
@@ -62,6 +74,7 @@ const notifyNotDeliveredOrder = (numOrder, message) => {
 
 export default {
   deliverOrderRequest,
+  deliverOrdersRequest,
   getOrdersToDeliverRequest,
   notifyNotDeliveredOrder
 };
