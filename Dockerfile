@@ -2,7 +2,7 @@ FROM kkarczmarczyk/node-yarn:6.9-wheezy
 MAINTAINER Dolce SAS
 LABEL Name=logistic-system-dolce Version=0.2.0
 
-RUN yarn global add concurrently babel-cli
+RUN npm i -g concurrently babel-cli nodemon
 
 # Create app directory
 RUN mkdir -p /usr/src/app
