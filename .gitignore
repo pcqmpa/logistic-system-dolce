@@ -3,6 +3,7 @@
 server.json
 build
 .vscode
+orders-pictures/*.jpg
 
 # Test Reports
 # reports
