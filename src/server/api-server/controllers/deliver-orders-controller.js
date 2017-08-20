@@ -48,12 +48,12 @@ const callGetOrdersToDeliver = (req, res) => {
 };
 
 const callDeliverOrder = (req, res) => {
-  // const {
-  //   numOrder,
-  //   orderType,
-  //   urlCode,
-  //   urlPackage
-  // } = req.body;
+  const {
+    numOrder,
+    orderType,
+    urlCode,
+    urlPackage
+  } = req.body;
 
   const requiredParams = ['numOrder', 'orderType', 'urlPackage', 'urlCode'];
   if (!validateParams(req.body, requiredParams)) {
@@ -62,27 +62,23 @@ const callDeliverOrder = (req, res) => {
       .send({ err: ARGS_ABSENCE });
   }
 
-  return res
-    .status(responses.OK)
-    .send({ message: 'OK' });
-
-  // return deliverOrdersServices
-  //   .deliverOrderRequest(numOrder, orderType, urlPackage, urlCode)
-  //   .subscribe(
-  //     (response) => {
-  //       // The order was successfully delivered.
-  //       return res
-  //         .status(responses.OK)
-  //         .send({ message: response.Message });
-  //     },
-  //     (err) => {
-  //       console.log(err); // eslint-disable-line
-  //       // There was an external server error.
-  //       return res
-  //         .status(responses.ERROR)
-  //         .send({ message: err.Message });
-  //     }
-  //   );
+  return deliverOrdersServices
+    .deliverOrderRequest(numOrder, orderType, urlPackage, urlCode)
+    .subscribe(
+      (response) => {
+        // The order was successfully delivered.
+        return res
+          .status(responses.OK)
+          .send({ message: response.Message });
+      },
+      (err) => {
+        console.log(err); // eslint-disable-line
+        // There was an external server error.
+        return res
+          .status(responses.ERROR)
+          .send({ message: err.Message });
+      }
+    );
 };
 
 /**
