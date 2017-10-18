@@ -13,12 +13,12 @@ services:
       - /usr/src/app/node_modules
       - ./orders-pictures:/usr/src/app/orders-pictures
     environment:
-      PORT: 80
-      HOST: '138.197.28.195'
+      PORT: 8081
+      HOST: '201.184.226.254'
       NODE_ENV: production
       MONGO_URL: mongodb://db:27017/logistic-system-dolce
     ports:
-      - 80:80
+      - 8081:8081
       - 3002:3002
   db:
     image: mongo:latest
