@@ -11,10 +11,10 @@ import { Log } from '../utils/';
 // App Config.
 import { env } from '../../../config/';
 
-let API_URL = `http://${env.HOST}:${env.API_PORT}`;
+let API_URL = `http://localhost:${env.API_PORT}`;
 
 if (env.MOCK_SERVER) {
-  API_URL = `http://${env.HOST}:${env.MOCK_API_PORT}`;
+  API_URL = `http://localhost:${env.MOCK_API_PORT}`;
 }
 
 // Http Proxy instance.
