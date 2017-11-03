@@ -54,7 +54,7 @@ const deliverOrdersRequest = (username, orders) => (
   streams.fromAjaxRequest(
     POST,
     deliverOrders(username),
-    { modelo: orders }
+    orders
   )
 );
 
