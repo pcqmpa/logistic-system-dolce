@@ -64,6 +64,8 @@ app.post(
   securityController.callAuthMobileUser
 );
 
+app.get('/api/testConnection', securityController.testConnection);
+
 // Orders Delivery.
 app.get(
   '/api/callGetOrdersToDeliver',
@@ -73,6 +75,11 @@ app.get(
 app.post(
   '/api/callDeliverOrder',
   deliverOrdersController.callDeliverOrder
+);
+
+app.post(
+  '/api/callDeliverOrders',
+  deliverOrdersController.callDeliverOrders
 );
 
 // The Picture Store Services.

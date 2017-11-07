@@ -61,6 +61,7 @@ authMiddleware(app);
 app.post('/api/callAuthMobileUser', securityController.callAuthMobileUser);
 app.get('/api/callFetchUser', securityController.callFetchUser);
 app.post('/api/destroyUserSession', securityController.destroyUserSession);
+app.get('/api/testConnection', securityController.testConnection);
 
 // User.
 app.get('/api/callConsultUsers', userController.callConsultUsers);

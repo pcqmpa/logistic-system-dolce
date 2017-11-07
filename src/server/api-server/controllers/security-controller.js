@@ -140,8 +140,15 @@ const destroyUserSession = (req, res) => {
   });
 };
 
+const testConnection = (_, res) => {
+  return res
+    .status(responses.OK)
+    .send({ message: 'There\'s connection' });
+};
+
 export default {
   callAuthMobileUser,
   callFetchUser,
-  destroyUserSession
+  destroyUserSession,
+  testConnection
 };

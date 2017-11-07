@@ -59,7 +59,28 @@ const callDeliverOrder = (req, res) => {
     );
 };
 
+/**
+ * Controller to deliver a list of orders.
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ */
+const callDeliverOrders = (req, res) => {
+  console.log('ORDERS:', req.body.orders);
+  const requiredParams = ['username', 'orders'];
+
+  if (!validateParams(req.body, requiredParams)) {
+    return res
+      .status(responses.ERROR)
+      .send({ err: ARGS_ABSENCE });
+  }
+
+  return res
+    .status(responses.OK)
+    .send({ message: 'OK' });
+};
+
 export default {
   callDeliverOrder,
+  callDeliverOrders,
   callGetOrdersToDeliver
 };

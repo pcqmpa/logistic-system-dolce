@@ -115,6 +115,23 @@ const orders = [
     StrPoblacion: 'Medellin',
     StrTipoEmpaque: 'Paquete',
     Entegado: false
+  },
+  {
+    Id: 7,
+    StrCampaña: '001',
+    IdTransportista: 1,
+    NumPedido: 15523688,
+    StrZona: '006',
+    StrIdentificacion: '1234567790',
+    StrNombreAsesora: 'Anne Brown',
+    StrTelefono: '3001020390',
+    StrDireccion: 'Cra 45 No 45-56',
+    StrBarrio: 'Laureles',
+    StrDepartamento: 'Antioquia',
+    StrCiudad: 'Medellin',
+    StrPoblacion: 'Medellin',
+    StrTipoEmpaque: 'Premios',
+    Entegado: false
   }
 ];
 
