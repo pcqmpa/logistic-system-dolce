@@ -16,6 +16,7 @@ import mockedData from '../../utils/mocked-data';
  * @returns {Symbol.Observable} -> The request.
  */
 const getOrdersToDeliverRequest = () => {
+  console.log('GET_ORDERS');
   const { orders } = mockedData;
   return orders;
 };
@@ -28,11 +29,34 @@ const getOrdersToDeliverRequest = () => {
  * @returns {Symbol.Observable} -> The request.
  */
 const deliverOrderRequest = () => {
-  const request = Observable.of({ Message: 'Pedido recivido' });
+  const request = Observable.of({ Message: 'Pedido recibido' });
+  return request;
+};
+
+/**
+ * Creates a request to deliver a list of order.
+ * @param {String} username -> The distributor username.
+ * @param {Array} orders -> The list of orders to deliver.
+ * @returns {Observable} -> The request.
+ */
+const deliverOrdersRequest = () => (
+  Observable.of({ Message: 'Pedidos recibidos' })
+);
+
+/**
+ * Creates a request to notify a not delivered order.
+ * @param {Number} numOrder -> The number of the order.
+ * @param {String} message -> The message of the notification.
+ * @returns {Observable} -> The request.
+ */
+const notifyNotDeliveredOrder = () => {
+  const request = Observable.of({ Message: 'Notificacion recibida' });
   return request;
 };
 
 export default {
   deliverOrderRequest,
-  getOrdersToDeliverRequest
+  deliverOrdersRequest,
+  getOrdersToDeliverRequest,
+  notifyNotDeliveredOrder
 };

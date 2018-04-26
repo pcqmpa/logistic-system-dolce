@@ -87,6 +87,7 @@ const callDeliverOrder = (req, res) => {
  * @param {Express.Response} res
  */
 const callDeliverOrders = (req, res) => {
+  console.log('DELIVER_ORDERS', req.body);
   const requiredParams = ['username', 'orders'];
 
   if (!validateParams(req.body, requiredParams)) {

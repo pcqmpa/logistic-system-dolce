@@ -34,7 +34,7 @@ const callDeliverOrder = (req, res) => {
     urlPackage
   } = req.body;
 
-  const requiredParams = ['numOrder', 'urlPackage', 'urlCode'];
+  const requiredParams = ['numOrder'];
   if (!validateParams(req.body, requiredParams)) {
     return res
       .status(responses.ERROR)
@@ -79,8 +79,21 @@ const callDeliverOrders = (req, res) => {
     .send({ message: 'OK' });
 };
 
+const callNotifyNotDeliveredOrder = (req, res) => {
+  const requiredParams = ['numOrder', 'message'];
+
+  if (!validateParams(req.body, requiredParams)) {
+    return res
+      .status(responses.ERROR)
+      .send({ err: ARGS_ABSENCE });
+  }
+
+  return res.status(responses.OK).send({ message: 'OK' });
+};
+
 export default {
   callDeliverOrder,
   callDeliverOrders,
-  callGetOrdersToDeliver
+  callGetOrdersToDeliver,
+  callNotifyNotDeliveredOrder
 };
